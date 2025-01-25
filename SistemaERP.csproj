@@ -6,16 +6,17 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+	<ForceDesignerDpiUnaware>false</ForceDesignerDpiUnaware>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Negocio\" />
-    <Folder Include="Dados\" />
     <Folder Include="Utilidades\" />
   </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
         <PackageReference Include="Syncfusion.GridHelperClasses.Windows" Version="28.1.35" />
         <PackageReference Include="Syncfusion.Grid.Windows" Version="28.1.35" />
     <PackageReference Include="Syncfusion.SfDataGrid.Winforms" Version="28.1.35" />
@@ -47,6 +48,8 @@
     <PackageReference Include="Syncfusion.Gauge.Windows" Version="28.1.35" />
     <PackageReference Include="Syncfusion.Maps.Windows" Version="28.1.35" />
     <PackageReference Include="Syncfusion.SfSmithChart.WinForms" Version="28.1.35" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.1" />
 </ItemGroup>
 
     <ItemGroup>
@@ -55,6 +58,11 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
+      <Compile Update="Properties\Settings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -62,5 +70,12 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\Settings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
     </ItemGroup>
 </Project>

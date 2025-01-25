@@ -30,17 +30,20 @@ partial class FormLogin
     /// </summary>
     private void InitializeComponent()
     {
+        var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
         pnLogin = new Panel();
+        label1 = new Label();
+        pictureBox2 = new PictureBox();
         lblEsqueciSenha = new Label();
         pnImagemLogin = new Panel();
         pictureBox1 = new PictureBox();
-        lblLogin = new Label();
         txtUsuario = new RJTextBox();
         txtSenha = new RJTextBox();
         btnSair = new RJButton();
         btnOlho = new FontAwesome.Sharp.IconButton();
         btnEntrar = new RJButton();
         pnLogin.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
         pnImagemLogin.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         SuspendLayout();
@@ -48,9 +51,10 @@ partial class FormLogin
         // pnLogin
         // 
         pnLogin.BackColor = Color.White;
+        pnLogin.Controls.Add(label1);
+        pnLogin.Controls.Add(pictureBox2);
         pnLogin.Controls.Add(lblEsqueciSenha);
         pnLogin.Controls.Add(pnImagemLogin);
-        pnLogin.Controls.Add(lblLogin);
         pnLogin.Controls.Add(txtUsuario);
         pnLogin.Controls.Add(txtSenha);
         pnLogin.Controls.Add(btnSair);
@@ -62,13 +66,36 @@ partial class FormLogin
         pnLogin.Size = new Size(1008, 729);
         pnLogin.TabIndex = 18;
         // 
+        // label1
+        // 
+        label1.Anchor = AnchorStyles.None;
+        label1.AutoSize = true;
+        label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        label1.ForeColor = Color.DimGray;
+        label1.Location = new Point(639, 138);
+        label1.Name = "label1";
+        label1.Size = new Size(241, 46);
+        label1.TabIndex = 28;
+        label1.Text = "Seja Bem-Vindo";
+        // 
+        // pictureBox2
+        // 
+        pictureBox2.Anchor = AnchorStyles.None;
+        pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+        pictureBox2.Location = new Point(639, 67);
+        pictureBox2.Name = "pictureBox2";
+        pictureBox2.Size = new Size(250, 68);
+        pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+        pictureBox2.TabIndex = 27;
+        pictureBox2.TabStop = false;
+        // 
         // lblEsqueciSenha
         // 
         lblEsqueciSenha.Anchor = AnchorStyles.None;
         lblEsqueciSenha.AutoSize = true;
         lblEsqueciSenha.Font = new Font("Segoe UI Variable Small Semilig", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
         lblEsqueciSenha.ForeColor = Color.DimGray;
-        lblEsqueciSenha.Location = new Point(624, 513);
+        lblEsqueciSenha.Location = new Point(634, 625);
         lblEsqueciSenha.Name = "lblEsqueciSenha";
         lblEsqueciSenha.Size = new Size(177, 24);
         lblEsqueciSenha.TabIndex = 26;
@@ -87,25 +114,13 @@ partial class FormLogin
         // pictureBox1
         // 
         pictureBox1.Dock = DockStyle.Fill;
-        pictureBox1.Image = Properties.Resources.shifaaz_shamoon_okVXy9tG3KY_unsplash;
+        pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
         pictureBox1.Location = new Point(0, 0);
         pictureBox1.Name = "pictureBox1";
         pictureBox1.Size = new Size(532, 729);
         pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox1.TabIndex = 24;
         pictureBox1.TabStop = false;
-        // 
-        // lblLogin
-        // 
-        lblLogin.Anchor = AnchorStyles.None;
-        lblLogin.AutoSize = true;
-        lblLogin.Font = new Font("Segoe UI Variable Display Semib", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        lblLogin.ForeColor = Color.DimGray;
-        lblLogin.Location = new Point(624, 192);
-        lblLogin.Name = "lblLogin";
-        lblLogin.Size = new Size(89, 38);
-        lblLogin.TabIndex = 23;
-        lblLogin.Text = "Login";
         // 
         // txtUsuario
         // 
@@ -117,7 +132,7 @@ partial class FormLogin
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtUsuario.ForeColor = Color.LightGray;
-        txtUsuario.Location = new Point(624, 283);
+        txtUsuario.Location = new Point(634, 395);
         txtUsuario.Multiline = false;
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
@@ -139,7 +154,7 @@ partial class FormLogin
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtSenha.ForeColor = Color.LightGray;
-        txtSenha.Location = new Point(624, 344);
+        txtSenha.Location = new Point(634, 456);
         txtSenha.Multiline = false;
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
@@ -150,6 +165,8 @@ partial class FormLogin
         txtSenha.TabIndex = 20;
         txtSenha.Texts = "";
         txtSenha.UnderlinedStyle = false;
+        txtSenha.KeyDown += txtSenha_KeyDown;
+        txtSenha.KeyPress += txtSenha_KeyPress;
         // 
         // btnSair
         // 
@@ -163,7 +180,7 @@ partial class FormLogin
         btnSair.FlatStyle = FlatStyle.Flat;
         btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSair.ForeColor = Color.White;
-        btnSair.Location = new Point(752, 405);
+        btnSair.Location = new Point(762, 517);
         btnSair.Name = "btnSair";
         btnSair.Size = new Size(122, 41);
         btnSair.TabIndex = 22;
@@ -183,7 +200,7 @@ partial class FormLogin
         btnOlho.IconColor = Color.FromArgb(60, 117, 125);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
-        btnOlho.Location = new Point(880, 349);
+        btnOlho.Location = new Point(890, 461);
         btnOlho.Name = "btnOlho";
         btnOlho.Size = new Size(38, 36);
         btnOlho.TabIndex = 21;
@@ -203,7 +220,7 @@ partial class FormLogin
         btnEntrar.FlatStyle = FlatStyle.Flat;
         btnEntrar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEntrar.ForeColor = Color.White;
-        btnEntrar.Location = new Point(624, 405);
+        btnEntrar.Location = new Point(634, 517);
         btnEntrar.Name = "btnEntrar";
         btnEntrar.Size = new Size(122, 41);
         btnEntrar.TabIndex = 18;
@@ -229,6 +246,7 @@ partial class FormLogin
         Load += FormClientes_Load;
         pnLogin.ResumeLayout(false);
         pnLogin.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
         pnImagemLogin.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
         ResumeLayout(false);
@@ -242,8 +260,9 @@ partial class FormLogin
     private RJButton btnSair;
     private FontAwesome.Sharp.IconButton btnOlho;
     private RJButton btnEntrar;
-    private Label lblLogin;
     private PictureBox pictureBox1;
     private Panel pnImagemLogin;
     private Label lblEsqueciSenha;
+    private Label label1;
+    private PictureBox pictureBox2;
 }

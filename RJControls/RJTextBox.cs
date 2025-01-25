@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using System.Drawing.Drawing2D;
 
 namespace SistemaERP.RJControls;
@@ -29,7 +21,7 @@ public partial class RJTextBox : UserControl
     private bool isPasswordChar = false;
 
     //Events
-    public event EventHandler _TextChanged;
+    public event EventHandler? _TextChanged;
 
     #endregion
 
@@ -135,17 +127,18 @@ public partial class RJTextBox : UserControl
 
     [Category("RJ Code Advance")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public override Font Font
+    public override Font? Font
     {
-        get => base.Font;
+        get => base.Font; // Permite que o valor seja nulo, conforme a classe base
         set
         {
-            base.Font = value;
-            textBox1.Font = value;
+            base.Font = value; // Permite que o valor seja nulo
+            textBox1.Font = value ?? SystemFonts.DefaultFont; // Define um valor padrão no controle interno
             if (this.DesignMode)
                 UpdateControlHeight();
         }
     }
+
 
     [Category("RJ Code Advance")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -223,7 +216,7 @@ public partial class RJTextBox : UserControl
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
-        Graphics graph = e.Graphics;
+        var graph = e.Graphics;
 
         if (borderRadius > 1)//Rounded TextBox
         {
@@ -232,10 +225,10 @@ public partial class RJTextBox : UserControl
             var rectBorder = Rectangle.Inflate(rectBorderSmooth, -borderSize, -borderSize);
             var smoothSize = borderSize > 0 ? borderSize : 1;
 
-            using GraphicsPath pathBorderSmooth = GetFigurePath(rectBorderSmooth, borderRadius);
-            using GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize);
-            using Pen penBorderSmooth = new Pen(Parent.BackColor, smoothSize);
-            using Pen penBorder = new Pen(borderColor, borderSize);
+            using var pathBorderSmooth = GetFigurePath(rectBorderSmooth, borderRadius);
+            using var pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize);
+            using var penBorderSmooth = new Pen(Parent.BackColor, smoothSize);
+            using var penBorder = new Pen(borderColor, borderSize);
             //-Drawing
             this.Region = new Region(pathBorderSmooth);//Set the rounded region of UserControl
             if (borderRadius > 15) SetTextBoxRoundedRegion();//Set the rounded region of TextBox component
@@ -262,7 +255,7 @@ public partial class RJTextBox : UserControl
         else //Square/Normal TextBox
         {
             //Draw border
-            using Pen penBorder = new Pen(borderColor, borderSize);
+            using var penBorder = new Pen(borderColor, borderSize);
             this.Region = new Region(this.ClientRectangle);
             penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             if (isFocused) penBorder.Color = borderFocusColor;
@@ -300,7 +293,7 @@ public partial class RJTextBox : UserControl
     }
     private GraphicsPath GetFigurePath(Rectangle rect, int radius)
     {
-        GraphicsPath path = new GraphicsPath();
+        var path = new GraphicsPath();
         var curveSize = radius * 2F;
 
         path.StartFigure();
@@ -377,4 +370,9 @@ public partial class RJTextBox : UserControl
     }
     ///::::+
     #endregion
+
+    private void textBox1_KeyDown(object sender, KeyEventArgs e)
+    {
+        this.OnKeyDown(e);
+    }
 }

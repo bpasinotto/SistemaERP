@@ -59,35 +59,5 @@ namespace SistemaERP.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cartoon_style_data_graphics {
-            get {
-                object obj = ResourceManager.GetObject("cartoon style data graphics", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap iconePonto {
-            get {
-                object obj = ResourceManager.GetObject("iconePonto", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap shifaaz_shamoon_okVXy9tG3KY_unsplash {
-            get {
-                object obj = ResourceManager.GetObject("shifaaz-shamoon-okVXy9tG3KY-unsplash", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
