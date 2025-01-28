@@ -1,19 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
-using SistemaERP.Negocio;
-using Syncfusion.Windows.Forms.Diagram;
+﻿using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
 public partial class FormLogin : Form
@@ -74,11 +59,9 @@ public partial class FormLogin : Form
 
             if (resultado)
             {
-                MessageBox.Show("Login efetuado com sucesso");
                 this.Hide();
                 FormPrincipal formPrincipal = new FormPrincipal();
-                formPrincipal.ShowDialog();
-                this.Close();
+                formPrincipal.ShowDialog();                
             }
             else
             {
@@ -97,9 +80,13 @@ public partial class FormLogin : Form
         }
     }
 
-    private void txtSenha_KeyPress(object sender, KeyPressEventArgs e)
-    {
 
+    private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            txtSenha.Focus();
+        }
     }
 
 

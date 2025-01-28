@@ -143,6 +143,7 @@ partial class FormLogin
         txtUsuario.TabIndex = 19;
         txtUsuario.Texts = "";
         txtUsuario.UnderlinedStyle = false;
+        txtUsuario.KeyDown += txtUsuario_KeyDown;
         // 
         // txtSenha
         // 
@@ -166,7 +167,6 @@ partial class FormLogin
         txtSenha.Texts = "";
         txtSenha.UnderlinedStyle = false;
         txtSenha.KeyDown += txtSenha_KeyDown;
-        txtSenha.KeyPress += txtSenha_KeyPress;
         // 
         // btnSair
         // 

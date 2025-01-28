@@ -28,4 +28,9 @@ public partial class FormUsuarios : Form
         txtSenha.PasswordChar = true;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
     }
+
+    private void btnVoltar_Click(object sender, EventArgs e)
+    {
+        Close();
+    }
 }

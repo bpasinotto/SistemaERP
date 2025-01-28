@@ -34,6 +34,7 @@ partial class FormUsuarios
         btnOlho = new FontAwesome.Sharp.IconButton();
         btnSalvar = new RJControls.RJButton();
         txtEmail = new RJControls.RJTextBox();
+        btnVoltar = new RJControls.RJButton();
         SuspendLayout();
         // 
         // label1
@@ -42,7 +43,7 @@ partial class FormUsuarios
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         label1.ForeColor = Color.DimGray;
-        label1.Location = new Point(341, 187);
+        label1.Location = new Point(349, 207);
         label1.Name = "label1";
         label1.Size = new Size(316, 46);
         label1.TabIndex = 29;
@@ -58,7 +59,7 @@ partial class FormUsuarios
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtUsuario.ForeColor = Color.LightGray;
-        txtUsuario.Location = new Point(341, 278);
+        txtUsuario.Location = new Point(349, 298);
         txtUsuario.Multiline = false;
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
@@ -80,7 +81,7 @@ partial class FormUsuarios
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtSenha.ForeColor = Color.LightGray;
-        txtSenha.Location = new Point(341, 400);
+        txtSenha.Location = new Point(349, 420);
         txtSenha.Multiline = false;
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
@@ -103,7 +104,7 @@ partial class FormUsuarios
         btnOlho.IconColor = Color.FromArgb(60, 117, 125);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
-        btnOlho.Location = new Point(597, 405);
+        btnOlho.Location = new Point(605, 425);
         btnOlho.Name = "btnOlho";
         btnOlho.Size = new Size(38, 36);
         btnOlho.TabIndex = 33;
@@ -123,7 +124,7 @@ partial class FormUsuarios
         btnSalvar.FlatStyle = FlatStyle.Flat;
         btnSalvar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSalvar.ForeColor = Color.White;
-        btnSalvar.Location = new Point(341, 461);
+        btnSalvar.Location = new Point(349, 481);
         btnSalvar.Name = "btnSalvar";
         btnSalvar.Size = new Size(122, 41);
         btnSalvar.TabIndex = 30;
@@ -141,7 +142,7 @@ partial class FormUsuarios
         txtEmail.BorderSize = 2;
         txtEmail.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtEmail.ForeColor = Color.LightGray;
-        txtEmail.Location = new Point(341, 338);
+        txtEmail.Location = new Point(349, 358);
         txtEmail.Multiline = false;
         txtEmail.Name = "txtEmail";
         txtEmail.Padding = new Padding(10, 7, 10, 7);
@@ -153,18 +154,41 @@ partial class FormUsuarios
         txtEmail.Texts = "";
         txtEmail.UnderlinedStyle = false;
         // 
+        // btnVoltar
+        // 
+        btnVoltar.Anchor = AnchorStyles.None;
+        btnVoltar.BackColor = Color.FromArgb(60, 117, 125);
+        btnVoltar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnVoltar.BorderColor = Color.Empty;
+        btnVoltar.BorderRadius = 20;
+        btnVoltar.BorderSize = 0;
+        btnVoltar.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnVoltar.FlatStyle = FlatStyle.Flat;
+        btnVoltar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnVoltar.ForeColor = Color.White;
+        btnVoltar.Location = new Point(477, 481);
+        btnVoltar.Name = "btnVoltar";
+        btnVoltar.Size = new Size(122, 41);
+        btnVoltar.TabIndex = 35;
+        btnVoltar.Text = "Voltar";
+        btnVoltar.TextColor = Color.White;
+        btnVoltar.UseVisualStyleBackColor = false;
+        btnVoltar.Click += btnVoltar_Click;
+        // 
         // FormUsuarios
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.White;
         ClientSize = new Size(1008, 729);
+        Controls.Add(btnVoltar);
         Controls.Add(txtEmail);
         Controls.Add(txtUsuario);
         Controls.Add(txtSenha);
         Controls.Add(btnOlho);
         Controls.Add(btnSalvar);
         Controls.Add(label1);
+        FormBorderStyle = FormBorderStyle.None;
         MinimumSize = new Size(1024, 768);
         Name = "FormUsuarios";
         Text = "FormUsuarios";
@@ -181,4 +205,5 @@ partial class FormUsuarios
     private FontAwesome.Sharp.IconButton btnOlho;
     private RJControls.RJButton btnSalvar;
     private RJControls.RJTextBox txtEmail;
+    private RJControls.RJButton btnVoltar;
 }
