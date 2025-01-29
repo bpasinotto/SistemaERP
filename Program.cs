@@ -14,7 +14,7 @@ internal static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWH1ccHVUR2RfWEVxXkQ=");
-        Database.Initialize();
+        Banco.Inicializa();
         Application.Run(new FormLogin());
         
     }

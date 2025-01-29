@@ -48,6 +48,7 @@ partial class FormInicio
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.WhiteSmoke;
         ClientSize = new Size(1008, 655);
         Controls.Add(pictureBox1);
         FormBorderStyle = FormBorderStyle.None;

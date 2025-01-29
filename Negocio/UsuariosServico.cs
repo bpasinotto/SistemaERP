@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ using SistemaERP.Dados;
 namespace SistemaERP.Negocio;
 public class UsuariosServico
 {
-    
+
     //Metodos
-    public bool Autenticar(string Nome, string Senha)
+    public bool AutenticaLogin(string Nome, string Senha)
     {
         UsuariosRepositorio usuarios = new UsuariosRepositorio();
-        var result = usuarios.Dados(Nome, Senha);
-                
+        var result = usuarios.BuscaUsuarioNomeSenha(Nome, Senha);
+
         if (result == null)
         {
             return false;
@@ -31,8 +32,19 @@ public class UsuariosServico
             }
         }
 
-        
     }
-    
+
+    public DataTable RetornaTodosUsuarios()
+    {
+        UsuariosRepositorio usuarios = new UsuariosRepositorio();
+        return usuarios.BuscaTodosUsuarios();
+    }
+
+
+    public string InsereUsuario(string Nome, string Email, string Senha)
+    {
+        UsuariosRepositorio repositorio = new UsuariosRepositorio();
+        return repositorio.InsereUsuario(Nome, Email, Senha);
+    }
 
 }

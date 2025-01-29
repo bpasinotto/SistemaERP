@@ -28,182 +28,117 @@ partial class FormUsuarios
     /// </summary>
     private void InitializeComponent()
     {
-        label1 = new Label();
-        txtUsuario = new RJControls.RJTextBox();
-        txtSenha = new RJControls.RJTextBox();
-        btnOlho = new FontAwesome.Sharp.IconButton();
-        btnSalvar = new RJControls.RJButton();
-        txtEmail = new RJControls.RJTextBox();
-        btnVoltar = new RJControls.RJButton();
+        btnNovo = new RJControls.RJButton();
+        btnEditar = new RJControls.RJButton();
+        pnTopo = new Panel();
+        pnMeio = new Panel();
+        dgUsuarios = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+        pnTopo.SuspendLayout();
+        pnMeio.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dgUsuarios).BeginInit();
         SuspendLayout();
         // 
-        // label1
+        // btnNovo
         // 
-        label1.Anchor = AnchorStyles.None;
-        label1.AutoSize = true;
-        label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        label1.ForeColor = Color.DimGray;
-        label1.Location = new Point(349, 207);
-        label1.Name = "label1";
-        label1.Size = new Size(316, 46);
-        label1.TabIndex = 29;
-        label1.Text = "Cadastro de Usuários";
+        btnNovo.Anchor = AnchorStyles.Right;
+        btnNovo.BackColor = Color.FromArgb(60, 117, 125);
+        btnNovo.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnNovo.BorderColor = Color.Empty;
+        btnNovo.BorderRadius = 20;
+        btnNovo.BorderSize = 0;
+        btnNovo.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnNovo.FlatStyle = FlatStyle.Flat;
+        btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnNovo.ForeColor = Color.White;
+        btnNovo.Location = new Point(924, 12);
+        btnNovo.Name = "btnNovo";
+        btnNovo.Size = new Size(72, 41);
+        btnNovo.TabIndex = 25;
+        btnNovo.Text = "Novo";
+        btnNovo.TextColor = Color.White;
+        btnNovo.UseVisualStyleBackColor = false;
+        btnNovo.Click += btnNovo_Click;
         // 
-        // txtUsuario
+        // btnEditar
         // 
-        txtUsuario.Anchor = AnchorStyles.None;
-        txtUsuario.BackColor = Color.FromArgb(60, 117, 125);
-        txtUsuario.BorderColor = Color.Empty;
-        txtUsuario.BorderFocusColor = Color.Black;
-        txtUsuario.BorderRadius = 20;
-        txtUsuario.BorderSize = 2;
-        txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        txtUsuario.ForeColor = Color.LightGray;
-        txtUsuario.Location = new Point(349, 298);
-        txtUsuario.Multiline = false;
-        txtUsuario.Name = "txtUsuario";
-        txtUsuario.Padding = new Padding(10, 7, 10, 7);
-        txtUsuario.PasswordChar = false;
-        txtUsuario.PlaceholderColor = Color.DarkGray;
-        txtUsuario.PlaceholderText = "Usuário";
-        txtUsuario.Size = new Size(250, 41);
-        txtUsuario.TabIndex = 31;
-        txtUsuario.Texts = "";
-        txtUsuario.UnderlinedStyle = false;
+        btnEditar.Anchor = AnchorStyles.Right;
+        btnEditar.BackColor = Color.FromArgb(60, 117, 125);
+        btnEditar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnEditar.BorderColor = Color.Empty;
+        btnEditar.BorderRadius = 20;
+        btnEditar.BorderSize = 0;
+        btnEditar.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnEditar.FlatStyle = FlatStyle.Flat;
+        btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnEditar.ForeColor = Color.White;
+        btnEditar.Location = new Point(845, 12);
+        btnEditar.Name = "btnEditar";
+        btnEditar.Size = new Size(73, 41);
+        btnEditar.TabIndex = 26;
+        btnEditar.Text = "Editar";
+        btnEditar.TextColor = Color.White;
+        btnEditar.UseVisualStyleBackColor = false;
+        btnEditar.Click += btnEditar_Click;
         // 
-        // txtSenha
+        // pnTopo
         // 
-        txtSenha.Anchor = AnchorStyles.None;
-        txtSenha.BackColor = Color.FromArgb(60, 117, 125);
-        txtSenha.BorderColor = Color.Empty;
-        txtSenha.BorderFocusColor = Color.Black;
-        txtSenha.BorderRadius = 20;
-        txtSenha.BorderSize = 2;
-        txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        txtSenha.ForeColor = Color.LightGray;
-        txtSenha.Location = new Point(349, 420);
-        txtSenha.Multiline = false;
-        txtSenha.Name = "txtSenha";
-        txtSenha.Padding = new Padding(10, 7, 10, 7);
-        txtSenha.PasswordChar = true;
-        txtSenha.PlaceholderColor = Color.DarkGray;
-        txtSenha.PlaceholderText = "Senha";
-        txtSenha.Size = new Size(250, 41);
-        txtSenha.TabIndex = 32;
-        txtSenha.Texts = "";
-        txtSenha.UnderlinedStyle = false;
+        pnTopo.Controls.Add(btnNovo);
+        pnTopo.Controls.Add(btnEditar);
+        pnTopo.Dock = DockStyle.Top;
+        pnTopo.Location = new Point(0, 0);
+        pnTopo.Name = "pnTopo";
+        pnTopo.Size = new Size(1008, 68);
+        pnTopo.TabIndex = 27;
         // 
-        // btnOlho
+        // pnMeio
         // 
-        btnOlho.Anchor = AnchorStyles.None;
-        btnOlho.BackColor = Color.White;
-        btnOlho.FlatAppearance.BorderSize = 0;
-        btnOlho.FlatStyle = FlatStyle.Flat;
-        btnOlho.ForeColor = Color.White;
-        btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-        btnOlho.IconColor = Color.FromArgb(60, 117, 125);
-        btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
-        btnOlho.IconSize = 32;
-        btnOlho.Location = new Point(605, 425);
-        btnOlho.Name = "btnOlho";
-        btnOlho.Size = new Size(38, 36);
-        btnOlho.TabIndex = 33;
-        btnOlho.UseVisualStyleBackColor = false;
-        btnOlho.MouseDown += btnOlho_MouseDown;
-        btnOlho.MouseUp += btnOlho_MouseUp;
+        pnMeio.Controls.Add(dgUsuarios);
+        pnMeio.Dock = DockStyle.Fill;
+        pnMeio.Location = new Point(0, 68);
+        pnMeio.Name = "pnMeio";
+        pnMeio.Size = new Size(1008, 587);
+        pnMeio.TabIndex = 28;
         // 
-        // btnSalvar
+        // dgUsuarios
         // 
-        btnSalvar.Anchor = AnchorStyles.None;
-        btnSalvar.BackColor = Color.FromArgb(60, 117, 125);
-        btnSalvar.BackgroundColor = Color.FromArgb(60, 117, 125);
-        btnSalvar.BorderColor = Color.Empty;
-        btnSalvar.BorderRadius = 20;
-        btnSalvar.BorderSize = 0;
-        btnSalvar.FlatAppearance.BorderColor = Color.DarkBlue;
-        btnSalvar.FlatStyle = FlatStyle.Flat;
-        btnSalvar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnSalvar.ForeColor = Color.White;
-        btnSalvar.Location = new Point(349, 481);
-        btnSalvar.Name = "btnSalvar";
-        btnSalvar.Size = new Size(122, 41);
-        btnSalvar.TabIndex = 30;
-        btnSalvar.Text = "Salvar";
-        btnSalvar.TextColor = Color.White;
-        btnSalvar.UseVisualStyleBackColor = false;
-        // 
-        // txtEmail
-        // 
-        txtEmail.Anchor = AnchorStyles.None;
-        txtEmail.BackColor = Color.FromArgb(60, 117, 125);
-        txtEmail.BorderColor = Color.Empty;
-        txtEmail.BorderFocusColor = Color.Black;
-        txtEmail.BorderRadius = 20;
-        txtEmail.BorderSize = 2;
-        txtEmail.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        txtEmail.ForeColor = Color.LightGray;
-        txtEmail.Location = new Point(349, 358);
-        txtEmail.Multiline = false;
-        txtEmail.Name = "txtEmail";
-        txtEmail.Padding = new Padding(10, 7, 10, 7);
-        txtEmail.PasswordChar = false;
-        txtEmail.PlaceholderColor = Color.DarkGray;
-        txtEmail.PlaceholderText = "Email";
-        txtEmail.Size = new Size(250, 41);
-        txtEmail.TabIndex = 34;
-        txtEmail.Texts = "";
-        txtEmail.UnderlinedStyle = false;
-        // 
-        // btnVoltar
-        // 
-        btnVoltar.Anchor = AnchorStyles.None;
-        btnVoltar.BackColor = Color.FromArgb(60, 117, 125);
-        btnVoltar.BackgroundColor = Color.FromArgb(60, 117, 125);
-        btnVoltar.BorderColor = Color.Empty;
-        btnVoltar.BorderRadius = 20;
-        btnVoltar.BorderSize = 0;
-        btnVoltar.FlatAppearance.BorderColor = Color.DarkBlue;
-        btnVoltar.FlatStyle = FlatStyle.Flat;
-        btnVoltar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnVoltar.ForeColor = Color.White;
-        btnVoltar.Location = new Point(477, 481);
-        btnVoltar.Name = "btnVoltar";
-        btnVoltar.Size = new Size(122, 41);
-        btnVoltar.TabIndex = 35;
-        btnVoltar.Text = "Voltar";
-        btnVoltar.TextColor = Color.White;
-        btnVoltar.UseVisualStyleBackColor = false;
-        btnVoltar.Click += btnVoltar_Click;
+        dgUsuarios.AccessibleName = "Table";
+        dgUsuarios.AllowEditing = false;
+        dgUsuarios.AllowFiltering = true;
+        dgUsuarios.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+        dgUsuarios.Dock = DockStyle.Fill;
+        dgUsuarios.Location = new Point(0, 0);
+        dgUsuarios.Name = "dgUsuarios";
+        dgUsuarios.Size = new Size(1008, 587);
+        dgUsuarios.Style.BorderColor = Color.FromArgb(100, 100, 100);
+        dgUsuarios.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+        dgUsuarios.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+        dgUsuarios.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+        dgUsuarios.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+        dgUsuarios.TabIndex = 0;
+        dgUsuarios.Text = "dgUsuarios";
         // 
         // FormUsuarios
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = Color.White;
-        ClientSize = new Size(1008, 729);
-        Controls.Add(btnVoltar);
-        Controls.Add(txtEmail);
-        Controls.Add(txtUsuario);
-        Controls.Add(txtSenha);
-        Controls.Add(btnOlho);
-        Controls.Add(btnSalvar);
-        Controls.Add(label1);
+        BackColor = Color.WhiteSmoke;
+        ClientSize = new Size(1008, 655);
+        Controls.Add(pnMeio);
+        Controls.Add(pnTopo);
         FormBorderStyle = FormBorderStyle.None;
-        MinimumSize = new Size(1024, 768);
         Name = "FormUsuarios";
         Text = "FormUsuarios";
-        WindowState = FormWindowState.Maximized;
+        pnTopo.ResumeLayout(false);
+        pnMeio.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dgUsuarios).EndInit();
         ResumeLayout(false);
-        PerformLayout();
     }
 
     #endregion
 
-    private Label label1;
-    private RJControls.RJTextBox txtUsuario;
-    private RJControls.RJTextBox txtSenha;
-    private FontAwesome.Sharp.IconButton btnOlho;
-    private RJControls.RJButton btnSalvar;
-    private RJControls.RJTextBox txtEmail;
-    private RJControls.RJButton btnVoltar;
+    private RJControls.RJButton btnNovo;
+    private RJControls.RJButton btnEditar;
+    private Panel pnTopo;
+    private Panel pnMeio;
+    private Syncfusion.WinForms.DataGrid.SfDataGrid dgUsuarios;
 }

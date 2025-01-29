@@ -55,7 +55,7 @@ public partial class FormLogin : Form
         else
         {
             UsuariosServico usuario = new UsuariosServico();
-            var resultado = usuario.Autenticar(txtUsuario.Texts, txtSenha.Texts);
+            var resultado = usuario.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
 
             if (resultado)
             {

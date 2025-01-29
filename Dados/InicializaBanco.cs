@@ -1,9 +1,9 @@
 ﻿using System.Configuration;
 using Microsoft.Data.SqlClient;
 
-public static class Database
+public static class Banco
 {
-    public static void Initialize()
+    public static void Inicializa()
     {
         var connectionString = ConfigurationManager.ConnectionStrings["SemBanco"].ConnectionString;
 
@@ -56,6 +56,10 @@ public static class Database
                     Senha NVARCHAR(100) NOT NULL
                 );");
 
+            // Insere usuário ADM
+            ExecuteSqlCommand(connection, @"
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Usuarios' AND xtype='U')
+                INSERT INTO Usuarios (Nome, Email, Senha) VALUES ('Admin', 'admin@example.com', 'admin123');");
            
         }
         catch (Exception ex)
