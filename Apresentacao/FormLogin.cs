@@ -10,13 +10,20 @@ public partial class FormLogin : Form
 
     private void FormClientes_Load(object sender, EventArgs e)
     {
+        UsuariosServico usuariosServico = new UsuariosServico();
+        var resultado = usuariosServico.ExisteAdmin();
+
+        if (resultado == false)
+        {            
+            FormMensagem mensagem = new FormMensagem("Atenção", "Crie o usuário que irá administrar o sistema.");
+            mensagem.ShowDialog();
+
+            FormCadUsuarios formCadUsuarios = new FormCadUsuarios();
+            formCadUsuarios.ShowDialog();
+        }
 
     }
-
-    private void rjButton1_Click(object sender, EventArgs e)
-    {
-        MessageBox.Show(txtUsuario.Texts);
-    }
+        
 
     private void btnSair_Click(object sender, EventArgs e)
     {
@@ -35,37 +42,39 @@ public partial class FormLogin : Form
         txtSenha.PasswordChar = true;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
     }
-
-    private void btnSair_Click_1(object sender, EventArgs e)
-    {
-        this.Close();
-    }
+       
 
     private void lblEsqueciSenha_Click(object sender, EventArgs e)
     {
-        MessageBox.Show("Esqueci minha senha");
+        FormMensagem mensagem = new FormMensagem("Atenção", "Esqueci minha senha.");
+        mensagem.ShowDialog();
     }
 
     private void btnEntrar_Click(object sender, EventArgs e)
     {
+        UsuariosServico usuariosServico = new UsuariosServico();
+
         if (string.IsNullOrWhiteSpace(txtUsuario.Texts) || string.IsNullOrWhiteSpace(txtSenha.Texts))
         {
-            MessageBox.Show("Preencha Usuário e Senha");
-        }
+            
+            FormMensagem mensagem = new FormMensagem("Atenção", "Preencha Usuário e Senha.");
+            mensagem.ShowDialog();
+
+        }        
         else
-        {
-            UsuariosServico usuario = new UsuariosServico();
-            var resultado = usuario.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
+        {            
+            var resultado = usuariosServico.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
 
             if (resultado)
             {
                 this.Hide();
                 FormPrincipal formPrincipal = new FormPrincipal();
-                formPrincipal.ShowDialog();                
+                formPrincipal.ShowDialog();
             }
             else
-            {
-                MessageBox.Show("Usuário ou Senha inválidos");
+            {                
+                FormMensagem mensagem = new FormMensagem("Atenção", "Usuário ou Senha inválida.");
+                mensagem.ShowDialog();
             }
         }
 

@@ -22,11 +22,11 @@ public static class Banco
             // Conectando à instância do SQL Server
             using SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-            
 
-            using SqlCommand command = new SqlCommand(createDatabaseQuery, connection);            
+
+            using SqlCommand command = new SqlCommand(createDatabaseQuery, connection);
             command.ExecuteNonQuery();
-            
+
 
             connection.ChangeDatabase("ERPDatabase");
 
@@ -57,10 +57,13 @@ public static class Banco
                 );");
 
             // Insere usuário ADM
-            ExecuteSqlCommand(connection, @"
-                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Usuarios' AND xtype='U')
-                INSERT INTO Usuarios (Nome, Email, Senha) VALUES ('Admin', 'admin@example.com', 'admin123');");
-           
+            //ExecuteSqlCommand(connection, @"IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID = 1)
+            //    BEGIN
+            //    INSERT INTO Usuarios (Nome, Email, Senha) 
+            //    VALUES ('Admin', 'admin@example.com', 'admin123');
+            //    END
+            //    ");
+
         }
         catch (Exception ex)
         {

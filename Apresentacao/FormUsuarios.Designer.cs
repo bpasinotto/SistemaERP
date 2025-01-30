@@ -41,8 +41,8 @@ partial class FormUsuarios
         // btnNovo
         // 
         btnNovo.Anchor = AnchorStyles.Right;
-        btnNovo.BackColor = Color.FromArgb(60, 117, 125);
-        btnNovo.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnNovo.BackColor = Color.FromArgb(2, 89, 89);
+        btnNovo.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnNovo.BorderColor = Color.Empty;
         btnNovo.BorderRadius = 20;
         btnNovo.BorderSize = 0;
@@ -62,8 +62,8 @@ partial class FormUsuarios
         // btnEditar
         // 
         btnEditar.Anchor = AnchorStyles.Right;
-        btnEditar.BackColor = Color.FromArgb(60, 117, 125);
-        btnEditar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnEditar.BackColor = Color.FromArgb(2, 89, 89);
+        btnEditar.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnEditar.BorderColor = Color.Empty;
         btnEditar.BorderRadius = 20;
         btnEditar.BorderSize = 0;

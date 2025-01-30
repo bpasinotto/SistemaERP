@@ -15,6 +15,7 @@ public partial class FormCadUsuarios : Form
     public FormCadUsuarios()
     {
         InitializeComponent();
+        lblEmailErro.Visible = false;
     }
 
     private void btnOlho_MouseDown(object sender, MouseEventArgs e)
@@ -37,8 +38,48 @@ public partial class FormCadUsuarios : Form
 
     private void btnSalvar_Click(object sender, EventArgs e)
     {
-        UsuariosServico usuariosServico = new UsuariosServico();
-        var resposta = usuariosServico.InsereUsuario(txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts);
-        MessageBox.Show(resposta);
+        if(lblEmailErro.Visible == false)
+        {
+            UsuariosServico usuariosServico = new UsuariosServico();
+            var resposta = usuariosServico.InsereUsuario(txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts);            
+
+            FormMensagem mensagem = new FormMensagem("Sucesso", resposta);
+            mensagem.ShowDialog();
+        }       
+
+    }
+
+    private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            txtEmail.Focus();
+        }
+    }
+
+    private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            txtSenha.Focus();
+        }
+    }
+
+    private void txtEmail__TextChanged(object sender, EventArgs e)
+    {
+        ValidaEmail();
+    }
+
+    private void ValidaEmail()
+    {
+        // Validação de email
+        if (txtEmail.Texts.Contains('@') && txtEmail.Texts.Contains('.'))
+        {
+            lblEmailErro.Visible = false;
+        }
+        else
+        {
+            lblEmailErro.Visible = true;
+        }
     }
 }

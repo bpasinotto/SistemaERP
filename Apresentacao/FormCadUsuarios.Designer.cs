@@ -35,6 +35,7 @@ partial class FormCadUsuarios
         btnSalvar = new RJControls.RJButton();
         txtEmail = new RJControls.RJTextBox();
         btnVoltar = new RJControls.RJButton();
+        lblEmailErro = new Label();
         SuspendLayout();
         // 
         // label1
@@ -52,9 +53,9 @@ partial class FormCadUsuarios
         // txtUsuario
         // 
         txtUsuario.Anchor = AnchorStyles.None;
-        txtUsuario.BackColor = Color.FromArgb(60, 117, 125);
+        txtUsuario.BackColor = Color.FromArgb(2, 89, 89);
         txtUsuario.BorderColor = Color.Empty;
-        txtUsuario.BorderFocusColor = Color.Black;
+        txtUsuario.BorderFocusColor = Color.FromArgb(3, 140, 140);
         txtUsuario.BorderRadius = 20;
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -64,19 +65,20 @@ partial class FormCadUsuarios
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
         txtUsuario.PasswordChar = false;
-        txtUsuario.PlaceholderColor = Color.DarkGray;
+        txtUsuario.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtUsuario.PlaceholderText = "Usuário";
         txtUsuario.Size = new Size(250, 41);
         txtUsuario.TabIndex = 1;
         txtUsuario.Texts = "";
         txtUsuario.UnderlinedStyle = false;
+        txtUsuario.KeyDown += txtUsuario_KeyDown;
         // 
         // txtSenha
         // 
         txtSenha.Anchor = AnchorStyles.None;
-        txtSenha.BackColor = Color.FromArgb(60, 117, 125);
+        txtSenha.BackColor = Color.FromArgb(2, 89, 89);
         txtSenha.BorderColor = Color.Empty;
-        txtSenha.BorderFocusColor = Color.Black;
+        txtSenha.BorderFocusColor = Color.FromArgb(3, 140, 140);
         txtSenha.BorderRadius = 20;
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -86,7 +88,7 @@ partial class FormCadUsuarios
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
         txtSenha.PasswordChar = true;
-        txtSenha.PlaceholderColor = Color.DarkGray;
+        txtSenha.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtSenha.PlaceholderText = "Senha";
         txtSenha.Size = new Size(250, 41);
         txtSenha.TabIndex = 3;
@@ -101,7 +103,7 @@ partial class FormCadUsuarios
         btnOlho.FlatStyle = FlatStyle.Flat;
         btnOlho.ForeColor = Color.White;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-        btnOlho.IconColor = Color.FromArgb(60, 117, 125);
+        btnOlho.IconColor = Color.FromArgb(2, 89, 89);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
         btnOlho.Location = new Point(605, 425);
@@ -116,8 +118,8 @@ partial class FormCadUsuarios
         // btnSalvar
         // 
         btnSalvar.Anchor = AnchorStyles.None;
-        btnSalvar.BackColor = Color.FromArgb(60, 117, 125);
-        btnSalvar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnSalvar.BackColor = Color.FromArgb(2, 89, 89);
+        btnSalvar.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnSalvar.BorderColor = Color.Empty;
         btnSalvar.BorderRadius = 20;
         btnSalvar.BorderSize = 0;
@@ -138,9 +140,9 @@ partial class FormCadUsuarios
         // txtEmail
         // 
         txtEmail.Anchor = AnchorStyles.None;
-        txtEmail.BackColor = Color.FromArgb(60, 117, 125);
+        txtEmail.BackColor = Color.FromArgb(2, 89, 89);
         txtEmail.BorderColor = Color.Empty;
-        txtEmail.BorderFocusColor = Color.Black;
+        txtEmail.BorderFocusColor = Color.FromArgb(3, 140, 140);
         txtEmail.BorderRadius = 20;
         txtEmail.BorderSize = 2;
         txtEmail.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -150,18 +152,20 @@ partial class FormCadUsuarios
         txtEmail.Name = "txtEmail";
         txtEmail.Padding = new Padding(10, 7, 10, 7);
         txtEmail.PasswordChar = false;
-        txtEmail.PlaceholderColor = Color.DarkGray;
+        txtEmail.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtEmail.PlaceholderText = "Email";
         txtEmail.Size = new Size(250, 41);
         txtEmail.TabIndex = 2;
         txtEmail.Texts = "";
         txtEmail.UnderlinedStyle = false;
+        txtEmail._TextChanged += txtEmail__TextChanged;
+        txtEmail.KeyDown += txtEmail_KeyDown;
         // 
         // btnVoltar
         // 
         btnVoltar.Anchor = AnchorStyles.None;
-        btnVoltar.BackColor = Color.FromArgb(60, 117, 125);
-        btnVoltar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnVoltar.BackColor = Color.FromArgb(2, 89, 89);
+        btnVoltar.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnVoltar.BorderColor = Color.Empty;
         btnVoltar.BorderRadius = 20;
         btnVoltar.BorderSize = 0;
@@ -179,12 +183,25 @@ partial class FormCadUsuarios
         btnVoltar.UseVisualStyleBackColor = false;
         btnVoltar.Click += btnVoltar_Click;
         // 
+        // lblEmailErro
+        // 
+        lblEmailErro.Anchor = AnchorStyles.None;
+        lblEmailErro.AutoSize = true;
+        lblEmailErro.Font = new Font("Segoe UI Variable Display", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        lblEmailErro.ForeColor = Color.Red;
+        lblEmailErro.Location = new Point(605, 368);
+        lblEmailErro.Name = "lblEmailErro";
+        lblEmailErro.Size = new Size(95, 20);
+        lblEmailErro.TabIndex = 36;
+        lblEmailErro.Text = "Email inválido";
+        // 
         // FormCadUsuarios
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.White;
         ClientSize = new Size(1024, 768);
+        Controls.Add(lblEmailErro);
         Controls.Add(btnVoltar);
         Controls.Add(txtEmail);
         Controls.Add(txtUsuario);
@@ -209,4 +226,5 @@ partial class FormCadUsuarios
     private RJControls.RJButton btnSalvar;
     private RJControls.RJTextBox txtEmail;
     private RJControls.RJButton btnVoltar;
+    private Label lblEmailErro;
 }

@@ -46,6 +46,10 @@ public partial class FormUsuarios : Form
 
     private void btnEditar_Click(object sender, EventArgs e)
     {
+        // Abre o form de cadastro de usuário com os dados do usuário selecionado no dgUsuarios
+        FormCadUsuarios formCadUsuarios = new FormCadUsuarios();
+        formCadUsuarios.ShowDialog();
+
 
     }
 

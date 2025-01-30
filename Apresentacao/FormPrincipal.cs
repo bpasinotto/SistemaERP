@@ -18,14 +18,16 @@ public partial class FormPrincipal : Form
 
     private void btnUsuarios_Click(object sender, EventArgs e)
     {
-        //Abre o FormInicio dentro do pnMeio do FormPrincipal
+        //Limpa o pnMeio do FormPrincipal
         pnMeio.Controls.Clear();
 
         //Define a cor de todos os botões como LightGray
         BotoesCinza();
 
         //Define somente a cor do botão selecionado para verde
-        btnUsuarios.BackColor = Color.FromArgb(60, 117, 125);
+        btnUsuarios.BackColor = Color.FromArgb(2, 89, 89);
+        //Define cor da letra para branco
+        btnUsuarios.ForeColor = Color.White;
 
         FormUsuarios formUsuarios = new FormUsuarios();
         formUsuarios.TopLevel = false;
@@ -45,7 +47,7 @@ public partial class FormPrincipal : Form
     private void btnTrocarUsuario_Click(object sender, EventArgs e)
     {
         this.Hide();
-        FormLogin formLogin = new FormLogin();
+        FormLogin formLogin = new FormLogin();        
         formLogin.Show();
     }
 
@@ -58,7 +60,9 @@ public partial class FormPrincipal : Form
         BotoesCinza();
 
         //Define somente a cor do botão selecionado para verde
-        btnInicio.BackColor = Color.FromArgb(60, 117, 125);
+        btnInicio.BackColor = Color.FromArgb(2, 89, 89);
+        //Define cor da letra para branco
+        btnInicio.ForeColor = Color.White;
 
         //Abre o FormInicio dentro do pnMeio
         FormInicio formInicio = new FormInicio();
@@ -72,6 +76,15 @@ public partial class FormPrincipal : Form
 
     private void BotoesCinza()
     {
+        //Define a cor da letra de todos os botões como preto
+        btnInicio.ForeColor = Color.Black;
+        btnProdutos.ForeColor = Color.Black;
+        btnClientes.ForeColor = Color.Black;
+        btnVender.ForeColor = Color.Black;
+        btnConsultaVendas.ForeColor = Color.Black;
+        btnEstoque.ForeColor = Color.Black;
+        btnUsuarios.ForeColor = Color.Black;
+        
         //Define a cor de todos os botões como LightGray
         btnInicio.BackColor = Color.LightGray;
         btnProdutos.BackColor = Color.LightGray;

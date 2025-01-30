@@ -125,22 +125,22 @@ partial class FormLogin
         // txtUsuario
         // 
         txtUsuario.Anchor = AnchorStyles.None;
-        txtUsuario.BackColor = Color.FromArgb(60, 117, 125);
+        txtUsuario.BackColor = Color.FromArgb(2, 89, 89);
         txtUsuario.BorderColor = Color.Empty;
-        txtUsuario.BorderFocusColor = Color.Black;
+        txtUsuario.BorderFocusColor = Color.FromArgb(3, 140, 140);
         txtUsuario.BorderRadius = 20;
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        txtUsuario.ForeColor = Color.LightGray;
+        txtUsuario.ForeColor = Color.White;
         txtUsuario.Location = new Point(634, 395);
         txtUsuario.Multiline = false;
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
         txtUsuario.PasswordChar = false;
-        txtUsuario.PlaceholderColor = Color.DarkGray;
+        txtUsuario.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtUsuario.PlaceholderText = "Usuário";
         txtUsuario.Size = new Size(250, 41);
-        txtUsuario.TabIndex = 19;
+        txtUsuario.TabIndex = 1;
         txtUsuario.Texts = "";
         txtUsuario.UnderlinedStyle = false;
         txtUsuario.KeyDown += txtUsuario_KeyDown;
@@ -148,22 +148,22 @@ partial class FormLogin
         // txtSenha
         // 
         txtSenha.Anchor = AnchorStyles.None;
-        txtSenha.BackColor = Color.FromArgb(60, 117, 125);
+        txtSenha.BackColor = Color.FromArgb(2, 89, 89);
         txtSenha.BorderColor = Color.Empty;
-        txtSenha.BorderFocusColor = Color.Black;
+        txtSenha.BorderFocusColor = Color.FromArgb(3, 140, 140);
         txtSenha.BorderRadius = 20;
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        txtSenha.ForeColor = Color.LightGray;
+        txtSenha.ForeColor = Color.White;
         txtSenha.Location = new Point(634, 456);
         txtSenha.Multiline = false;
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
         txtSenha.PasswordChar = true;
-        txtSenha.PlaceholderColor = Color.DarkGray;
+        txtSenha.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtSenha.PlaceholderText = "Senha";
         txtSenha.Size = new Size(250, 41);
-        txtSenha.TabIndex = 20;
+        txtSenha.TabIndex = 2;
         txtSenha.Texts = "";
         txtSenha.UnderlinedStyle = false;
         txtSenha.KeyDown += txtSenha_KeyDown;
@@ -171,8 +171,8 @@ partial class FormLogin
         // btnSair
         // 
         btnSair.Anchor = AnchorStyles.None;
-        btnSair.BackColor = Color.FromArgb(60, 117, 125);
-        btnSair.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnSair.BackColor = Color.FromArgb(2, 89, 89);
+        btnSair.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnSair.BorderColor = Color.Empty;
         btnSair.BorderRadius = 20;
         btnSair.BorderSize = 0;
@@ -183,11 +183,11 @@ partial class FormLogin
         btnSair.Location = new Point(762, 517);
         btnSair.Name = "btnSair";
         btnSair.Size = new Size(122, 41);
-        btnSair.TabIndex = 22;
+        btnSair.TabIndex = 4;
         btnSair.Text = "Sair";
         btnSair.TextColor = Color.White;
         btnSair.UseVisualStyleBackColor = false;
-        btnSair.Click += btnSair_Click_1;
+        btnSair.Click += btnSair_Click;
         // 
         // btnOlho
         // 
@@ -197,7 +197,7 @@ partial class FormLogin
         btnOlho.FlatStyle = FlatStyle.Flat;
         btnOlho.ForeColor = Color.White;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-        btnOlho.IconColor = Color.FromArgb(60, 117, 125);
+        btnOlho.IconColor = Color.FromArgb(2, 89, 89);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
         btnOlho.Location = new Point(890, 461);
@@ -211,8 +211,8 @@ partial class FormLogin
         // btnEntrar
         // 
         btnEntrar.Anchor = AnchorStyles.None;
-        btnEntrar.BackColor = Color.FromArgb(60, 117, 125);
-        btnEntrar.BackgroundColor = Color.FromArgb(60, 117, 125);
+        btnEntrar.BackColor = Color.FromArgb(2, 89, 89);
+        btnEntrar.BackgroundColor = Color.FromArgb(2, 89, 89);
         btnEntrar.BorderColor = Color.Empty;
         btnEntrar.BorderRadius = 20;
         btnEntrar.BorderSize = 0;
@@ -223,7 +223,7 @@ partial class FormLogin
         btnEntrar.Location = new Point(634, 517);
         btnEntrar.Name = "btnEntrar";
         btnEntrar.Size = new Size(122, 41);
-        btnEntrar.TabIndex = 18;
+        btnEntrar.TabIndex = 3;
         btnEntrar.Text = "Entrar";
         btnEntrar.TextColor = Color.White;
         btnEntrar.UseVisualStyleBackColor = false;
@@ -233,7 +233,7 @@ partial class FormLogin
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = Color.FromArgb(60, 117, 125);
+        BackColor = Color.White;
         ClientSize = new Size(1008, 729);
         Controls.Add(pnLogin);
         ForeColor = SystemColors.ControlText;

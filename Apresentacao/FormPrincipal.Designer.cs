@@ -30,15 +30,15 @@ partial class FormPrincipal
     {
         pnTopo = new Panel();
         btnUsuarios = new RJControls.RJButton();
+        btnTrocarUsuario = new RJControls.RJButton();
+        btnConsultaVendas = new RJControls.RJButton();
+        btnSair = new RJControls.RJButton();
         btnInicio = new RJControls.RJButton();
+        btnVender = new RJControls.RJButton();
+        pageSizeControl1 = new Syncfusion.Windows.Forms.Diagram.PageSizeControl();
         btnProdutos = new RJControls.RJButton();
         btnEstoque = new RJControls.RJButton();
         btnClientes = new RJControls.RJButton();
-        btnConsultaVendas = new RJControls.RJButton();
-        btnVender = new RJControls.RJButton();
-        btnTrocarUsuario = new RJControls.RJButton();
-        btnSair = new RJControls.RJButton();
-        pageSizeControl1 = new Syncfusion.Windows.Forms.Diagram.PageSizeControl();
         pnMeio = new Panel();
         pnTopo.SuspendLayout();
         SuspendLayout();
@@ -70,7 +70,7 @@ partial class FormPrincipal
         btnUsuarios.BorderRadius = 20;
         btnUsuarios.BorderSize = 0;
         btnUsuarios.FlatAppearance.BorderSize = 0;
-        btnUsuarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
+        btnUsuarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
         btnUsuarios.FlatStyle = FlatStyle.Flat;
         btnUsuarios.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnUsuarios.ForeColor = Color.Black;
@@ -83,6 +83,68 @@ partial class FormPrincipal
         btnUsuarios.UseVisualStyleBackColor = false;
         btnUsuarios.Click += btnUsuarios_Click;
         // 
+        // btnTrocarUsuario
+        // 
+        btnTrocarUsuario.Anchor = AnchorStyles.Right;
+        btnTrocarUsuario.BackColor = Color.FromArgb(2, 89, 89);
+        btnTrocarUsuario.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnTrocarUsuario.BorderColor = Color.Empty;
+        btnTrocarUsuario.BorderRadius = 20;
+        btnTrocarUsuario.BorderSize = 0;
+        btnTrocarUsuario.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnTrocarUsuario.FlatStyle = FlatStyle.Flat;
+        btnTrocarUsuario.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnTrocarUsuario.ForeColor = Color.White;
+        btnTrocarUsuario.Location = new Point(791, 15);
+        btnTrocarUsuario.Name = "btnTrocarUsuario";
+        btnTrocarUsuario.Size = new Size(142, 41);
+        btnTrocarUsuario.TabIndex = 24;
+        btnTrocarUsuario.Text = "Trocar Usuário";
+        btnTrocarUsuario.TextColor = Color.White;
+        btnTrocarUsuario.UseVisualStyleBackColor = false;
+        btnTrocarUsuario.Click += btnTrocarUsuario_Click;
+        // 
+        // btnConsultaVendas
+        // 
+        btnConsultaVendas.BackColor = Color.LightGray;
+        btnConsultaVendas.BackgroundColor = Color.LightGray;
+        btnConsultaVendas.BorderColor = Color.Empty;
+        btnConsultaVendas.BorderRadius = 20;
+        btnConsultaVendas.BorderSize = 0;
+        btnConsultaVendas.FlatAppearance.BorderSize = 0;
+        btnConsultaVendas.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
+        btnConsultaVendas.FlatStyle = FlatStyle.Flat;
+        btnConsultaVendas.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnConsultaVendas.ForeColor = Color.Black;
+        btnConsultaVendas.Location = new Point(364, 15);
+        btnConsultaVendas.Name = "btnConsultaVendas";
+        btnConsultaVendas.Size = new Size(146, 41);
+        btnConsultaVendas.TabIndex = 24;
+        btnConsultaVendas.Text = "Consultar Vendas";
+        btnConsultaVendas.TextColor = Color.Black;
+        btnConsultaVendas.UseVisualStyleBackColor = false;
+        // 
+        // btnSair
+        // 
+        btnSair.Anchor = AnchorStyles.Right;
+        btnSair.BackColor = Color.FromArgb(2, 89, 89);
+        btnSair.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnSair.BorderColor = Color.Empty;
+        btnSair.BorderRadius = 20;
+        btnSair.BorderSize = 0;
+        btnSair.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnSair.FlatStyle = FlatStyle.Flat;
+        btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnSair.ForeColor = Color.White;
+        btnSair.Location = new Point(939, 15);
+        btnSair.Name = "btnSair";
+        btnSair.Size = new Size(57, 41);
+        btnSair.TabIndex = 23;
+        btnSair.Text = "Sair";
+        btnSair.TextColor = Color.White;
+        btnSair.UseVisualStyleBackColor = false;
+        btnSair.Click += btnSair_Click;
+        // 
         // btnInicio
         // 
         btnInicio.BackColor = Color.LightGray;
@@ -91,7 +153,7 @@ partial class FormPrincipal
         btnInicio.BorderRadius = 20;
         btnInicio.BorderSize = 0;
         btnInicio.FlatAppearance.BorderSize = 0;
-        btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
+        btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
         btnInicio.FlatStyle = FlatStyle.Flat;
         btnInicio.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnInicio.ForeColor = Color.Black;
@@ -104,6 +166,34 @@ partial class FormPrincipal
         btnInicio.UseVisualStyleBackColor = false;
         btnInicio.Click += btnInicio_Click;
         // 
+        // btnVender
+        // 
+        btnVender.BackColor = Color.LightGray;
+        btnVender.BackgroundColor = Color.LightGray;
+        btnVender.BorderColor = Color.Empty;
+        btnVender.BorderRadius = 20;
+        btnVender.BorderSize = 0;
+        btnVender.FlatAppearance.BorderSize = 0;
+        btnVender.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
+        btnVender.FlatStyle = FlatStyle.Flat;
+        btnVender.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnVender.ForeColor = Color.Black;
+        btnVender.Location = new Point(281, 15);
+        btnVender.Name = "btnVender";
+        btnVender.Size = new Size(77, 41);
+        btnVender.TabIndex = 22;
+        btnVender.Text = "Vender";
+        btnVender.TextColor = Color.Black;
+        btnVender.UseVisualStyleBackColor = false;
+        // 
+        // pageSizeControl1
+        // 
+        pageSizeControl1.Location = new Point(598, 71);
+        pageSizeControl1.Margin = new Padding(4, 3, 4, 3);
+        pageSizeControl1.Name = "pageSizeControl1";
+        pageSizeControl1.Size = new Size(258, 308);
+        pageSizeControl1.TabIndex = 1;
+        // 
         // btnProdutos
         // 
         btnProdutos.BackColor = Color.LightGray;
@@ -112,7 +202,7 @@ partial class FormPrincipal
         btnProdutos.BorderRadius = 20;
         btnProdutos.BorderSize = 0;
         btnProdutos.FlatAppearance.BorderSize = 0;
-        btnProdutos.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
+        btnProdutos.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
         btnProdutos.FlatStyle = FlatStyle.Flat;
         btnProdutos.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnProdutos.ForeColor = Color.Black;
@@ -132,7 +222,7 @@ partial class FormPrincipal
         btnEstoque.BorderRadius = 20;
         btnEstoque.BorderSize = 0;
         btnEstoque.FlatAppearance.BorderSize = 0;
-        btnEstoque.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
+        btnEstoque.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
         btnEstoque.FlatStyle = FlatStyle.Flat;
         btnEstoque.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEstoque.ForeColor = Color.Black;
@@ -152,7 +242,7 @@ partial class FormPrincipal
         btnClientes.BorderRadius = 20;
         btnClientes.BorderSize = 0;
         btnClientes.FlatAppearance.BorderSize = 0;
-        btnClientes.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
+        btnClientes.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
         btnClientes.FlatStyle = FlatStyle.Flat;
         btnClientes.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnClientes.ForeColor = Color.Black;
@@ -163,96 +253,6 @@ partial class FormPrincipal
         btnClientes.Text = "Clientes";
         btnClientes.TextColor = Color.Black;
         btnClientes.UseVisualStyleBackColor = false;
-        // 
-        // btnConsultaVendas
-        // 
-        btnConsultaVendas.BackColor = Color.LightGray;
-        btnConsultaVendas.BackgroundColor = Color.LightGray;
-        btnConsultaVendas.BorderColor = Color.Empty;
-        btnConsultaVendas.BorderRadius = 20;
-        btnConsultaVendas.BorderSize = 0;
-        btnConsultaVendas.FlatAppearance.BorderSize = 0;
-        btnConsultaVendas.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
-        btnConsultaVendas.FlatStyle = FlatStyle.Flat;
-        btnConsultaVendas.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnConsultaVendas.ForeColor = Color.Black;
-        btnConsultaVendas.Location = new Point(364, 15);
-        btnConsultaVendas.Name = "btnConsultaVendas";
-        btnConsultaVendas.Size = new Size(146, 41);
-        btnConsultaVendas.TabIndex = 24;
-        btnConsultaVendas.Text = "Consultar Vendas";
-        btnConsultaVendas.TextColor = Color.Black;
-        btnConsultaVendas.UseVisualStyleBackColor = false;
-        // 
-        // btnVender
-        // 
-        btnVender.BackColor = Color.LightGray;
-        btnVender.BackgroundColor = Color.LightGray;
-        btnVender.BorderColor = Color.Empty;
-        btnVender.BorderRadius = 20;
-        btnVender.BorderSize = 0;
-        btnVender.FlatAppearance.BorderSize = 0;
-        btnVender.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 117, 125);
-        btnVender.FlatStyle = FlatStyle.Flat;
-        btnVender.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnVender.ForeColor = Color.Black;
-        btnVender.Location = new Point(281, 15);
-        btnVender.Name = "btnVender";
-        btnVender.Size = new Size(77, 41);
-        btnVender.TabIndex = 22;
-        btnVender.Text = "Vender";
-        btnVender.TextColor = Color.Black;
-        btnVender.UseVisualStyleBackColor = false;
-        // 
-        // btnTrocarUsuario
-        // 
-        btnTrocarUsuario.Anchor = AnchorStyles.Right;
-        btnTrocarUsuario.BackColor = Color.FromArgb(60, 117, 125);
-        btnTrocarUsuario.BackgroundColor = Color.FromArgb(60, 117, 125);
-        btnTrocarUsuario.BorderColor = Color.Empty;
-        btnTrocarUsuario.BorderRadius = 20;
-        btnTrocarUsuario.BorderSize = 0;
-        btnTrocarUsuario.FlatAppearance.BorderColor = Color.DarkBlue;
-        btnTrocarUsuario.FlatStyle = FlatStyle.Flat;
-        btnTrocarUsuario.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnTrocarUsuario.ForeColor = Color.White;
-        btnTrocarUsuario.Location = new Point(791, 15);
-        btnTrocarUsuario.Name = "btnTrocarUsuario";
-        btnTrocarUsuario.Size = new Size(142, 41);
-        btnTrocarUsuario.TabIndex = 24;
-        btnTrocarUsuario.Text = "Trocar Usuário";
-        btnTrocarUsuario.TextColor = Color.White;
-        btnTrocarUsuario.UseVisualStyleBackColor = false;
-        btnTrocarUsuario.Click += btnTrocarUsuario_Click;
-        // 
-        // btnSair
-        // 
-        btnSair.Anchor = AnchorStyles.Right;
-        btnSair.BackColor = Color.FromArgb(60, 117, 125);
-        btnSair.BackgroundColor = Color.FromArgb(60, 117, 125);
-        btnSair.BorderColor = Color.Empty;
-        btnSair.BorderRadius = 20;
-        btnSair.BorderSize = 0;
-        btnSair.FlatAppearance.BorderColor = Color.DarkBlue;
-        btnSair.FlatStyle = FlatStyle.Flat;
-        btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnSair.ForeColor = Color.White;
-        btnSair.Location = new Point(939, 15);
-        btnSair.Name = "btnSair";
-        btnSair.Size = new Size(57, 41);
-        btnSair.TabIndex = 23;
-        btnSair.Text = "Sair";
-        btnSair.TextColor = Color.White;
-        btnSair.UseVisualStyleBackColor = false;
-        btnSair.Click += btnSair_Click;
-        // 
-        // pageSizeControl1
-        // 
-        pageSizeControl1.Location = new Point(598, 71);
-        pageSizeControl1.Margin = new Padding(4, 3, 4, 3);
-        pageSizeControl1.Name = "pageSizeControl1";
-        pageSizeControl1.Size = new Size(258, 308);
-        pageSizeControl1.TabIndex = 1;
         // 
         // pnMeio
         // 
