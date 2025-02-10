@@ -15,7 +15,6 @@ internal static class Program
         ApplicationConfiguration.Initialize();
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWH1ccHVUR2RfWEVxXkQ=");
         Banco.Inicializa();
-        Application.Run(new FormLogin());
-        
+        Application.Run(new FormLogin());        
     }
 }

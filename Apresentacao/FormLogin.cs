@@ -1,29 +1,35 @@
 ﻿using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormLogin : Form
+public partial class FormLogin : BaseForm
 {
     public FormLogin()
     {
         InitializeComponent();
     }
 
-    private void FormClientes_Load(object sender, EventArgs e)
+    private void FormLogin_Load(object sender, EventArgs e)
     {
+        string savedTheme = Properties.Settings.Default.Theme;
+        if (savedTheme == "Escuro")
+        {
+            pbLogo.Image = Properties.Resources.ERPsystemLogoPreto;
+        }
+
         UsuariosServico usuariosServico = new UsuariosServico();
         var resultado = usuariosServico.ExisteAdmin();
 
         if (resultado == false)
-        {            
+        {
             FormMensagem mensagem = new FormMensagem("Atenção", "Crie o usuário que irá administrar o sistema.");
             mensagem.ShowDialog();
 
             FormCadUsuarios formCadUsuarios = new FormCadUsuarios();
-            formCadUsuarios.ShowDialog();
+            formCadUsuarios.ShowDialog();            
         }
 
     }
-        
+
 
     private void btnSair_Click(object sender, EventArgs e)
     {
@@ -42,7 +48,7 @@ public partial class FormLogin : Form
         txtSenha.PasswordChar = true;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
     }
-       
+
 
     private void lblEsqueciSenha_Click(object sender, EventArgs e)
     {
@@ -56,29 +62,38 @@ public partial class FormLogin : Form
 
         if (string.IsNullOrWhiteSpace(txtUsuario.Texts) || string.IsNullOrWhiteSpace(txtSenha.Texts))
         {
-            
+
             FormMensagem mensagem = new FormMensagem("Atenção", "Preencha Usuário e Senha.");
             mensagem.ShowDialog();
 
-        }        
+        }
         else
-        {            
-            var resultado = usuariosServico.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
+        {
+            var id = usuariosServico.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
 
-            if (resultado)
-            {
-                this.Hide();
-                FormPrincipal formPrincipal = new FormPrincipal();
-                formPrincipal.ShowDialog();
+            if (id > 0)
+            {                
+                Hide();
+                FormPrincipal formPrincipal = new FormPrincipal(id, txtUsuario.Texts);
+                LimparCampos();
+                formPrincipal.Show();
             }
             else
-            {                
+            {
                 FormMensagem mensagem = new FormMensagem("Atenção", "Usuário ou Senha inválida.");
                 mensagem.ShowDialog();
             }
         }
 
 
+    }
+
+    //Limma os campos
+    private void LimparCampos()
+    {
+        txtUsuario.Texts = string.Empty;
+        txtSenha.Texts = string.Empty;
+        txtUsuario.Focus();
     }
 
     private void txtSenha_KeyDown(object sender, KeyEventArgs e)
@@ -97,19 +112,5 @@ public partial class FormLogin : Form
             txtSenha.Focus();
         }
     }
-
-
-
-    //public bool AbrirFormPincipal(bool resultado)
-    //{
-    //    if (resultado)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
 
 }

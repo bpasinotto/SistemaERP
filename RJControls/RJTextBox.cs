@@ -280,6 +280,7 @@ public partial class RJTextBox : UserControl
                 textBox1.UseSystemPasswordChar = false;
         }
     }
+
     private void RemovePlaceholder()
     {
         if (isPlaceholder && placeholderText != "")

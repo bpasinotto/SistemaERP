@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaERP.Apresentacao;
 
 namespace SistemaERP;
-public partial class FormMensagem : Form
+public partial class FormMensagem : BaseForm
 {
     public FormMensagem(string Titulo, string Mensagem)
     {

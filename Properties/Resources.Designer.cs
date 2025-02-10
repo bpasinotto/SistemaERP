@@ -59,5 +59,25 @@ namespace SistemaERP.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ERPsystemLogo {
+            get {
+                object obj = ResourceManager.GetObject("ERPsystemLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ERPsystemLogoPreto {
+            get {
+                object obj = ResourceManager.GetObject("ERPsystemLogoPreto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -40,7 +40,11 @@ partial class FormPrincipal
         btnEstoque = new RJControls.RJButton();
         btnClientes = new RJControls.RJButton();
         pnMeio = new Panel();
+        pnBaixo = new Panel();
+        comboBoxThemes = new ComboBox();
+        lblUsuarioLogado = new Label();
         pnTopo.SuspendLayout();
+        pnBaixo.SuspendLayout();
         SuspendLayout();
         // 
         // pnTopo
@@ -253,14 +257,44 @@ partial class FormPrincipal
         btnClientes.Text = "Clientes";
         btnClientes.TextColor = Color.Black;
         btnClientes.UseVisualStyleBackColor = false;
+        btnClientes.Click += btnClientes_Click;
         // 
         // pnMeio
         // 
         pnMeio.Dock = DockStyle.Fill;
         pnMeio.Location = new Point(0, 74);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1008, 655);
+        pnMeio.Size = new Size(1008, 627);
         pnMeio.TabIndex = 2;
+        // 
+        // pnBaixo
+        // 
+        pnBaixo.Controls.Add(comboBoxThemes);
+        pnBaixo.Controls.Add(lblUsuarioLogado);
+        pnBaixo.Dock = DockStyle.Bottom;
+        pnBaixo.Location = new Point(0, 701);
+        pnBaixo.Name = "pnBaixo";
+        pnBaixo.Size = new Size(1008, 28);
+        pnBaixo.TabIndex = 3;
+        // 
+        // comboBoxThemes
+        // 
+        comboBoxThemes.Anchor = AnchorStyles.Right;
+        comboBoxThemes.FormattingEnabled = true;
+        comboBoxThemes.Location = new Point(884, 2);
+        comboBoxThemes.Name = "comboBoxThemes";
+        comboBoxThemes.Size = new Size(121, 23);
+        comboBoxThemes.TabIndex = 2;
+        comboBoxThemes.SelectedIndexChanged += ComboBoxThemes_SelectedIndexChanged;
+        // 
+        // lblUsuarioLogado
+        // 
+        lblUsuarioLogado.Font = new Font("Segoe UI Variable Display", 11.25F);
+        lblUsuarioLogado.Location = new Point(3, 4);
+        lblUsuarioLogado.Name = "lblUsuarioLogado";
+        lblUsuarioLogado.Size = new Size(192, 20);
+        lblUsuarioLogado.TabIndex = 1;
+        lblUsuarioLogado.Text = "Usuário:";
         // 
         // FormPrincipal
         // 
@@ -269,13 +303,17 @@ partial class FormPrincipal
         BackColor = Color.WhiteSmoke;
         ClientSize = new Size(1008, 729);
         Controls.Add(pnMeio);
+        Controls.Add(pnBaixo);
         Controls.Add(pnTopo);
+        ForeColor = Color.Black;
         MinimumSize = new Size(1024, 768);
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "FormPrincipal";
         WindowState = FormWindowState.Maximized;
+        Load += FormPrincipal_Load;
         pnTopo.ResumeLayout(false);
+        pnBaixo.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -293,4 +331,7 @@ partial class FormPrincipal
     private RJControls.RJButton btnUsuarios;
     private RJControls.RJButton btnSair;
     private RJControls.RJButton btnTrocarUsuario;
+    private Panel pnBaixo;
+    private Label lblUsuarioLogado;
+    internal ComboBox comboBoxThemes;
 }

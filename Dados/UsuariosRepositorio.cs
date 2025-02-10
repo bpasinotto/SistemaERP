@@ -9,25 +9,26 @@ using Microsoft.Data.SqlClient;
 using SistemaERP.Negocio;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Syncfusion.Windows.Forms.Diagram;
+using System.Windows.Navigation;
 
 namespace SistemaERP.Dados;
 public class UsuariosRepositorio
 {
+    string stringConexao = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
 
     public UsuariosRepositorio()
     {
     }
 
-    public List<string> BuscaUsuarioNomeSenha(string Nome, string Senha)
-    {       
 
-        var connectionString = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
+    public List<string> BuscaUsuarioId(int Id)
+    {
 
         // Consulta SELECT
-        string query = @"SELECT Id, Nome, Email, Senha FROM dbo.Usuarios WHERE Nome = @nome AND Senha = @senha";
+        string query = @"SELECT Id, Nome, Email, Senha, Ativo FROM dbo.Usuarios WHERE Id = @id";
 
         // Usando SqlConnection para conectar ao banco de dados
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(stringConexao))
         {
             try
             {
@@ -38,8 +39,7 @@ public class UsuariosRepositorio
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     // Adicionando parâmetros usando SqlParameter para maior controle de tipo
-                    command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar) { Value = Nome });
-                    command.Parameters.Add(new SqlParameter("@senha", System.Data.SqlDbType.VarChar) { Value = Senha });
+                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = Id });
 
                     // Executando o comando e obtendo os resultados em um SqlDataReader
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -51,110 +51,173 @@ public class UsuariosRepositorio
                             if (reader.Read())
                             {
                                 // Acessando os valores por índice ou nome da coluna
-                                return new List<string> { reader["Id"].ToString(), reader["Nome"].ToString(), reader["Email"].ToString(), reader["Senha"].ToString() };
+                                return new List<string> { reader["Id"].ToString(), reader["Nome"].ToString(), reader["Email"].ToString(), reader["Senha"].ToString(), reader["Ativo"].ToString() };
                             }
                         }
-                        else
-                        {
-                            return new List<string> { "0", "0", "0", "0" };
-                        }
+
                     }
                 }
             }
-            catch (Exception ex)
-            {                
-                throw new Exception("Erro ao consultar o banco de dados.", ex);
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                // Fechando conexão
+                connection.Close();
             }
         }
 
-        return null;
+        return new List<string>();
     }
 
 
-    public DataTable BuscaTodosUsuarios()
+    internal List<int> BuscaUsuarioNomeSenha(string Nome, string Senha)
     {
+        string query = @"SELECT Id, Ativo FROM dbo.Usuarios WHERE Nome = @nome AND Senha = @senha";
 
-        var connectionString = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
-
-        // Consulta SELECT
-        string query = @"SELECT Id, Nome, Email FROM dbo.Usuarios";
-
-        // Usando SqlConnection para conectar ao banco de dados
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(stringConexao))
         {
             try
             {
-                // Abrindo conexão
                 connection.Open();
 
-                // Criando o comando SQL
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    
+                    command.Parameters.Add(new SqlParameter("@nome", SqlDbType.VarChar) { Value = Nome });
+                    command.Parameters.Add(new SqlParameter("@senha", SqlDbType.VarChar) { Value = Senha });
+
                     // Executando o comando e obtendo os resultados em um SqlDataReader
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         // Verifica se há linhas retornadas
                         if (reader.HasRows)
                         {
-                            //Para cado linha retornada, cria uma nova linha na DataTable
-                            DataTable dataTable = new DataTable();
-                            dataTable.Load(reader);
-                            return dataTable;
-                        }
-                        else
-                        {
-                            return null;
+                            // Lendo linha
+                            if (reader.Read())
+                            {
+                                // Acessando os valores por índice ou nome da coluna
+                                return new List<int> { Convert.ToInt32(reader["Id"]), Convert.ToInt16(reader["Ativo"]) };
+                            }
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao consultar o banco de dados.", ex);
+                throw new Exception("Erro ao buscar usuário do banco de dados", ex);
             }
         }
-        
+
+        return new List<int> { 0, 0};
+    }
+
+
+    public DataTable BuscaTodosUsuarios(int Status)
+    {
+        // Consulta SELECT
+        string query = @"SELECT Id, Nome, Email FROM dbo.Usuarios WHERE Ativo = @status";
+
+        // Usando SqlConnection para conectar ao banco de dados
+        using (SqlConnection connection = new SqlConnection(stringConexao))
+        {
+            // Criando o comando SQL
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add(new SqlParameter("@status", System.Data.SqlDbType.Int) { Value = Status });
+
+                try
+                {
+                    // Abrindo conexão
+                    connection.Open();
+
+                    // Executando o comando e obtendo os resultados em um SqlDataReader
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        // Verifica se há linhas retornadas
+                        if (reader.HasRows)
+                        {
+                            // Para cada linha retornada, cria uma nova linha na DataTable
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            return dataTable;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao consultar o banco de dados.", ex);
+                }
+            }
+        }
+
+        return null;
     }
 
     //  Insere um novo usuário no banco da dados com parâmetros
-    public string InsereUsuario(string Nome, string Email, string Senha)
+    public bool InsereUsuario(string Nome, string Email, string Senha)
     {
-        var connectionString = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
-
         // Comando para inserir um novo usuário
-        string query = @"INSERT INTO dbo.Usuarios (Nome, Email, Senha) VALUES (@nome, @email, @senha)";
-
+        var query = @"INSERT INTO dbo.Usuarios (Nome, Email, Senha) VALUES (@nome, @email, @senha)";
 
         // Usando SqlConnection para conectar ao banco de dados
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using var connection = new SqlConnection(stringConexao);
+        try
+        {
+            // Abrindo conexão
+            connection.Open();
+
+            // Criando o comando SQL
+            using var command = new SqlCommand(query, connection);
+            // Adicionando parâmetros usando SqlParameter para maior controle de tipo
+            command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar) { Value = Nome });
+            command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar) { Value = Email });
+            command.Parameters.Add(new SqlParameter("@senha", System.Data.SqlDbType.VarChar) { Value = Senha });
+
+            // Executando o comando
+            command.ExecuteNonQuery();
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    // Recebe Id e altera Nome, Email e Senha do usuário
+    public bool AlterarUsuario(string id, string nome, string email, string senha, int ativo)
+    {
+        using (SqlConnection connection = new SqlConnection(stringConexao))
         {
             try
             {
-                // Abrindo conexão
                 connection.Open();
 
-                // Criando o comando SQL
-                using (SqlCommand command = new SqlCommand(query, connection))
+                string query = "UPDATE Usuarios SET Nome = @Nome, Email = @Email, Senha = @Senha, Ativo = @Ativo WHERE Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    // Adicionando parâmetros usando SqlParameter para maior controle de tipo
-                    command.Parameters.Add(new SqlParameter("@nome", System.Data.SqlDbType.VarChar) { Value = Nome });
-                    command.Parameters.Add(new SqlParameter("@email", System.Data.SqlDbType.VarChar) { Value = Email });
-                    command.Parameters.Add(new SqlParameter("@senha", System.Data.SqlDbType.VarChar) { Value = Senha });
+                    // Parâmetros para evitar SQL Injection
+                    cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.NVarChar)).Value = nome;
+                    cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar)).Value = email;
+                    cmd.Parameters.Add(new SqlParameter("@Senha", SqlDbType.NVarChar)).Value = senha;
+                    cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int)).Value = id;
+                    cmd.Parameters.Add(new SqlParameter("@Ativo", SqlDbType.Int)).Value = ativo;
 
                     // Executando o comando
-                    command.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
 
-                    // Fechando conexão
-                    connection.Close();
-
-                    return "Usuário cadastrado com sucesso!";
-
+                    // Retorna true se ao menos uma linha foi atualizada
+                    return rowsAffected > 0;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao inserir no banco de dados.", ex);
+                // Tratar exceções de forma adequada
+                Console.WriteLine("Erro ao atualizar o usuário: " + ex.Message);
+                return false;
             }
         }
     }
@@ -162,12 +225,11 @@ public class UsuariosRepositorio
 
     public bool ExisteAdmin()
     {
-        var connectionString = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
 
         string query = @"SELECT COUNT(*) FROM Usuarios;";
 
         // Usando SqlConnection para conectar ao banco de dados
-        using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(stringConexao))
         {
             try
             {
@@ -187,7 +249,7 @@ public class UsuariosRepositorio
                     int count = Convert.ToInt32(resultado);
 
                     // Se o resultado for maior que 0, significa que há usuários na tabela
-                    return count > 0;
+                    return count > 1;
                 }
             }
             catch (Exception ex)

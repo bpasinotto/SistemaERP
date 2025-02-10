@@ -5,40 +5,98 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaERP.Dados;
+using System.Text.RegularExpressions;
 
 namespace SistemaERP.Negocio;
 public class UsuariosServico
 {
 
     //Metodos
-    public bool AutenticaLogin(string Nome, string Senha)
-    {
-        UsuariosRepositorio usuarios = new UsuariosRepositorio();
-        var result = usuarios.BuscaUsuarioNomeSenha(Nome, Senha);
+    internal int AutenticaLogin(string Nome, string Senha)
+    {        
+        var resultado = new UsuariosRepositorio().BuscaUsuarioNomeSenha(Nome, Senha);
 
-       
-        if (Nome == "Admin" && Senha == "Bpdo8787*" || Nome == result[1] && Senha == result[3])
+        // Se o resultado no index 1 for igual a 1 retorna o id do usuário, senão retorna 0
+        if (resultado[1] == 1)
         {
-            return true;
+            return resultado[0];
         }
         else
         {
-            return false;
+            return 0;
         }
 
+
     }
 
-    public DataTable RetornaTodosUsuarios()
+    public bool ValidarEmail(string email)
     {
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
+
+        try
+        {
+            // Define um padrão de regex para validar o formato do email
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+
+            // Verifica se o email corresponde ao padrão
+            return regex.IsMatch(email);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    // Validar senha do cadastro de usuário
+    public bool ValidarSenha(string senha)
+    {
+        if (string.IsNullOrWhiteSpace(senha))
+            return false;
+        try
+        {
+            // Verifica se a senha tem mais de 3 caracteres
+            return senha.Length > 3;
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    // Validar nome do cadastro de usuário
+    public bool ValidarNome(string nome)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+            return false;
+        try
+        {
+            // Verifica se o nome tem mais de 2 caracteres
+            return nome.Length > 2;
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public DataTable RetornaTodosUsuarios(bool Inativos)
+    {
+        var Status = 1;
+        if (Inativos)
+        {
+            Status = 0;
+        }
+
         UsuariosRepositorio usuarios = new UsuariosRepositorio();
-        return usuarios.BuscaTodosUsuarios();
+        return usuarios.BuscaTodosUsuarios(Status);
     }
 
 
-    public string InsereUsuario(string Nome, string Email, string Senha)
-    {
-        UsuariosRepositorio repositorio = new UsuariosRepositorio();
-        return repositorio.InsereUsuario(Nome, Email, Senha);
+    public bool InsereUsuario(string Nome, string Email, string Senha)
+    {        
+        return new UsuariosRepositorio().InsereUsuario(Nome, Email, Senha);
     }
 
     public bool ExisteAdmin()
@@ -47,4 +105,24 @@ public class UsuariosServico
         return repositorio.ExisteAdmin();
     }
 
+    public List<string> BuscaUsuarioId(int Id)
+    {
+        UsuariosRepositorio repositorio = new UsuariosRepositorio();
+        return repositorio.BuscaUsuarioId(Id);
+    }
+
+
+    public bool AlterarUsuario(string Id, string Nome, string Email, string Senha, bool Inativar)
+    {
+        var Status = 1;
+        if (Inativar)
+        {
+            Status = 0;
+        }
+
+        UsuariosRepositorio repositorio = new UsuariosRepositorio();
+        return repositorio.AlterarUsuario(Id, Nome, Email, Senha, Status);
+    }
+
+    
 }

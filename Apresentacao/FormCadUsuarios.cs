@@ -7,15 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.IdentityModel.Tokens;
 using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormCadUsuarios : Form
+public partial class FormCadUsuarios : BaseForm
 {
+
     public FormCadUsuarios()
     {
         InitializeComponent();
-        lblEmailErro.Visible = false;
+
+        lblEmailInvalido.Visible = lblSenhaInvalida.Visible = lblUsuarioInvalido.Visible = false;
+    }
+
+    private void FormCadUsuarios_Load(object sender, EventArgs e)
+    {
+
     }
 
     private void btnOlho_MouseDown(object sender, MouseEventArgs e)
@@ -38,15 +46,22 @@ public partial class FormCadUsuarios : Form
 
     private void btnSalvar_Click(object sender, EventArgs e)
     {
-        if(lblEmailErro.Visible == false)
+        if (!lblUsuarioInvalido.Visible && !lblEmailInvalido.Visible && !lblSenhaInvalida.Visible && !txtUsuario.Texts.IsNullOrEmpty() && !txtEmail.Texts.IsNullOrEmpty() && !txtSenha.Texts.IsNullOrEmpty())
         {
-            UsuariosServico usuariosServico = new UsuariosServico();
-            var resposta = usuariosServico.InsereUsuario(txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts);            
-
-            FormMensagem mensagem = new FormMensagem("Sucesso", resposta);
+            var sucesso = new UsuariosServico().InsereUsuario(txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts);
+            var mensagem = new FormMensagem(sucesso ? "Sucesso" : "Falha", sucesso ? "Usuário cadastrado com sucesso." : "Falha no cadastro do usuário.");
             mensagem.ShowDialog();
-        }       
 
+            if (sucesso) LimparCampos();
+        }
+    }
+
+    private void LimparCampos()
+    {
+        txtUsuario.Texts = string.Empty;
+        txtEmail.Texts = string.Empty;
+        txtSenha.Texts = string.Empty;
+        txtUsuario.Focus();
     }
 
     private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
@@ -65,21 +80,54 @@ public partial class FormCadUsuarios : Form
         }
     }
 
-    private void txtEmail__TextChanged(object sender, EventArgs e)
+
+    private void txtSenha_KeyDown(object sender, KeyEventArgs e)
     {
-        ValidaEmail();
+        //chama o metodo salvar
+        if (e.KeyCode == Keys.Enter)
+        {
+            btnSalvar_Click(sender, EventArgs.Empty); // Passa EventArgs.Empty, que é compatível
+        }
     }
 
-    private void ValidaEmail()
+    private void txtUsuario__TextChanged(object sender, EventArgs e)
     {
-        // Validação de email
-        if (txtEmail.Texts.Contains('@') && txtEmail.Texts.Contains('.'))
+        if (txtUsuario.Texts.Length > 0)
         {
-            lblEmailErro.Visible = false;
+            // chama a função de validação de nome
+            lblUsuarioInvalido.Visible = !new UsuariosServico().ValidarNome(txtUsuario.Texts);
         }
         else
         {
-            lblEmailErro.Visible = true;
+            lblUsuarioInvalido.Visible = false;
         }
     }
+
+    private void txtEmail__TextChanged(object sender, EventArgs e)
+    {
+        if (txtEmail.Texts.Length > 0)
+        {
+            // Validação de email
+            lblEmailInvalido.Visible = !new UsuariosServico().ValidarEmail(txtEmail.Texts);
+        }
+        else
+        {
+            lblEmailInvalido.Visible = false;
+        }
+    }
+
+    private void txtSenha__TextChanged(object sender, EventArgs e)
+    {
+        if (txtSenha.Texts.Length > 0)
+        {
+            // Chama a função de validação de senha
+            lblSenhaInvalida.Visible = !new UsuariosServico().ValidarSenha(txtSenha.Texts);
+        }
+        else
+        {
+            lblSenhaInvalida.Visible = false;
+        }
+    }
+
+   
 }

@@ -15,11 +15,23 @@ partial class FormLogin
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
-        if (disposing && (components != null))
+        if (disposing)
         {
-            components.Dispose();
+            // Verifica se os componentes não são nulos e os libera
+            if (components != null)
+            {
+                components.Dispose();
+            }
         }
-        base.Dispose(disposing);
+        // Chama o método Dispose da classe base
+        try
+        {
+            base.Dispose(disposing);
+        }
+        catch (Exception)
+        {
+            // Ignora
+        }
     }
 
     #region Windows Form Designer generated code
@@ -33,26 +45,25 @@ partial class FormLogin
         var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
         pnLogin = new Panel();
         label1 = new Label();
-        pictureBox2 = new PictureBox();
+        pbLogo = new PictureBox();
         lblEsqueciSenha = new Label();
         pnImagemLogin = new Panel();
-        pictureBox1 = new PictureBox();
+        pbImagemLogin = new PictureBox();
         txtUsuario = new RJTextBox();
         txtSenha = new RJTextBox();
         btnSair = new RJButton();
         btnOlho = new FontAwesome.Sharp.IconButton();
         btnEntrar = new RJButton();
         pnLogin.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
         pnImagemLogin.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)pbImagemLogin).BeginInit();
         SuspendLayout();
         // 
         // pnLogin
         // 
-        pnLogin.BackColor = Color.White;
         pnLogin.Controls.Add(label1);
-        pnLogin.Controls.Add(pictureBox2);
+        pnLogin.Controls.Add(pbLogo);
         pnLogin.Controls.Add(lblEsqueciSenha);
         pnLogin.Controls.Add(pnImagemLogin);
         pnLogin.Controls.Add(txtUsuario);
@@ -78,16 +89,16 @@ partial class FormLogin
         label1.TabIndex = 28;
         label1.Text = "Seja Bem-Vindo";
         // 
-        // pictureBox2
+        // pbLogo
         // 
-        pictureBox2.Anchor = AnchorStyles.None;
-        pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-        pictureBox2.Location = new Point(639, 67);
-        pictureBox2.Name = "pictureBox2";
-        pictureBox2.Size = new Size(250, 68);
-        pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-        pictureBox2.TabIndex = 27;
-        pictureBox2.TabStop = false;
+        pbLogo.Anchor = AnchorStyles.None;
+        pbLogo.Image = Properties.Resources.ERPsystemLogo;
+        pbLogo.Location = new Point(637, 42);
+        pbLogo.Name = "pbLogo";
+        pbLogo.Size = new Size(247, 93);
+        pbLogo.SizeMode = PictureBoxSizeMode.Zoom;
+        pbLogo.TabIndex = 27;
+        pbLogo.TabStop = false;
         // 
         // lblEsqueciSenha
         // 
@@ -104,23 +115,23 @@ partial class FormLogin
         // 
         // pnImagemLogin
         // 
-        pnImagemLogin.Controls.Add(pictureBox1);
+        pnImagemLogin.Controls.Add(pbImagemLogin);
         pnImagemLogin.Dock = DockStyle.Left;
         pnImagemLogin.Location = new Point(0, 0);
         pnImagemLogin.Name = "pnImagemLogin";
         pnImagemLogin.Size = new Size(532, 729);
         pnImagemLogin.TabIndex = 25;
         // 
-        // pictureBox1
+        // pbImagemLogin
         // 
-        pictureBox1.Dock = DockStyle.Fill;
-        pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-        pictureBox1.Location = new Point(0, 0);
-        pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(532, 729);
-        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-        pictureBox1.TabIndex = 24;
-        pictureBox1.TabStop = false;
+        pbImagemLogin.Dock = DockStyle.Fill;
+        pbImagemLogin.Image = (Image)resources.GetObject("pbImagemLogin.Image");
+        pbImagemLogin.Location = new Point(0, 0);
+        pbImagemLogin.Name = "pbImagemLogin";
+        pbImagemLogin.Size = new Size(532, 729);
+        pbImagemLogin.SizeMode = PictureBoxSizeMode.StretchImage;
+        pbImagemLogin.TabIndex = 24;
+        pbImagemLogin.TabStop = false;
         // 
         // txtUsuario
         // 
@@ -192,7 +203,6 @@ partial class FormLogin
         // btnOlho
         // 
         btnOlho.Anchor = AnchorStyles.None;
-        btnOlho.BackColor = Color.White;
         btnOlho.FlatAppearance.BorderSize = 0;
         btnOlho.FlatStyle = FlatStyle.Flat;
         btnOlho.ForeColor = Color.White;
@@ -240,15 +250,15 @@ partial class FormLogin
         MinimumSize = new Size(1024, 768);
         Name = "FormLogin";
         SizeGripStyle = SizeGripStyle.Show;
-        StartPosition = FormStartPosition.CenterScreen;
+        StartPosition = FormStartPosition.CenterParent;
         Text = "PasiWare";
         WindowState = FormWindowState.Maximized;
-        Load += FormClientes_Load;
+        Load += FormLogin_Load;
         pnLogin.ResumeLayout(false);
         pnLogin.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+        ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
         pnImagemLogin.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+        ((System.ComponentModel.ISupportInitialize)pbImagemLogin).EndInit();
         ResumeLayout(false);
     }
 
@@ -260,9 +270,9 @@ partial class FormLogin
     private RJButton btnSair;
     private FontAwesome.Sharp.IconButton btnOlho;
     private RJButton btnEntrar;
-    private PictureBox pictureBox1;
+    private PictureBox pbImagemLogin;
     private Panel pnImagemLogin;
     private Label lblEsqueciSenha;
     private Label label1;
-    private PictureBox pictureBox2;
+    private PictureBox pbLogo;
 }

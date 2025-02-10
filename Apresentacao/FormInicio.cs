@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormInicio : Form
+public partial class FormInicio : BaseForm
 {
     public FormInicio()
     {

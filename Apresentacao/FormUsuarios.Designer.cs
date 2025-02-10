@@ -31,6 +31,7 @@ partial class FormUsuarios
         btnNovo = new RJControls.RJButton();
         btnEditar = new RJControls.RJButton();
         pnTopo = new Panel();
+        cbInativos = new CheckBox();
         pnMeio = new Panel();
         dgUsuarios = new Syncfusion.WinForms.DataGrid.SfDataGrid();
         pnTopo.SuspendLayout();
@@ -82,6 +83,7 @@ partial class FormUsuarios
         // 
         // pnTopo
         // 
+        pnTopo.Controls.Add(cbInativos);
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Dock = DockStyle.Top;
@@ -89,6 +91,18 @@ partial class FormUsuarios
         pnTopo.Name = "pnTopo";
         pnTopo.Size = new Size(1008, 68);
         pnTopo.TabIndex = 27;
+        // 
+        // cbInativos
+        // 
+        cbInativos.AutoSize = true;
+        cbInativos.Font = new Font("Segoe UI Variable Display", 11.25F);
+        cbInativos.Location = new Point(21, 22);
+        cbInativos.Name = "cbInativos";
+        cbInativos.Size = new Size(160, 24);
+        cbInativos.TabIndex = 34;
+        cbInativos.Text = "Ver usuários inativos";
+        cbInativos.UseVisualStyleBackColor = true;
+        cbInativos.CheckedChanged += cbInativos_CheckedChanged;
         // 
         // pnMeio
         // 
@@ -105,7 +119,9 @@ partial class FormUsuarios
         dgUsuarios.AllowEditing = false;
         dgUsuarios.AllowFiltering = true;
         dgUsuarios.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+        dgUsuarios.BackColor = Color.White;
         dgUsuarios.Dock = DockStyle.Fill;
+        dgUsuarios.ForeColor = Color.Black;
         dgUsuarios.Location = new Point(0, 0);
         dgUsuarios.Name = "dgUsuarios";
         dgUsuarios.Size = new Size(1008, 587);
@@ -128,7 +144,9 @@ partial class FormUsuarios
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormUsuarios";
         Text = "FormUsuarios";
+        Load += FormUsuarios_Load;
         pnTopo.ResumeLayout(false);
+        pnTopo.PerformLayout();
         pnMeio.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)dgUsuarios).EndInit();
         ResumeLayout(false);
@@ -141,4 +159,5 @@ partial class FormUsuarios
     private Panel pnTopo;
     private Panel pnMeio;
     private Syncfusion.WinForms.DataGrid.SfDataGrid dgUsuarios;
+    private CheckBox cbInativos;
 }
