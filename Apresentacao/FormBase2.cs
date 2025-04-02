@@ -5,31 +5,32 @@ using System.Windows.Forms;
 using FontAwesome.Sharp;
 using SistemaERP.RJControls;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.Controls;
 
 namespace SistemaERP.Apresentacao;
-public class BaseForm : Form
+public class FormBase2 : Form
 {
-    public BaseForm()
+    public FormBase2()
     {
-        this.Load += BaseForm_Load;
+        this.Load += FormBase_Load;
     }
 
-    private void BaseForm_Load(object? sender, EventArgs e)
+    private void FormBase_Load(object? sender, EventArgs e)
     {
         // Carregar o tema salvo
-        string savedTheme = Properties.Settings.Default.Theme;
-        if (!string.IsNullOrEmpty(savedTheme))
+        string temaSalvo = Properties.Settings.Default.Tema;
+        if (!string.IsNullOrEmpty(temaSalvo))
         {
-            ApplyTheme(savedTheme);
+            AplicaTema(temaSalvo);
         }
         else
         {
             // Aplicar um tema padrão caso não haja tema salvo
-            ApplyTheme("Claro");
+            AplicaTema("Claro");
         }
     }
 
-    internal void ApplyTheme(string theme)
+    internal void AplicaTema(string theme)
     {
         if (theme == "Claro")
         {
@@ -49,12 +50,19 @@ public class BaseForm : Form
         }
         else if (theme == "Escuro")
         {
-            this.BackColor = Color.Black;
+            this.BackColor = Color.FromArgb(44, 44, 44);
             this.ForeColor = Color.White;
             foreach (Panel panel in this.Controls.OfType<Panel>())
             {
-                panel.BackColor = Color.Black;
+                panel.BackColor = Color.FromArgb(44, 44, 44);
                 panel.ForeColor = Color.White;
+            }
+
+            //Altera a cor do pnTopo do FormPrincipal
+            if (this.Name == "FormPrincipal")
+            {
+                Panel pnTopo = (Panel)this.Controls.Find("pnTopo", true)[0];
+                pnTopo.BackColor = Color.FromArgb(32, 32, 32);
             }
 
             foreach (RJTextBox rJTextBox in this.Controls.OfType<RJTextBox>())
@@ -65,9 +73,10 @@ public class BaseForm : Form
 
             foreach (IconButton button in this.Controls.OfType<IconButton>())
             {
-                button.BackColor = Color.Black;                
+                button.BackColor = Color.FromArgb(44, 44, 44);
+                button.IconColor = Color.White;
             }
-                        
+                       
 
         }
     }

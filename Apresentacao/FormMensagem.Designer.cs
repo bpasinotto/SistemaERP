@@ -39,11 +39,11 @@ partial class FormMensagem
         // lblMensagem
         // 
         lblMensagem.Font = new Font("Segoe UI Variable Display", 14.25F);
-        lblMensagem.Location = new Point(0, 34);
+        lblMensagem.Location = new Point(12, 0);
         lblMensagem.Name = "lblMensagem";
-        lblMensagem.Size = new Size(600, 30);
+        lblMensagem.Size = new Size(576, 106);
         lblMensagem.TabIndex = 0;
-        lblMensagem.Text = "Mensagem aqui";
+        lblMensagem.Text = "Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui, Mensagem aqui,  Mensagem aqui,  ";
         lblMensagem.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // pnTopo
@@ -52,16 +52,16 @@ partial class FormMensagem
         pnTopo.Dock = DockStyle.Top;
         pnTopo.Location = new Point(0, 0);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(600, 100);
+        pnTopo.Size = new Size(600, 109);
         pnTopo.TabIndex = 1;
         // 
         // pnBaixo
         // 
         pnBaixo.Controls.Add(btnOK);
-        pnBaixo.Dock = DockStyle.Bottom;
-        pnBaixo.Location = new Point(0, 75);
+        pnBaixo.Dock = DockStyle.Fill;
+        pnBaixo.Location = new Point(0, 109);
         pnBaixo.Name = "pnBaixo";
-        pnBaixo.Size = new Size(600, 100);
+        pnBaixo.Size = new Size(600, 66);
         pnBaixo.TabIndex = 2;
         // 
         // btnOK
@@ -76,7 +76,7 @@ partial class FormMensagem
         btnOK.FlatStyle = FlatStyle.Flat;
         btnOK.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnOK.ForeColor = Color.White;
-        btnOK.Location = new Point(239, 30);
+        btnOK.Location = new Point(239, 10);
         btnOK.Name = "btnOK";
         btnOK.Size = new Size(122, 41);
         btnOK.TabIndex = 19;

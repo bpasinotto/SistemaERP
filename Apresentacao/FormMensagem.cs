@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SistemaERP.Apresentacao;
 
 namespace SistemaERP;
-public partial class FormMensagem : BaseForm
+public partial class FormMensagem : FormBase
 {
     public FormMensagem(string Titulo, string Mensagem)
     {

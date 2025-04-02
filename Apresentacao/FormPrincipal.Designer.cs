@@ -41,7 +41,8 @@ partial class FormPrincipal
         btnClientes = new RJControls.RJButton();
         pnMeio = new Panel();
         pnBaixo = new Panel();
-        comboBoxThemes = new ComboBox();
+        label1 = new Label();
+        cbTema = new ComboBox();
         lblUsuarioLogado = new Label();
         pnTopo.SuspendLayout();
         pnBaixo.SuspendLayout();
@@ -61,9 +62,9 @@ partial class FormPrincipal
         pnTopo.Controls.Add(btnEstoque);
         pnTopo.Controls.Add(btnClientes);
         pnTopo.Dock = DockStyle.Top;
-        pnTopo.Location = new Point(0, 0);
+        pnTopo.Location = new Point(2, 2);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1008, 74);
+        pnTopo.Size = new Size(1004, 74);
         pnTopo.TabIndex = 0;
         // 
         // btnUsuarios
@@ -99,7 +100,7 @@ partial class FormPrincipal
         btnTrocarUsuario.FlatStyle = FlatStyle.Flat;
         btnTrocarUsuario.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnTrocarUsuario.ForeColor = Color.White;
-        btnTrocarUsuario.Location = new Point(791, 15);
+        btnTrocarUsuario.Location = new Point(787, 15);
         btnTrocarUsuario.Name = "btnTrocarUsuario";
         btnTrocarUsuario.Size = new Size(142, 41);
         btnTrocarUsuario.TabIndex = 24;
@@ -140,7 +141,7 @@ partial class FormPrincipal
         btnSair.FlatStyle = FlatStyle.Flat;
         btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSair.ForeColor = Color.White;
-        btnSair.Location = new Point(939, 15);
+        btnSair.Location = new Point(935, 15);
         btnSair.Name = "btnSair";
         btnSair.Size = new Size(57, 41);
         btnSair.TabIndex = 23;
@@ -262,35 +263,48 @@ partial class FormPrincipal
         // pnMeio
         // 
         pnMeio.Dock = DockStyle.Fill;
-        pnMeio.Location = new Point(0, 74);
+        pnMeio.Location = new Point(2, 76);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1008, 627);
+        pnMeio.Size = new Size(1004, 623);
         pnMeio.TabIndex = 2;
         // 
         // pnBaixo
         // 
-        pnBaixo.Controls.Add(comboBoxThemes);
+        pnBaixo.Controls.Add(label1);
+        pnBaixo.Controls.Add(cbTema);
         pnBaixo.Controls.Add(lblUsuarioLogado);
         pnBaixo.Dock = DockStyle.Bottom;
-        pnBaixo.Location = new Point(0, 701);
+        pnBaixo.Location = new Point(2, 699);
         pnBaixo.Name = "pnBaixo";
-        pnBaixo.Size = new Size(1008, 28);
+        pnBaixo.Size = new Size(1004, 28);
         pnBaixo.TabIndex = 3;
         // 
-        // comboBoxThemes
+        // label1
         // 
-        comboBoxThemes.Anchor = AnchorStyles.Right;
-        comboBoxThemes.FormattingEnabled = true;
-        comboBoxThemes.Location = new Point(884, 2);
-        comboBoxThemes.Name = "comboBoxThemes";
-        comboBoxThemes.Size = new Size(121, 23);
-        comboBoxThemes.TabIndex = 2;
-        comboBoxThemes.SelectedIndexChanged += ComboBoxThemes_SelectedIndexChanged;
+        label1.Anchor = AnchorStyles.Right;
+        label1.AutoSize = true;
+        label1.Font = new Font("Segoe UI Variable Display", 11.25F);
+        label1.Location = new Point(852, 3);
+        label1.Name = "label1";
+        label1.Size = new Size(47, 20);
+        label1.TabIndex = 3;
+        label1.Text = "Tema:";
+        label1.Click += label1_Click;
+        // 
+        // cbTema
+        // 
+        cbTema.Anchor = AnchorStyles.Right;
+        cbTema.FormattingEnabled = true;
+        cbTema.Location = new Point(902, 2);
+        cbTema.Name = "cbTema";
+        cbTema.Size = new Size(90, 23);
+        cbTema.TabIndex = 2;
+        cbTema.SelectedIndexChanged += cbTema_SelectedIndexChanged;
         // 
         // lblUsuarioLogado
         // 
         lblUsuarioLogado.Font = new Font("Segoe UI Variable Display", 11.25F);
-        lblUsuarioLogado.Location = new Point(3, 4);
+        lblUsuarioLogado.Location = new Point(12, 3);
         lblUsuarioLogado.Name = "lblUsuarioLogado";
         lblUsuarioLogado.Size = new Size(192, 20);
         lblUsuarioLogado.TabIndex = 1;
@@ -305,15 +319,18 @@ partial class FormPrincipal
         Controls.Add(pnMeio);
         Controls.Add(pnBaixo);
         Controls.Add(pnTopo);
-        ForeColor = Color.Black;
         MinimumSize = new Size(1024, 768);
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "FormPrincipal";
+        Style.BackColor = Color.WhiteSmoke;
+        Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+        Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+        Text = "PasiWare";
         WindowState = FormWindowState.Maximized;
         Load += FormPrincipal_Load;
         pnTopo.ResumeLayout(false);
         pnBaixo.ResumeLayout(false);
+        pnBaixo.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -333,5 +350,6 @@ partial class FormPrincipal
     private RJControls.RJButton btnTrocarUsuario;
     private Panel pnBaixo;
     private Label lblUsuarioLogado;
-    internal ComboBox comboBoxThemes;
+    internal ComboBox cbTema;
+    private Label label1;
 }

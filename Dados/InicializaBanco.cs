@@ -95,9 +95,9 @@ public static class Banco
             //new { Nome = "Id", Definicao = "INT IDENTITY(1,1) PRIMARY KEY" },
             new { Nome = "CPF/CNPJ", Definicao = "NVARCHAR(20)" },
             new { Nome = "Razao", Definicao = "NVARCHAR(100) NOT NULL" },
-            new { Nome = "Fantasia", Definicao = "NVARCHAR(100) NOT NULL" },
+            new { Nome = "Fantasia", Definicao = "NVARCHAR(100)" },
             new { Nome = "Email", Definicao = "NVARCHAR(100)" },
-            new { Nome = "Telefone", Definicao = "NVARCHAR(11)" },
+            new { Nome = "Telefone", Definicao = "NVARCHAR(15)" },
             new { Nome = "CEP", Definicao = "NVARCHAR(10)" },
             new { Nome = "Rua", Definicao = "NVARCHAR(100)" },
             new { Nome = "Numero", Definicao = "NVARCHAR(5)" },
@@ -105,7 +105,8 @@ public static class Banco
             new { Nome = "Complemento", Definicao = "NVARCHAR(20)" },
             new { Nome = "Cidade", Definicao = "NVARCHAR(100)" },
             new { Nome = "Estado", Definicao = "NVARCHAR(2)" },
-            new { Nome = "Obs", Definicao = "NVARCHAR(100)" }
+            new { Nome = "Obs", Definicao = "NVARCHAR(240)" },
+            new { Nome = "Ativo", Definicao = "BIT DEFAULT 1 NOT NULL" }
         };
 
         foreach (var coluna in colunasEsperadas)

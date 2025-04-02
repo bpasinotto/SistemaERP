@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -11,45 +11,50 @@
   </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CpfCnpj" Version="2.0.5" />
         <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
         <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
-        <PackageReference Include="Syncfusion.GridHelperClasses.Windows" Version="28.1.35" />
-        <PackageReference Include="Syncfusion.Grid.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.SfDataGrid.Winforms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Tools.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Spreadsheet.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Shared.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Shared.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Core.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.SfInput.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Tools.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.SfBarcode.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Calculate.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Grouping.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.TreeMap.Windows" Version="28.1.35" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Syncfusion.GridHelperClasses.Windows" Version="28.2.5" />
+        <PackageReference Include="Syncfusion.Grid.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.SfDataGrid.Winforms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Spreadsheet.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Shared.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Shared.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Core.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.SfInput.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Tools.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.SfBarcode.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Calculate.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Grouping.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.TreeMap.Windows" Version="28.2.5" />
     <PackageReference Include="Syncfusion.HTMLUI.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Schedule.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Edit.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.PivotChart.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Compression.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.OfficeChart.Base" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.DocIO.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.PdfViewer.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Presentation.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.XlsIO.WinForms" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.BulletGraph.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Chart.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Diagram.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Gauge.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.Maps.Windows" Version="28.1.35" />
-    <PackageReference Include="Syncfusion.SfSmithChart.WinForms" Version="28.1.35" />
+    <PackageReference Include="Syncfusion.Schedule.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Edit.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.PivotChart.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Compression.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.OfficeChart.Base" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.DocIO.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.PdfViewer.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Presentation.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.XlsIO.WinForms" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.BulletGraph.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Chart.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Diagram.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Gauge.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.Maps.Windows" Version="28.2.5" />
+    <PackageReference Include="Syncfusion.SfSmithChart.WinForms" Version="28.2.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
 </ItemGroup>
 
     <ItemGroup>
       <Compile Update="Apresentacao\FormAlteraUsuarios.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Apresentacao\FormBase2.cs">
         <SubType>Form</SubType>
       </Compile>
       <Compile Update="Properties\Resources.Designer.cs">

@@ -187,7 +187,7 @@ public class UsuariosRepositorio
     }
 
     // Recebe Id e altera Nome, Email e Senha do usuário
-    public bool AlterarUsuario(string id, string nome, string email, string senha, int ativo)
+    public bool AlterarUsuario(string id, string nome, string email, string senha)
     {
         using (SqlConnection connection = new SqlConnection(stringConexao))
         {
@@ -195,7 +195,7 @@ public class UsuariosRepositorio
             {
                 connection.Open();
 
-                string query = "UPDATE Usuarios SET Nome = @Nome, Email = @Email, Senha = @Senha, Ativo = @Ativo WHERE Id = @Id";
+                string query = "UPDATE Usuarios SET Nome = @Nome, Email = @Email, Senha = @Senha WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -203,8 +203,7 @@ public class UsuariosRepositorio
                     cmd.Parameters.Add(new SqlParameter("@Nome", SqlDbType.NVarChar)).Value = nome;
                     cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar)).Value = email;
                     cmd.Parameters.Add(new SqlParameter("@Senha", SqlDbType.NVarChar)).Value = senha;
-                    cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int)).Value = id;
-                    cmd.Parameters.Add(new SqlParameter("@Ativo", SqlDbType.Int)).Value = ativo;
+                    cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int)).Value = id;                    
 
                     // Executando o comando
                     int rowsAffected = cmd.ExecuteNonQuery();
@@ -223,7 +222,7 @@ public class UsuariosRepositorio
     }
 
 
-    public bool ExisteAdmin()
+    public int ExisteAdmin()
     {
 
         string query = @"SELECT COUNT(*) FROM Usuarios;";
@@ -245,11 +244,11 @@ public class UsuariosRepositorio
                     // Fechando conexão
                     connection.Close();
 
-                    // Convertendo o resultado para int
+                    // Convertendo o resultado para int 
                     int count = Convert.ToInt32(resultado);
 
-                    // Se o resultado for maior que 0, significa que há usuários na tabela
-                    return count > 1;
+                    // Se o resultado for igual a 1, significa que há usuários na tabela
+                    return count;
                 }
             }
             catch (Exception ex)
@@ -258,5 +257,36 @@ public class UsuariosRepositorio
             }
         }
     }
+
+
+    //Inativar e ativar usuário 
+    public bool InativarAtivarUsuario(string id, bool status)
+    {
+        using (SqlConnection connection = new SqlConnection(stringConexao))
+        {
+            try
+            {
+                connection.Open();
+                string query = "UPDATE Usuarios SET Ativo = @status WHERE Id = @Id";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    // Parâmetros para evitar SQL Injection
+                    cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int)).Value = id;
+                    cmd.Parameters.Add(new SqlParameter("@status", SqlDbType.Int)).Value = status;
+                    // Executando o comando
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    // Retorna true se ao menos uma linha foi atualizada
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tratar exceções de forma adequada
+                Console.WriteLine("Erro ao atualizar o usuário: " + ex.Message);
+                return false;
+            }
+        }
+    }
+
 
 }

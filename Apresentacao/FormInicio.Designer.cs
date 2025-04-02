@@ -28,38 +28,40 @@ partial class FormInicio
     /// </summary>
     private void InitializeComponent()
     {
-        var resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicio));
-        pictureBox1 = new PictureBox();
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+        bpLogo = new PictureBox();
+        ((System.ComponentModel.ISupportInitialize)bpLogo).BeginInit();
         SuspendLayout();
         // 
-        // pictureBox1
+        // bpLogo
         // 
-        pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-        pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-        pictureBox1.Location = new Point(808, 587);
-        pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(209, 68);
-        pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-        pictureBox1.TabIndex = 1;
-        pictureBox1.TabStop = false;
+        bpLogo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        bpLogo.Image = Properties.Resources.LogoTransparenteComVerde;
+        bpLogo.Location = new Point(824, 626);
+        bpLogo.Name = "bpLogo";
+        bpLogo.Size = new Size(209, 68);
+        bpLogo.SizeMode = PictureBoxSizeMode.Zoom;
+        bpLogo.TabIndex = 1;
+        bpLogo.TabStop = false;
         // 
         // FormInicio
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1008, 655);
-        Controls.Add(pictureBox1);
+        ClientSize = new Size(1040, 733);
+        Controls.Add(bpLogo);
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormInicio";
         StartPosition = FormStartPosition.Manual;
+        Style.BackColor = Color.WhiteSmoke;
+        Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+        Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
         Text = "FormInicio";
-        ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+        ((System.ComponentModel.ISupportInitialize)bpLogo).EndInit();
         ResumeLayout(false);
     }
 
     #endregion
 
-    private PictureBox pictureBox1;
+    private PictureBox bpLogo;
 }

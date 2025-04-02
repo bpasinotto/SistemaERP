@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormPrincipal : BaseForm
+public partial class FormPrincipal : FormBase
 {
     FormUsuarios formUsuarios = new FormUsuarios();
+    FormClientes formClientes = new FormClientes();
+    FormInicio formInicio = new FormInicio();
     int Id = 0;
 
     public FormPrincipal()
@@ -22,49 +24,53 @@ public partial class FormPrincipal : BaseForm
     public FormPrincipal(int id, string usuarioLogado)
     {
         InitializeComponent();
-                
+
         Id = id;
         lblUsuarioLogado.Text = "Usuário: " + usuarioLogado;
     }
 
     private void FormPrincipal_Load(object sender, EventArgs e)
     {
-        comboBoxThemes.Items.Add("Claro");
-        comboBoxThemes.Items.Add("Escuro");
-        //comboBoxThemes.SelectedIndexChanged += ComboBoxThemes_SelectedIndexChanged;
+        cbTema.Items.Add("Claro");
+        cbTema.Items.Add("Escuro");
 
         // Carregar o tema salvo
-        string savedTheme = Properties.Settings.Default.Theme;
+        string savedTheme = Properties.Settings.Default.Tema;
         if (!string.IsNullOrEmpty(savedTheme))
         {
-            comboBoxThemes.SelectedItem = savedTheme;
+            cbTema.SelectedItem = savedTheme;
         }
     }
 
-    internal void ComboBoxThemes_SelectedIndexChanged(object sender, EventArgs e)
+    internal void cbTema_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string selectedTheme = comboBoxThemes.SelectedItem.ToString();
-        ApplyTheme(selectedTheme);
+        string selectedTheme = cbTema.SelectedItem.ToString();        
 
         // Salvar o tema selecionado
-        Properties.Settings.Default.Theme = selectedTheme;
+        Properties.Settings.Default.Tema = selectedTheme;
         Properties.Settings.Default.Save();
 
-        //Atuliza o tema em todos os Forms
+        //Atualiza o tema em todos os Forms
         foreach (Form form in Application.OpenForms)
         {
-            if (form is BaseForm)
+            if (form is FormBase)
             {
-                ((BaseForm)form).ApplyTheme(selectedTheme);                
+                ((FormBase)form).AplicaTema(selectedTheme);
+            }
+            if (form is FormBase2)
+            {
+                ((FormBase2)form).AplicaTema(selectedTheme);
             }
         }
 
+        //Atualiza a cor do grid do FormUsuarios de acordo com o tema selecionado
         formUsuarios.MudaCorGrid(selectedTheme);
+        formClientes.MudaCorGrid(selectedTheme);
     }
 
     private void btnUsuarios_Click(object sender, EventArgs e)
     {
-        
+
         if (Id < 3)
         {
             //Limpa o pnMeio do FormPrincipal
@@ -76,8 +82,8 @@ public partial class FormPrincipal : BaseForm
             //Define somente a cor do botão selecionado para verde
             btnUsuarios.BackColor = Color.FromArgb(2, 89, 89);
             //Define cor da letra para branco
-            btnUsuarios.ForeColor = Color.White;                      
-                        
+            btnUsuarios.ForeColor = Color.White;
+
             formUsuarios.TopLevel = false;
             pnMeio.Controls.Add(formUsuarios);
             formUsuarios.Show();
@@ -120,7 +126,7 @@ public partial class FormPrincipal : BaseForm
         btnInicio.ForeColor = Color.White;
 
         //Abre o FormInicio dentro do pnMeio
-        FormInicio formInicio = new FormInicio();
+        
         formInicio.TopLevel = false;
         pnMeio.Controls.Add(formInicio);
         formInicio.Show();
@@ -168,7 +174,7 @@ public partial class FormPrincipal : BaseForm
         //Define cor da letra para branco
         btnClientes.ForeColor = Color.White;
 
-        FormClientes formClientes = new FormClientes();
+
         formClientes.TopLevel = false;
         pnMeio.Controls.Add(formClientes);
         formClientes.Show();
@@ -177,6 +183,8 @@ public partial class FormPrincipal : BaseForm
         formClientes.Dock = DockStyle.Fill;
     }
 
-    
+    private void label1_Click(object sender, EventArgs e)
+    {
 
+    }
 }

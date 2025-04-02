@@ -2,7 +2,7 @@
 using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormAlteraUsuarios : BaseForm
+public partial class FormAlteraUsuarios : FormBase
 {
     string Id = "";
 
@@ -14,7 +14,10 @@ public partial class FormAlteraUsuarios : BaseForm
         txtUsuario.Texts = lista[1];
         txtEmail.Texts = lista[2];
         txtSenha.Texts = lista[3];
-        cbInativar.Checked = !bool.Parse(lista[4]);
+        if (lista[4] == "False")
+        {
+            btnAtivaInativa.Text = "Ativar Usuário";
+        }
 
         lblEmailInvalido.Visible = lblSenhaInvalida.Visible = lblUsuarioInvalido.Visible = false;
     }
@@ -40,11 +43,11 @@ public partial class FormAlteraUsuarios : BaseForm
     {
         if (!lblUsuarioInvalido.Visible && !lblEmailInvalido.Visible && !lblSenhaInvalida.Visible && !txtUsuario.Texts.IsNullOrEmpty() && !txtEmail.Texts.IsNullOrEmpty() && !txtSenha.Texts.IsNullOrEmpty())
         {
-            var sucesso = new UsuariosServico().AlterarUsuario(Id, txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts, cbInativar.Checked);
+            var sucesso = new UsuariosServico().AlterarUsuario(Id, txtUsuario.Texts, txtEmail.Texts, txtSenha.Texts);
             var mensagem = new FormMensagem(sucesso ? "Sucesso" : "Falha", sucesso ? "Usuário atualizado com sucesso." : "Falha na atualização do usuário.");
             mensagem.ShowDialog();
-
-            if (sucesso) LimparCampos();
+            Close();
+            //if (sucesso) LimparCampos();
         }
     }
 
@@ -54,7 +57,6 @@ public partial class FormAlteraUsuarios : BaseForm
         txtEmail.Texts = string.Empty;
         txtSenha.Texts = string.Empty;
         txtUsuario.Focus();
-        cbInativar.Checked = false;
     }
 
     private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
@@ -106,7 +108,7 @@ public partial class FormAlteraUsuarios : BaseForm
         {
             lblEmailInvalido.Visible = false;
         }
-    }      
+    }
 
     private void txtSenha__TextChanged(object sender, EventArgs e)
     {
@@ -119,5 +121,14 @@ public partial class FormAlteraUsuarios : BaseForm
         {
             lblSenhaInvalida.Visible = false;
         }
+    }
+
+    private void btnAtivaInativa_Click(object sender, EventArgs e)
+    {
+        //Inativa ou ativa um usuário
+        var sucesso = new UsuariosServico().InativaAtivaUsuario(Id, btnAtivaInativa.Text == "Ativar Usuário");
+        var mensagem = new FormMensagem(sucesso ? "Sucesso" : "Falha", sucesso ? "Usuário atualizado com sucesso." : "Falha na atualização do usuário.");
+        mensagem.ShowDialog();
+        Close();
     }
 }

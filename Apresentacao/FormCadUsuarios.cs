@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormCadUsuarios : BaseForm
+public partial class FormCadUsuarios : FormBase
 {
 
     public FormCadUsuarios()
@@ -53,6 +53,13 @@ public partial class FormCadUsuarios : BaseForm
             mensagem.ShowDialog();
 
             if (sucesso) LimparCampos();
+
+            UsuariosServico usuariosServico = new UsuariosServico();
+            var resultado = usuariosServico.ExisteAdmin();
+            if (resultado == 2)
+            {
+                Close();
+            }
         }
     }
 
@@ -129,5 +136,5 @@ public partial class FormCadUsuarios : BaseForm
         }
     }
 
-   
+
 }

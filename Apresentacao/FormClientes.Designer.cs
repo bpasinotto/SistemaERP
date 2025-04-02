@@ -29,10 +29,14 @@ partial class FormClientes
     private void InitializeComponent()
     {
         pnTopo = new Panel();
-        btnNovo = new RJControls.RJButton();
-        btnEditar = new RJControls.RJButton();
+        btnNovo = new SistemaERP.RJControls.RJButton();
+        btnEditar = new SistemaERP.RJControls.RJButton();
         cbInativos = new CheckBox();
+        pnMeio = new Panel();
+        dgClientes = new Syncfusion.WinForms.DataGrid.SfDataGrid();
         pnTopo.SuspendLayout();
+        pnMeio.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dgClientes).BeginInit();
         SuspendLayout();
         // 
         // pnTopo
@@ -43,7 +47,7 @@ partial class FormClientes
         pnTopo.Dock = DockStyle.Top;
         pnTopo.Location = new Point(0, 0);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1008, 68);
+        pnTopo.Size = new Size(1004, 68);
         pnTopo.TabIndex = 28;
         // 
         // btnNovo
@@ -58,13 +62,14 @@ partial class FormClientes
         btnNovo.FlatStyle = FlatStyle.Flat;
         btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnNovo.ForeColor = Color.White;
-        btnNovo.Location = new Point(924, 12);
+        btnNovo.Location = new Point(920, 12);
         btnNovo.Name = "btnNovo";
         btnNovo.Size = new Size(72, 41);
         btnNovo.TabIndex = 35;
         btnNovo.Text = "Novo";
         btnNovo.TextColor = Color.White;
         btnNovo.UseVisualStyleBackColor = false;
+        btnNovo.Click += btnNovo_Click;
         // 
         // btnEditar
         // 
@@ -78,13 +83,14 @@ partial class FormClientes
         btnEditar.FlatStyle = FlatStyle.Flat;
         btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEditar.ForeColor = Color.White;
-        btnEditar.Location = new Point(845, 12);
+        btnEditar.Location = new Point(841, 12);
         btnEditar.Name = "btnEditar";
         btnEditar.Size = new Size(73, 41);
         btnEditar.TabIndex = 36;
         btnEditar.Text = "Editar";
         btnEditar.TextColor = Color.White;
         btnEditar.UseVisualStyleBackColor = false;
+        btnEditar.Click += btnEditar_Click;
         // 
         // cbInativos
         // 
@@ -92,23 +98,59 @@ partial class FormClientes
         cbInativos.Font = new Font("Segoe UI Variable Display", 11.25F);
         cbInativos.Location = new Point(21, 22);
         cbInativos.Name = "cbInativos";
-        cbInativos.Size = new Size(160, 24);
+        cbInativos.Size = new Size(156, 24);
         cbInativos.TabIndex = 34;
-        cbInativos.Text = "Ver usuários inativos";
+        cbInativos.Text = "Ver clientes inativos";
         cbInativos.UseVisualStyleBackColor = true;
+        cbInativos.CheckedChanged += cbInativos_CheckedChanged;
+        // 
+        // pnMeio
+        // 
+        pnMeio.Controls.Add(dgClientes);
+        pnMeio.Dock = DockStyle.Fill;
+        pnMeio.Location = new Point(0, 68);
+        pnMeio.Name = "pnMeio";
+        pnMeio.Size = new Size(1004, 555);
+        pnMeio.TabIndex = 29;
+        // 
+        // dgClientes
+        // 
+        dgClientes.AccessibleName = "Table";
+        dgClientes.AllowEditing = false;
+        dgClientes.AllowFiltering = true;
+        dgClientes.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+        dgClientes.BackColor = Color.White;
+        dgClientes.Dock = DockStyle.Fill;
+        dgClientes.ForeColor = Color.Black;
+        dgClientes.Location = new Point(0, 0);
+        dgClientes.Name = "dgClientes";
+        dgClientes.Size = new Size(1004, 555);
+        dgClientes.Style.BorderColor = Color.FromArgb(100, 100, 100);
+        dgClientes.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+        dgClientes.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+        dgClientes.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+        dgClientes.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+        dgClientes.TabIndex = 0;
+        dgClientes.Text = "dgUsuarios";
         // 
         // FormClientes
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1008, 655);
+        ClientSize = new Size(1004, 623);
+        ControlBox = false;
+        Controls.Add(pnMeio);
         Controls.Add(pnTopo);
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormClientes";
-        Text = "FormClientes";
+        StartPosition = FormStartPosition.CenterParent;
+        WindowState = FormWindowState.Maximized;
+        Load += FormClientes_Load;
         pnTopo.ResumeLayout(false);
         pnTopo.PerformLayout();
+        pnMeio.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dgClientes).EndInit();
         ResumeLayout(false);
     }
 
@@ -118,4 +160,6 @@ partial class FormClientes
     private CheckBox cbInativos;
     private RJControls.RJButton btnNovo;
     private RJControls.RJButton btnEditar;
+    private Panel pnMeio;
+    private Syncfusion.WinForms.DataGrid.SfDataGrid dgClientes;
 }

@@ -99,7 +99,7 @@ public class UsuariosServico
         return new UsuariosRepositorio().InsereUsuario(Nome, Email, Senha);
     }
 
-    public bool ExisteAdmin()
+    public int ExisteAdmin()
     {
         UsuariosRepositorio repositorio = new UsuariosRepositorio();
         return repositorio.ExisteAdmin();
@@ -112,17 +112,18 @@ public class UsuariosServico
     }
 
 
-    public bool AlterarUsuario(string Id, string Nome, string Email, string Senha, bool Inativar)
-    {
-        var Status = 1;
-        if (Inativar)
-        {
-            Status = 0;
-        }
-
+    public bool AlterarUsuario(string Id, string Nome, string Email, string Senha)
+    {       
         UsuariosRepositorio repositorio = new UsuariosRepositorio();
-        return repositorio.AlterarUsuario(Id, Nome, Email, Senha, Status);
+        return repositorio.AlterarUsuario(Id, Nome, Email, Senha);
     }
 
-    
+
+    //Inativa e ativa um usuário
+    public bool InativaAtivaUsuario(string Id, bool Inativar)
+    {
+        UsuariosRepositorio repositorio = new UsuariosRepositorio();
+        return repositorio.InativarAtivarUsuario(Id, Inativar);
+    }
+
 }

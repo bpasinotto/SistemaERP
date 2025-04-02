@@ -2,16 +2,13 @@
 using SistemaERP.Negocio;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormUsuarios : BaseForm
+public partial class FormUsuarios : FormBase2
 {
-
-
     private DataTable dt;
 
     public FormUsuarios()
     {
-        InitializeComponent();       
-
+        InitializeComponent(); 
     }
 
     private void FormUsuarios_Load(object sender, EventArgs e)
@@ -21,20 +18,24 @@ public partial class FormUsuarios : BaseForm
 
     internal void MudaCorGrid(string tema)
     {
-        if(tema == "Escuro")
+        if (tema == "Escuro")
         {
-            dgUsuarios.BackColor = Color.Black;
-            dgUsuarios.Style.CellStyle.BackColor = Color.Black;
+            dgUsuarios.BackColor = Color.FromArgb(44, 44, 44);
+            dgUsuarios.Style.CellStyle.BackColor = Color.FromArgb(44, 44, 44);
             dgUsuarios.Style.CellStyle.TextColor = Color.White;
+            dgUsuarios.Style.HeaderStyle.BackColor = Color.LightGray;
+            dgUsuarios.Style.CurrentCellStyle.BackColor = Color.LightGray;
+            dgUsuarios.Style.SelectionStyle.BackColor = Color.LightGray;
         }
         else
         {
             dgUsuarios.BackColor = Color.White;
             dgUsuarios.Style.CellStyle.BackColor = Color.White;
-            dgUsuarios.Style.CellStyle.TextColor = Color.Black;
-        }
-
-              
+            dgUsuarios.Style.CellStyle.TextColor = Color.FromArgb(44, 44, 44);
+            dgUsuarios.Style.HeaderStyle.BackColor = Color.LightGray;
+            dgUsuarios.Style.CurrentCellStyle.BackColor = Color.LightGray;
+            dgUsuarios.Style.SelectionStyle.BackColor = Color.LightGray;
+        }                      
     }
 
     private void PreencheGrid()
@@ -63,7 +64,6 @@ public partial class FormUsuarios : BaseForm
                 idUsuario = Convert.ToInt32(rowView["Id"]); // Substitua "Id" pelo nome da coluna no seu DataTable                
             }
 
-
             UsuariosServico usuariosServico = new UsuariosServico();
             var dadosUsuario = usuariosServico.BuscaUsuarioId(idUsuario);
 
@@ -72,10 +72,7 @@ public partial class FormUsuarios : BaseForm
             formAlteraUsuarios.ShowDialog();
 
             // Atualiza a lista            
-            dt = new DataTable();
-            dt = usuariosServico.RetornaTodosUsuarios(cbInativos.Checked);
-
-            dgUsuarios.DataSource = dt;
+            PreencheGrid();
         }
         else
         {
@@ -93,17 +90,12 @@ public partial class FormUsuarios : BaseForm
         formCadUsuarios.ShowDialog();
 
         // Atualiza a lista
-        UsuariosServico usuariosServico = new UsuariosServico();
-        dt = new DataTable();
-        dt = usuariosServico.RetornaTodosUsuarios(cbInativos.Checked);
-
-        dgUsuarios.DataSource = dt;
+        PreencheGrid();
     }
 
     private void cbInativos_CheckedChanged(object sender, EventArgs e)
     {
         PreencheGrid();
     }
-
 
 }

@@ -20,6 +20,9 @@ public partial class RJTextBox : UserControl
     private bool isPlaceholder = false;
     private bool isPasswordChar = false;
 
+    // Variável de controle para evitar recursão
+    private bool isChangingText = false;
+
     //Events
     public event EventHandler? _TextChanged;
 
@@ -139,7 +142,6 @@ public partial class RJTextBox : UserControl
         }
     }
 
-
     [Category("RJ Code Advance")]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public string Texts
@@ -197,7 +199,21 @@ public partial class RJTextBox : UserControl
         }
     }
 
+    [Category("RJ Code Advance")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public int SelectionStart
+    {
+        get => textBox1.SelectionStart;
+        set => textBox1.SelectionStart = value;
+    }
 
+    [Category("RJ Code Advance")]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public int MaxLength
+    {
+        get => textBox1.MaxLength;
+        set => textBox1.MaxLength = value;
+    }
 
     #endregion
 
@@ -213,6 +229,7 @@ public partial class RJTextBox : UserControl
         base.OnLoad(e);
         UpdateControlHeight();
     }
+
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
@@ -271,27 +288,42 @@ public partial class RJTextBox : UserControl
     #region -> Private methods
     private void SetPlaceholder()
     {
+        // Evita recursão ao alterar o texto
+        if (isChangingText) return;
+
         if (string.IsNullOrWhiteSpace(textBox1.Text) && placeholderText != "")
         {
             isPlaceholder = true;
+
+            // Desativa o evento TextChanged temporariamente
+            isChangingText = true;
             textBox1.Text = placeholderText;
             textBox1.ForeColor = placeholderColor;
+            // Retorna o passwordChar à sua condição original, se necessário
             if (isPasswordChar)
                 textBox1.UseSystemPasswordChar = false;
+            isChangingText = false;
         }
     }
 
     private void RemovePlaceholder()
     {
+        // Evita recursão ao alterar o texto
+        if (isChangingText) return;
+
         if (isPlaceholder && placeholderText != "")
         {
             isPlaceholder = false;
-            textBox1.Text = "";
+            // Desativa o evento TextChanged temporariamente
+            isChangingText = true;
+            textBox1.Text = ""; // Limpa o campo de texto
             textBox1.ForeColor = this.ForeColor;
             if (isPasswordChar)
                 textBox1.UseSystemPasswordChar = true;
+            isChangingText = false;
         }
     }
+
     private GraphicsPath GetFigurePath(Rectangle rect, int radius)
     {
         var path = new GraphicsPath();
@@ -337,9 +369,27 @@ public partial class RJTextBox : UserControl
     #region -> TextBox events
     private void textBox1_TextChanged(object sender, EventArgs e)
     {
-        if (_TextChanged != null)
-            _TextChanged.Invoke(sender, e);
+        // Se o controle estiver alterando o texto, não fazemos nada
+        if (isChangingText) return;
+
+        // Verifica se o texto está vazio e gerencia o placeholder
+        if (string.IsNullOrWhiteSpace(textBox1.Text))
+        {
+            SetPlaceholder();
+        }
+        else
+        {
+            if (isPlaceholder)
+            {
+                RemovePlaceholder();
+                textBox1.SelectionStart = textBox1.Text.Length; // Move o cursor para o final do texto
+            }
+        }
+
+        // Dispara o evento de texto alterado
+        _TextChanged?.Invoke(sender, e);
     }
+
     private void textBox1_Click(object sender, EventArgs e)
     {
         this.OnClick(e);
@@ -354,22 +404,47 @@ public partial class RJTextBox : UserControl
     }
     private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
     {
-        this.OnKeyPress(e);
+        // Se o placeholder estiver ativo, remova-o e insira a tecla pressionada
+        if (isPlaceholder)
+        {
+            RemovePlaceholder();
+
+            if (e.KeyChar.ToString() == "\b")
+            {
+                SetPlaceholder();
+            }
+            else
+            {
+                textBox1.Text = e.KeyChar.ToString();
+            }
+
+            textBox1.SelectionStart = textBox1.Text.Length; // Move o cursor para o final do texto
+            e.Handled = true; // Indica que a tecla foi tratada
+        }
+        else
+        {
+            this.OnKeyPress(e);
+        }
     }
 
     private void textBox1_Enter(object sender, EventArgs e)
     {
         isFocused = true;
         this.Invalidate();
-        RemovePlaceholder();
+
+        // Não remover o placeholder se o campo estiver vazio
+        //if (!string.IsNullOrWhiteSpace(textBox1.Text))
+        //{
+        //    RemovePlaceholder();
+        //}
     }
+
     private void textBox1_Leave(object sender, EventArgs e)
     {
         isFocused = false;
         this.Invalidate();
         SetPlaceholder();
     }
-    ///::::+
     #endregion
 
     private void textBox1_KeyDown(object sender, KeyEventArgs e)

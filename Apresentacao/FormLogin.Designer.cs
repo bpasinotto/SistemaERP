@@ -72,9 +72,9 @@ partial class FormLogin
         pnLogin.Controls.Add(btnOlho);
         pnLogin.Controls.Add(btnEntrar);
         pnLogin.Dock = DockStyle.Fill;
-        pnLogin.Location = new Point(0, 0);
+        pnLogin.Location = new Point(2, 2);
         pnLogin.Name = "pnLogin";
-        pnLogin.Size = new Size(1008, 729);
+        pnLogin.Size = new Size(1004, 725);
         pnLogin.TabIndex = 18;
         // 
         // label1
@@ -82,8 +82,7 @@ partial class FormLogin
         label1.Anchor = AnchorStyles.None;
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        label1.ForeColor = Color.DimGray;
-        label1.Location = new Point(639, 138);
+        label1.Location = new Point(637, 136);
         label1.Name = "label1";
         label1.Size = new Size(241, 46);
         label1.TabIndex = 28;
@@ -92,8 +91,8 @@ partial class FormLogin
         // pbLogo
         // 
         pbLogo.Anchor = AnchorStyles.None;
-        pbLogo.Image = Properties.Resources.ERPsystemLogo;
-        pbLogo.Location = new Point(637, 42);
+        pbLogo.Image = Properties.Resources.LogoTransparenteComVerde;
+        pbLogo.Location = new Point(635, 40);
         pbLogo.Name = "pbLogo";
         pbLogo.Size = new Size(247, 93);
         pbLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -105,8 +104,7 @@ partial class FormLogin
         lblEsqueciSenha.Anchor = AnchorStyles.None;
         lblEsqueciSenha.AutoSize = true;
         lblEsqueciSenha.Font = new Font("Segoe UI Variable Small Semilig", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        lblEsqueciSenha.ForeColor = Color.DimGray;
-        lblEsqueciSenha.Location = new Point(634, 625);
+        lblEsqueciSenha.Location = new Point(632, 623);
         lblEsqueciSenha.Name = "lblEsqueciSenha";
         lblEsqueciSenha.Size = new Size(177, 24);
         lblEsqueciSenha.TabIndex = 26;
@@ -119,7 +117,7 @@ partial class FormLogin
         pnImagemLogin.Dock = DockStyle.Left;
         pnImagemLogin.Location = new Point(0, 0);
         pnImagemLogin.Name = "pnImagemLogin";
-        pnImagemLogin.Size = new Size(532, 729);
+        pnImagemLogin.Size = new Size(532, 725);
         pnImagemLogin.TabIndex = 25;
         // 
         // pbImagemLogin
@@ -128,7 +126,7 @@ partial class FormLogin
         pbImagemLogin.Image = (Image)resources.GetObject("pbImagemLogin.Image");
         pbImagemLogin.Location = new Point(0, 0);
         pbImagemLogin.Name = "pbImagemLogin";
-        pbImagemLogin.Size = new Size(532, 729);
+        pbImagemLogin.Size = new Size(532, 725);
         pbImagemLogin.SizeMode = PictureBoxSizeMode.StretchImage;
         pbImagemLogin.TabIndex = 24;
         pbImagemLogin.TabStop = false;
@@ -143,13 +141,14 @@ partial class FormLogin
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtUsuario.ForeColor = Color.White;
-        txtUsuario.Location = new Point(634, 395);
+        txtUsuario.Location = new Point(632, 393);
         txtUsuario.Multiline = false;
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
         txtUsuario.PasswordChar = false;
         txtUsuario.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtUsuario.PlaceholderText = "Usuário";
+        txtUsuario.SelectionStart = 0;
         txtUsuario.Size = new Size(250, 41);
         txtUsuario.TabIndex = 1;
         txtUsuario.Texts = "";
@@ -166,13 +165,14 @@ partial class FormLogin
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtSenha.ForeColor = Color.White;
-        txtSenha.Location = new Point(634, 456);
+        txtSenha.Location = new Point(632, 454);
         txtSenha.Multiline = false;
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
         txtSenha.PasswordChar = true;
         txtSenha.PlaceholderColor = Color.FromArgb(191, 189, 180);
         txtSenha.PlaceholderText = "Senha";
+        txtSenha.SelectionStart = 0;
         txtSenha.Size = new Size(250, 41);
         txtSenha.TabIndex = 2;
         txtSenha.Texts = "";
@@ -191,7 +191,7 @@ partial class FormLogin
         btnSair.FlatStyle = FlatStyle.Flat;
         btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSair.ForeColor = Color.White;
-        btnSair.Location = new Point(762, 517);
+        btnSair.Location = new Point(760, 515);
         btnSair.Name = "btnSair";
         btnSair.Size = new Size(122, 41);
         btnSair.TabIndex = 4;
@@ -205,12 +205,11 @@ partial class FormLogin
         btnOlho.Anchor = AnchorStyles.None;
         btnOlho.FlatAppearance.BorderSize = 0;
         btnOlho.FlatStyle = FlatStyle.Flat;
-        btnOlho.ForeColor = Color.White;
         btnOlho.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
         btnOlho.IconColor = Color.FromArgb(2, 89, 89);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
-        btnOlho.Location = new Point(890, 461);
+        btnOlho.Location = new Point(888, 459);
         btnOlho.Name = "btnOlho";
         btnOlho.Size = new Size(38, 36);
         btnOlho.TabIndex = 21;
@@ -230,7 +229,7 @@ partial class FormLogin
         btnEntrar.FlatStyle = FlatStyle.Flat;
         btnEntrar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEntrar.ForeColor = Color.White;
-        btnEntrar.Location = new Point(634, 517);
+        btnEntrar.Location = new Point(632, 515);
         btnEntrar.Name = "btnEntrar";
         btnEntrar.Size = new Size(122, 41);
         btnEntrar.TabIndex = 3;
@@ -243,14 +242,14 @@ partial class FormLogin
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = Color.White;
         ClientSize = new Size(1008, 729);
         Controls.Add(pnLogin);
-        ForeColor = SystemColors.ControlText;
         MinimumSize = new Size(1024, 768);
         Name = "FormLogin";
         SizeGripStyle = SizeGripStyle.Show;
         StartPosition = FormStartPosition.CenterParent;
+        Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+        Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
         Text = "PasiWare";
         WindowState = FormWindowState.Maximized;
         Load += FormLogin_Load;

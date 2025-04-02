@@ -26,12 +26,12 @@ namespace SistemaERP.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Theme {
+        public string Tema {
             get {
-                return ((string)(this["Theme"]));
+                return ((string)(this["Tema"]));
             }
             set {
-                this["Theme"] = value;
+                this["Tema"] = value;
             }
         }
     }

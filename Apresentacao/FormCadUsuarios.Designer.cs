@@ -30,14 +30,17 @@ partial class FormCadUsuarios
     {
         label1 = new Label();
         btnOlho = new FontAwesome.Sharp.IconButton();
-        btnSalvar = new RJControls.RJButton();
-        btnVoltar = new RJControls.RJButton();
+        btnSalvar = new SistemaERP.RJControls.RJButton();
+        btnVoltar = new SistemaERP.RJControls.RJButton();
         lblEmailInvalido = new Label();
-        txtEmail = new RJControls.RJTextBox();
-        txtSenha = new RJControls.RJTextBox();
-        txtUsuario = new RJControls.RJTextBox();
+        txtEmail = new SistemaERP.RJControls.RJTextBox();
+        txtSenha = new SistemaERP.RJControls.RJTextBox();
+        txtUsuario = new SistemaERP.RJControls.RJTextBox();
         lblUsuarioInvalido = new Label();
         lblSenhaInvalida = new Label();
+        label3 = new Label();
+        label4 = new Label();
+        label2 = new Label();
         SuspendLayout();
         // 
         // label1
@@ -45,8 +48,7 @@ partial class FormCadUsuarios
         label1.Anchor = AnchorStyles.None;
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        label1.ForeColor = Color.DimGray;
-        label1.Location = new Point(349, 207);
+        label1.Location = new Point(346, 49);
         label1.Name = "label1";
         label1.Size = new Size(316, 46);
         label1.TabIndex = 29;
@@ -55,7 +57,6 @@ partial class FormCadUsuarios
         // btnOlho
         // 
         btnOlho.Anchor = AnchorStyles.None;
-        btnOlho.BackColor = Color.White;
         btnOlho.FlatAppearance.BorderSize = 0;
         btnOlho.FlatStyle = FlatStyle.Flat;
         btnOlho.ForeColor = Color.White;
@@ -63,7 +64,7 @@ partial class FormCadUsuarios
         btnOlho.IconColor = Color.FromArgb(2, 89, 89);
         btnOlho.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnOlho.IconSize = 32;
-        btnOlho.Location = new Point(605, 422);
+        btnOlho.Location = new Point(633, 390);
         btnOlho.Name = "btnOlho";
         btnOlho.Size = new Size(38, 36);
         btnOlho.TabIndex = 6;
@@ -84,7 +85,7 @@ partial class FormCadUsuarios
         btnSalvar.FlatStyle = FlatStyle.Flat;
         btnSalvar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSalvar.ForeColor = Color.White;
-        btnSalvar.Location = new Point(349, 480);
+        btnSalvar.Location = new Point(377, 628);
         btnSalvar.Name = "btnSalvar";
         btnSalvar.Size = new Size(122, 41);
         btnSalvar.TabIndex = 4;
@@ -106,7 +107,7 @@ partial class FormCadUsuarios
         btnVoltar.FlatStyle = FlatStyle.Flat;
         btnVoltar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnVoltar.ForeColor = Color.White;
-        btnVoltar.Location = new Point(477, 480);
+        btnVoltar.Location = new Point(505, 628);
         btnVoltar.Name = "btnVoltar";
         btnVoltar.Size = new Size(122, 41);
         btnVoltar.TabIndex = 5;
@@ -122,7 +123,7 @@ partial class FormCadUsuarios
         lblEmailInvalido.AutoSize = true;
         lblEmailInvalido.Font = new Font("Segoe UI Variable Display", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         lblEmailInvalido.ForeColor = Color.Red;
-        lblEmailInvalido.Location = new Point(605, 368);
+        lblEmailInvalido.Location = new Point(633, 336);
         lblEmailInvalido.Name = "lblEmailInvalido";
         lblEmailInvalido.Size = new Size(95, 20);
         lblEmailInvalido.TabIndex = 7;
@@ -138,13 +139,15 @@ partial class FormCadUsuarios
         txtEmail.BorderSize = 2;
         txtEmail.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtEmail.ForeColor = Color.White;
-        txtEmail.Location = new Point(349, 358);
+        txtEmail.Location = new Point(377, 326);
+        txtEmail.MaxLength = 32767;
         txtEmail.Multiline = false;
         txtEmail.Name = "txtEmail";
         txtEmail.Padding = new Padding(10, 7, 10, 7);
         txtEmail.PasswordChar = false;
         txtEmail.PlaceholderColor = Color.FromArgb(191, 189, 180);
-        txtEmail.PlaceholderText = "Email";
+        txtEmail.PlaceholderText = "";
+        txtEmail.SelectionStart = 0;
         txtEmail.Size = new Size(250, 41);
         txtEmail.TabIndex = 2;
         txtEmail.Texts = "";
@@ -162,13 +165,15 @@ partial class FormCadUsuarios
         txtSenha.BorderSize = 2;
         txtSenha.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtSenha.ForeColor = Color.White;
-        txtSenha.Location = new Point(349, 419);
+        txtSenha.Location = new Point(377, 387);
+        txtSenha.MaxLength = 32767;
         txtSenha.Multiline = false;
         txtSenha.Name = "txtSenha";
         txtSenha.Padding = new Padding(10, 7, 10, 7);
         txtSenha.PasswordChar = true;
         txtSenha.PlaceholderColor = Color.FromArgb(191, 189, 180);
-        txtSenha.PlaceholderText = "Senha";
+        txtSenha.PlaceholderText = "";
+        txtSenha.SelectionStart = 0;
         txtSenha.Size = new Size(250, 41);
         txtSenha.TabIndex = 3;
         txtSenha.Texts = "";
@@ -186,13 +191,15 @@ partial class FormCadUsuarios
         txtUsuario.BorderSize = 2;
         txtUsuario.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtUsuario.ForeColor = Color.White;
-        txtUsuario.Location = new Point(349, 297);
+        txtUsuario.Location = new Point(377, 265);
+        txtUsuario.MaxLength = 32767;
         txtUsuario.Multiline = false;
         txtUsuario.Name = "txtUsuario";
         txtUsuario.Padding = new Padding(10, 7, 10, 7);
         txtUsuario.PasswordChar = false;
         txtUsuario.PlaceholderColor = Color.FromArgb(191, 189, 180);
-        txtUsuario.PlaceholderText = "Usuário";
+        txtUsuario.PlaceholderText = "";
+        txtUsuario.SelectionStart = 0;
         txtUsuario.Size = new Size(250, 41);
         txtUsuario.TabIndex = 1;
         txtUsuario.Texts = "";
@@ -206,7 +213,7 @@ partial class FormCadUsuarios
         lblUsuarioInvalido.AutoSize = true;
         lblUsuarioInvalido.Font = new Font("Segoe UI Variable Display", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         lblUsuarioInvalido.ForeColor = Color.Red;
-        lblUsuarioInvalido.Location = new Point(605, 308);
+        lblUsuarioInvalido.Location = new Point(633, 276);
         lblUsuarioInvalido.Name = "lblUsuarioInvalido";
         lblUsuarioInvalido.Size = new Size(142, 20);
         lblUsuarioInvalido.TabIndex = 30;
@@ -218,18 +225,50 @@ partial class FormCadUsuarios
         lblSenhaInvalida.AutoSize = true;
         lblSenhaInvalida.Font = new Font("Segoe UI Variable Display", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         lblSenhaInvalida.ForeColor = Color.Red;
-        lblSenhaInvalida.Location = new Point(201, 429);
+        lblSenhaInvalida.Location = new Point(229, 397);
         lblSenhaInvalida.Name = "lblSenhaInvalida";
         lblSenhaInvalida.Size = new Size(142, 20);
         lblSenhaInvalida.TabIndex = 31;
         lblSenhaInvalida.Text = "Mínimo 4 caracteres";
         // 
+        // label3
+        // 
+        label3.Anchor = AnchorStyles.None;
+        label3.AutoSize = true;
+        label3.Font = new Font("Segoe UI Variable Display", 10F);
+        label3.Location = new Point(395, 309);
+        label3.Name = "label3";
+        label3.Size = new Size(46, 19);
+        label3.TabIndex = 76;
+        label3.Text = "E-mail";
+        // 
+        // label4
+        // 
+        label4.Anchor = AnchorStyles.None;
+        label4.AutoSize = true;
+        label4.Font = new Font("Segoe UI Variable Display", 10F);
+        label4.Location = new Point(395, 371);
+        label4.Name = "label4";
+        label4.Size = new Size(47, 19);
+        label4.TabIndex = 77;
+        label4.Text = "Senha";
+        // 
+        // label2
+        // 
+        label2.Anchor = AnchorStyles.None;
+        label2.AutoSize = true;
+        label2.Font = new Font("Segoe UI Variable Display", 10F);
+        label2.Location = new Point(395, 248);
+        label2.Name = "label2";
+        label2.Size = new Size(55, 19);
+        label2.TabIndex = 75;
+        label2.Text = "Usuário";
+        // 
         // FormCadUsuarios
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = Color.White;
-        ClientSize = new Size(1024, 768);
+        ClientSize = new Size(1008, 729);
         ControlBox = false;
         Controls.Add(lblSenhaInvalida);
         Controls.Add(lblUsuarioInvalido);
@@ -241,10 +280,14 @@ partial class FormCadUsuarios
         Controls.Add(btnOlho);
         Controls.Add(btnSalvar);
         Controls.Add(label1);
-        ForeColor = Color.Black;
+        Controls.Add(label3);
+        Controls.Add(label4);
+        Controls.Add(label2);
         MinimumSize = new Size(1024, 768);
         Name = "FormCadUsuarios";
         StartPosition = FormStartPosition.CenterParent;
+        Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+        Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
         Text = " ";
         WindowState = FormWindowState.Maximized;
         Load += FormCadUsuarios_Load;
@@ -264,4 +307,7 @@ partial class FormCadUsuarios
     private RJControls.RJTextBox txtUsuario;
     private Label lblUsuarioInvalido;
     private Label lblSenhaInvalida;
+    private Label label3;
+    private Label label4;
+    private Label label2;
 }

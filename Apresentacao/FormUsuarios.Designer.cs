@@ -51,7 +51,7 @@ partial class FormUsuarios
         btnNovo.FlatStyle = FlatStyle.Flat;
         btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnNovo.ForeColor = Color.White;
-        btnNovo.Location = new Point(924, 12);
+        btnNovo.Location = new Point(1000, 12);
         btnNovo.Name = "btnNovo";
         btnNovo.Size = new Size(72, 41);
         btnNovo.TabIndex = 25;
@@ -72,7 +72,7 @@ partial class FormUsuarios
         btnEditar.FlatStyle = FlatStyle.Flat;
         btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEditar.ForeColor = Color.White;
-        btnEditar.Location = new Point(845, 12);
+        btnEditar.Location = new Point(921, 12);
         btnEditar.Name = "btnEditar";
         btnEditar.Size = new Size(73, 41);
         btnEditar.TabIndex = 26;
@@ -87,9 +87,9 @@ partial class FormUsuarios
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Dock = DockStyle.Top;
-        pnTopo.Location = new Point(0, 0);
+        pnTopo.Location = new Point(2, 2);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1008, 68);
+        pnTopo.Size = new Size(1084, 68);
         pnTopo.TabIndex = 27;
         // 
         // cbInativos
@@ -108,9 +108,9 @@ partial class FormUsuarios
         // 
         pnMeio.Controls.Add(dgUsuarios);
         pnMeio.Dock = DockStyle.Fill;
-        pnMeio.Location = new Point(0, 68);
+        pnMeio.Location = new Point(2, 70);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1008, 587);
+        pnMeio.Size = new Size(1084, 778);
         pnMeio.TabIndex = 28;
         // 
         // dgUsuarios
@@ -124,7 +124,7 @@ partial class FormUsuarios
         dgUsuarios.ForeColor = Color.Black;
         dgUsuarios.Location = new Point(0, 0);
         dgUsuarios.Name = "dgUsuarios";
-        dgUsuarios.Size = new Size(1008, 587);
+        dgUsuarios.Size = new Size(1084, 778);
         dgUsuarios.Style.BorderColor = Color.FromArgb(100, 100, 100);
         dgUsuarios.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
         dgUsuarios.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -138,11 +138,11 @@ partial class FormUsuarios
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1008, 655);
+        ClientSize = new Size(1088, 850);
         Controls.Add(pnMeio);
         Controls.Add(pnTopo);
         FormBorderStyle = FormBorderStyle.None;
-        Name = "FormUsuarios";
+        Name = "FormUsuarios";       
         Text = "FormUsuarios";
         Load += FormUsuarios_Load;
         pnTopo.ResumeLayout(false);
