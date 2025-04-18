@@ -48,7 +48,7 @@ namespace SistemaERP.Apresentacao
 
         private void txtCNPJ_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir apenas números e controlar o tamanho máximo de 14 caracteres
+            // Permite apenas números e controla o tamanho máximo de 14 caracteres
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
@@ -178,7 +178,7 @@ namespace SistemaERP.Apresentacao
         private void txtTelefone_Leave(object sender, EventArgs e)
         {
             var telefone = txtTelefone.Texts;
-            // Adicionar máscara de telefone
+            // Adiciona máscara de telefone
             if (telefone.Length == 11)
             {
                 txtTelefone.Texts = Convert.ToUInt64(telefone).ToString(@"(00) 00000-0000");
@@ -230,7 +230,7 @@ namespace SistemaERP.Apresentacao
 
         private void txtCEP_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir apenas números e controlar o tamanho máximo de 8 caracteres
+            // Permite apenas números e controla o tamanho máximo de 8 caracteres
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;

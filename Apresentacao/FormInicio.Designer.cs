@@ -36,7 +36,7 @@ partial class FormInicio
         // 
         bpLogo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         bpLogo.Image = Properties.Resources.LogoTransparenteComVerde;
-        bpLogo.Location = new Point(824, 626);
+        bpLogo.Location = new Point(776, 583);
         bpLogo.Name = "bpLogo";
         bpLogo.Size = new Size(209, 68);
         bpLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -48,7 +48,7 @@ partial class FormInicio
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1040, 733);
+        ClientSize = new Size(1024, 768);
         Controls.Add(bpLogo);
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormInicio";

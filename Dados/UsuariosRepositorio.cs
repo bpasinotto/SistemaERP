@@ -63,8 +63,7 @@ public class UsuariosRepositorio
 
             }
             finally
-            {
-                // Fechando conexão
+            {                
                 connection.Close();
             }
         }
@@ -88,16 +87,16 @@ public class UsuariosRepositorio
                     command.Parameters.Add(new SqlParameter("@nome", SqlDbType.VarChar) { Value = Nome });
                     command.Parameters.Add(new SqlParameter("@senha", SqlDbType.VarChar) { Value = Senha });
 
-                    // Executando o comando e obtendo os resultados em um SqlDataReader
+                    // Executa o comando e obtem os resultados em um SqlDataReader
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         // Verifica se há linhas retornadas
                         if (reader.HasRows)
                         {
-                            // Lendo linha
+                            // Lê a linha
                             if (reader.Read())
                             {
-                                // Acessando os valores por índice ou nome da coluna
+                                // Acessa os valores por índice ou nome da coluna
                                 return new List<int> { Convert.ToInt32(reader["Id"]), Convert.ToInt16(reader["Ativo"]) };
                             }
                         }
@@ -108,9 +107,11 @@ public class UsuariosRepositorio
             {
                 throw new Exception("Erro ao buscar usuário do banco de dados", ex);
             }
-        }
 
-        return new List<int> { 0, 0};
+            return new List<int> { 0, 0 };
+
+        }
+        
     }
 
 

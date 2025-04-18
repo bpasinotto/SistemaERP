@@ -99,4 +99,20 @@ public partial class FormClientes : FormBase2
             mensagem.ShowDialog();
         }
     }
+
+    private void txtPesquisa__TextChanged(object sender, EventArgs e)
+    {
+        string filtro = txtPesquisa.Texts.Trim();
+        if (string.IsNullOrEmpty(filtro))
+        {
+            PreencheGrid();
+        }
+        else
+        {
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = string.Join(" OR ", dt.Columns.Cast<DataColumn>()
+                .Select(c => $"CONVERT([{c.ColumnName}], System.String) LIKE '%{filtro}%'"));
+            dgClientes.DataSource = dv.ToTable();
+        }
+    }
 }

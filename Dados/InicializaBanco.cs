@@ -102,7 +102,7 @@ public static class Banco
             new { Nome = "Rua", Definicao = "NVARCHAR(100)" },
             new { Nome = "Numero", Definicao = "NVARCHAR(5)" },
             new { Nome = "Bairro", Definicao = "NVARCHAR(100)" },
-            new { Nome = "Complemento", Definicao = "NVARCHAR(20)" },
+            new { Nome = "Complemento", Definicao = "NVARCHAR(30)" },
             new { Nome = "Cidade", Definicao = "NVARCHAR(100)" },
             new { Nome = "Estado", Definicao = "NVARCHAR(2)" },
             new { Nome = "Obs", Definicao = "NVARCHAR(240)" },

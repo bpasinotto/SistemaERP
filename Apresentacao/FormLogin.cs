@@ -57,29 +57,28 @@ public partial class FormLogin : FormBase
         }
         else
         {
-            var id = usuariosServico.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
+            var resultado = usuariosServico.AutenticaLogin(txtUsuario.Texts, txtSenha.Texts);
 
-            if (id > 0)
+            if (resultado.ContainsKey("id"))
             {
-                // Mostrar a tela de carregamento
+                // Mostra a tela de carregamento
                 using (var formCarregamento = new FormCarregamento())
                 {
                     formCarregamento.Show();
                     formCarregamento.Refresh();
 
-                    // Carregar a tela principal
+                    // Carrega a tela principal
                     Hide();
-                    FormPrincipal formPrincipal = new FormPrincipal(id, txtUsuario.Texts);
+                    FormPrincipal formPrincipal = new FormPrincipal(int.Parse(resultado["id"]), txtUsuario.Texts);
                     LimparCampos();
                     formPrincipal.Show();
-
-                    // Fechar a tela de carregamento
+                                        
                     formCarregamento.Close();
                 }
             }
             else
             {
-                FormMensagem mensagem = new FormMensagem("Atenção", "Usuário ou Senha inválida.");
+                FormMensagem mensagem = new FormMensagem("Atenção", resultado["erro"]);
                 mensagem.ShowDialog();
             }
         }

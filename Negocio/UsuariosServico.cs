@@ -12,20 +12,27 @@ public class UsuariosServico
 {
 
     //Metodos
-    internal int AutenticaLogin(string Nome, string Senha)
+    internal Dictionary<string, string> AutenticaLogin(string Nome, string Senha)
     {        
         var resultado = new UsuariosRepositorio().BuscaUsuarioNomeSenha(Nome, Senha);
 
-        // Se o resultado no index 1 for igual a 1 retorna o id do usuário, senão retorna 0
+        //resultado na posição 0 é o ID do usuário e na posição 1 é o status do usuário
         if (resultado[1] == 1)
         {
-            return resultado[0];
+            return new Dictionary<string, string> { { "id", resultado[0].ToString() } };
+        }
+        else if (resultado[0] == 0)
+        {
+            return new Dictionary<string, string> { { "erro", "Usuário ou Senha Incorreto." } };
+        }
+        else if (resultado[0] > 0 && resultado[1] == 0)
+        {
+            return new Dictionary<string, string> { { "erro", "O Usuário está Desativado." } };
         }
         else
         {
-            return 0;
+            return new Dictionary<string, string> { { "erro", "Erro ao autenticar o usuário." } };
         }
-
 
     }
 

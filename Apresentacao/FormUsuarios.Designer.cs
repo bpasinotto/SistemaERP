@@ -28,12 +28,13 @@ partial class FormUsuarios
     /// </summary>
     private void InitializeComponent()
     {
-        btnNovo = new RJControls.RJButton();
-        btnEditar = new RJControls.RJButton();
+        btnNovo = new SistemaERP.RJControls.RJButton();
+        btnEditar = new SistemaERP.RJControls.RJButton();
         pnTopo = new Panel();
         cbInativos = new CheckBox();
         pnMeio = new Panel();
         dgUsuarios = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+        txtPesquisa = new SistemaERP.RJControls.RJTextBox();
         pnTopo.SuspendLayout();
         pnMeio.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dgUsuarios).BeginInit();
@@ -51,7 +52,7 @@ partial class FormUsuarios
         btnNovo.FlatStyle = FlatStyle.Flat;
         btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnNovo.ForeColor = Color.White;
-        btnNovo.Location = new Point(1000, 12);
+        btnNovo.Location = new Point(940, 12);
         btnNovo.Name = "btnNovo";
         btnNovo.Size = new Size(72, 41);
         btnNovo.TabIndex = 25;
@@ -72,7 +73,7 @@ partial class FormUsuarios
         btnEditar.FlatStyle = FlatStyle.Flat;
         btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEditar.ForeColor = Color.White;
-        btnEditar.Location = new Point(921, 12);
+        btnEditar.Location = new Point(861, 12);
         btnEditar.Name = "btnEditar";
         btnEditar.Size = new Size(73, 41);
         btnEditar.TabIndex = 26;
@@ -83,13 +84,14 @@ partial class FormUsuarios
         // 
         // pnTopo
         // 
+        pnTopo.Controls.Add(txtPesquisa);
         pnTopo.Controls.Add(cbInativos);
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Dock = DockStyle.Top;
-        pnTopo.Location = new Point(2, 2);
+        pnTopo.Location = new Point(0, 0);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1084, 68);
+        pnTopo.Size = new Size(1024, 68);
         pnTopo.TabIndex = 27;
         // 
         // cbInativos
@@ -108,9 +110,9 @@ partial class FormUsuarios
         // 
         pnMeio.Controls.Add(dgUsuarios);
         pnMeio.Dock = DockStyle.Fill;
-        pnMeio.Location = new Point(2, 70);
+        pnMeio.Location = new Point(0, 68);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1084, 778);
+        pnMeio.Size = new Size(1024, 700);
         pnMeio.TabIndex = 28;
         // 
         // dgUsuarios
@@ -124,7 +126,7 @@ partial class FormUsuarios
         dgUsuarios.ForeColor = Color.Black;
         dgUsuarios.Location = new Point(0, 0);
         dgUsuarios.Name = "dgUsuarios";
-        dgUsuarios.Size = new Size(1084, 778);
+        dgUsuarios.Size = new Size(1024, 700);
         dgUsuarios.Style.BorderColor = Color.FromArgb(100, 100, 100);
         dgUsuarios.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
         dgUsuarios.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -133,16 +135,40 @@ partial class FormUsuarios
         dgUsuarios.TabIndex = 0;
         dgUsuarios.Text = "dgUsuarios";
         // 
+        // txtPesquisa
+        // 
+        txtPesquisa.BackColor = Color.FromArgb(2, 89, 89);
+        txtPesquisa.BorderColor = Color.Empty;
+        txtPesquisa.BorderFocusColor = Color.FromArgb(3, 140, 140);
+        txtPesquisa.BorderRadius = 20;
+        txtPesquisa.BorderSize = 2;
+        txtPesquisa.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        txtPesquisa.ForeColor = Color.White;
+        txtPesquisa.Location = new Point(187, 12);
+        txtPesquisa.MaxLength = 32767;
+        txtPesquisa.Multiline = false;
+        txtPesquisa.Name = "txtPesquisa";
+        txtPesquisa.Padding = new Padding(10, 7, 10, 7);
+        txtPesquisa.PasswordChar = false;
+        txtPesquisa.PlaceholderColor = Color.FromArgb(191, 189, 180);
+        txtPesquisa.PlaceholderText = "Pesquisar";
+        txtPesquisa.SelectionStart = 0;
+        txtPesquisa.Size = new Size(250, 41);
+        txtPesquisa.TabIndex = 35;
+        txtPesquisa.Texts = "";
+        txtPesquisa.UnderlinedStyle = false;
+        txtPesquisa._TextChanged += txtPesquisa__TextChanged;
+        // 
         // FormUsuarios
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1088, 850);
+        ClientSize = new Size(1024, 768);
         Controls.Add(pnMeio);
         Controls.Add(pnTopo);
         FormBorderStyle = FormBorderStyle.None;
-        Name = "FormUsuarios";       
+        Name = "FormUsuarios";
         Text = "FormUsuarios";
         Load += FormUsuarios_Load;
         pnTopo.ResumeLayout(false);
@@ -160,4 +186,5 @@ partial class FormUsuarios
     private Panel pnMeio;
     private Syncfusion.WinForms.DataGrid.SfDataGrid dgUsuarios;
     private CheckBox cbInativos;
+    private RJControls.RJTextBox txtPesquisa;
 }

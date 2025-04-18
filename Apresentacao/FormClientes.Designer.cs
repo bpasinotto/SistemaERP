@@ -29,6 +29,8 @@ partial class FormClientes
     private void InitializeComponent()
     {
         pnTopo = new Panel();
+        txtPesquisa = new SistemaERP.RJControls.RJTextBox();
+        txtCNPJ = new SistemaERP.RJControls.RJTextBox();
         btnNovo = new SistemaERP.RJControls.RJButton();
         btnEditar = new SistemaERP.RJControls.RJButton();
         cbInativos = new CheckBox();
@@ -41,14 +43,64 @@ partial class FormClientes
         // 
         // pnTopo
         // 
+        pnTopo.Controls.Add(txtPesquisa);
+        pnTopo.Controls.Add(txtCNPJ);
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Controls.Add(cbInativos);
         pnTopo.Dock = DockStyle.Top;
         pnTopo.Location = new Point(0, 0);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1004, 68);
+        pnTopo.Size = new Size(1024, 68);
         pnTopo.TabIndex = 28;
+        // 
+        // txtPesquisa
+        // 
+        txtPesquisa.BackColor = Color.FromArgb(2, 89, 89);
+        txtPesquisa.BorderColor = Color.Empty;
+        txtPesquisa.BorderFocusColor = Color.FromArgb(3, 140, 140);
+        txtPesquisa.BorderRadius = 20;
+        txtPesquisa.BorderSize = 2;
+        txtPesquisa.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        txtPesquisa.ForeColor = Color.White;
+        txtPesquisa.Location = new Point(185, 12);
+        txtPesquisa.MaxLength = 32767;
+        txtPesquisa.Multiline = false;
+        txtPesquisa.Name = "txtPesquisa";
+        txtPesquisa.Padding = new Padding(10, 7, 10, 7);
+        txtPesquisa.PasswordChar = false;
+        txtPesquisa.PlaceholderColor = Color.FromArgb(191, 189, 180);
+        txtPesquisa.PlaceholderText = "Pesquisar";
+        txtPesquisa.SelectionStart = 0;
+        txtPesquisa.Size = new Size(250, 41);
+        txtPesquisa.TabIndex = 33;
+        txtPesquisa.Texts = "";
+        txtPesquisa.UnderlinedStyle = false;
+        txtPesquisa._TextChanged += txtPesquisa__TextChanged;
+        // 
+        // txtCNPJ
+        // 
+        txtCNPJ.Anchor = AnchorStyles.None;
+        txtCNPJ.BackColor = Color.FromArgb(2, 89, 89);
+        txtCNPJ.BorderColor = Color.Empty;
+        txtCNPJ.BorderFocusColor = Color.FromArgb(3, 140, 140);
+        txtCNPJ.BorderRadius = 20;
+        txtCNPJ.BorderSize = 2;
+        txtCNPJ.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        txtCNPJ.ForeColor = Color.White;
+        txtCNPJ.Location = new Point(54, -453);
+        txtCNPJ.MaxLength = 32767;
+        txtCNPJ.Multiline = false;
+        txtCNPJ.Name = "txtCNPJ";
+        txtCNPJ.Padding = new Padding(10, 7, 10, 7);
+        txtCNPJ.PasswordChar = false;
+        txtCNPJ.PlaceholderColor = Color.FromArgb(191, 189, 180);
+        txtCNPJ.PlaceholderText = "";
+        txtCNPJ.SelectionStart = 0;
+        txtCNPJ.Size = new Size(250, 41);
+        txtCNPJ.TabIndex = 37;
+        txtCNPJ.Texts = "";
+        txtCNPJ.UnderlinedStyle = false;
         // 
         // btnNovo
         // 
@@ -62,7 +114,7 @@ partial class FormClientes
         btnNovo.FlatStyle = FlatStyle.Flat;
         btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnNovo.ForeColor = Color.White;
-        btnNovo.Location = new Point(920, 12);
+        btnNovo.Location = new Point(940, 12);
         btnNovo.Name = "btnNovo";
         btnNovo.Size = new Size(72, 41);
         btnNovo.TabIndex = 35;
@@ -83,7 +135,7 @@ partial class FormClientes
         btnEditar.FlatStyle = FlatStyle.Flat;
         btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEditar.ForeColor = Color.White;
-        btnEditar.Location = new Point(841, 12);
+        btnEditar.Location = new Point(861, 12);
         btnEditar.Name = "btnEditar";
         btnEditar.Size = new Size(73, 41);
         btnEditar.TabIndex = 36;
@@ -110,7 +162,7 @@ partial class FormClientes
         pnMeio.Dock = DockStyle.Fill;
         pnMeio.Location = new Point(0, 68);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1004, 555);
+        pnMeio.Size = new Size(1024, 700);
         pnMeio.TabIndex = 29;
         // 
         // dgClientes
@@ -124,7 +176,7 @@ partial class FormClientes
         dgClientes.ForeColor = Color.Black;
         dgClientes.Location = new Point(0, 0);
         dgClientes.Name = "dgClientes";
-        dgClientes.Size = new Size(1004, 555);
+        dgClientes.Size = new Size(1024, 700);
         dgClientes.Style.BorderColor = Color.FromArgb(100, 100, 100);
         dgClientes.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
         dgClientes.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
@@ -138,7 +190,7 @@ partial class FormClientes
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1004, 623);
+        ClientSize = new Size(1024, 768);
         ControlBox = false;
         Controls.Add(pnMeio);
         Controls.Add(pnTopo);
@@ -162,4 +214,6 @@ partial class FormClientes
     private RJControls.RJButton btnEditar;
     private Panel pnMeio;
     private Syncfusion.WinForms.DataGrid.SfDataGrid dgClientes;
+    private RJControls.RJTextBox txtCNPJ;
+    private RJControls.RJTextBox txtPesquisa;
 }

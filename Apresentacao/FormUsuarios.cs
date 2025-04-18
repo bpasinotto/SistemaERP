@@ -8,7 +8,7 @@ public partial class FormUsuarios : FormBase2
 
     public FormUsuarios()
     {
-        InitializeComponent(); 
+        InitializeComponent();
     }
 
     private void FormUsuarios_Load(object sender, EventArgs e)
@@ -35,7 +35,7 @@ public partial class FormUsuarios : FormBase2
             dgUsuarios.Style.HeaderStyle.BackColor = Color.LightGray;
             dgUsuarios.Style.CurrentCellStyle.BackColor = Color.LightGray;
             dgUsuarios.Style.SelectionStyle.BackColor = Color.LightGray;
-        }                      
+        }
     }
 
     private void PreencheGrid()
@@ -45,11 +45,11 @@ public partial class FormUsuarios : FormBase2
         dt = new DataTable();
         dt = usuariosServico.RetornaTodosUsuarios(cbInativos.Checked);
 
-        dgUsuarios.DataSource = dt;        
+        dgUsuarios.DataSource = dt;
     }
 
     private void btnEditar_Click(object sender, EventArgs e)
-    {        
+    {
         var idUsuario = 0;
 
         // Verifica se há alguma linha selecionada
@@ -61,18 +61,28 @@ public partial class FormUsuarios : FormBase2
             // Faz o cast para DataRow
             if (linhaSelecionada is DataRowView rowView)
             {
-                idUsuario = Convert.ToInt32(rowView["Id"]); // Substitua "Id" pelo nome da coluna no seu DataTable                
+                idUsuario = Convert.ToInt32(rowView["Id"]);            
             }
 
-            UsuariosServico usuariosServico = new UsuariosServico();
-            var dadosUsuario = usuariosServico.BuscaUsuarioId(idUsuario);
+            if (idUsuario == 1)
+            {
+                FormMensagem mensagem = new FormMensagem("Atenção", "Não é possivel editar esse usuário.");
+                mensagem.ShowDialog();
+                return;
+            }
+            else
+            {
+                UsuariosServico usuariosServico = new UsuariosServico();
+                var dadosUsuario = usuariosServico.BuscaUsuarioId(idUsuario);
 
-            //Abre o form de cadastro de usuário com os dados do usuário selecionado no dgUsuarios
-            FormAlteraUsuarios formAlteraUsuarios = new FormAlteraUsuarios(dadosUsuario);
-            formAlteraUsuarios.ShowDialog();
+                //Abre o form de cadastro de usuário com os dados do usuário selecionado no dgUsuarios
+                FormAlteraUsuarios formAlteraUsuarios = new FormAlteraUsuarios(dadosUsuario);
+                formAlteraUsuarios.ShowDialog();
 
-            // Atualiza a lista            
-            PreencheGrid();
+                // Atualiza a lista            
+                PreencheGrid();
+            }
+           
         }
         else
         {
@@ -98,4 +108,19 @@ public partial class FormUsuarios : FormBase2
         PreencheGrid();
     }
 
+    private void txtPesquisa__TextChanged(object sender, EventArgs e)
+    {
+        string filtro = txtPesquisa.Texts.Trim();
+        if (string.IsNullOrEmpty(filtro))
+        {
+            PreencheGrid();
+        }
+        else
+        {
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = string.Join(" OR ", dt.Columns.Cast<DataColumn>()
+                .Select(c => $"CONVERT([{c.ColumnName}], System.String) LIKE '%{filtro}%'"));
+            dgUsuarios.DataSource = dv.ToTable();
+        }
+    }
 }
