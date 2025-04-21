@@ -31,11 +31,13 @@ public static class Banco
 
             // Criar tabelas
             CreateTableClientes(connection);
+            CreateTableFornecedores(connection);
             CreateTableProdutos(connection);
             CreateTableUsuarios(connection);
 
             // Verificar e adicionar colunas conforme as definições das tabelas
             VerificarColunasClientes(connection);
+            VerificarColunasFornecedores(connection);
             VerificarColunasProdutos(connection);
             VerificarColunasUsuarios(connection);
 
@@ -63,6 +65,17 @@ public static class Banco
             );";
 
         ExecuteSqlCommand(connection, createClientesTable);
+    }
+
+    private static void CreateTableFornecedores(SqlConnection connection)
+    {
+        string createFornecedoresTable = @"
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Fornecedores' AND xtype='U')
+            CREATE TABLE Fornecedores (
+                Id INT IDENTITY(1,1) PRIMARY KEY                
+            );";
+
+        ExecuteSqlCommand(connection, createFornecedoresTable);
     }
 
     private static void CreateTableProdutos(SqlConnection connection)
@@ -112,6 +125,32 @@ public static class Banco
         foreach (var coluna in colunasEsperadas)
         {
             VerificarEAdicionarColuna(connection, "Clientes", coluna.Nome, coluna.Definicao);
+        }
+    }
+
+    private static void VerificarColunasFornecedores(SqlConnection connection)
+    {        
+        var colunasEsperadas = new[]
+        {            
+            new { Nome = "CPF/CNPJ", Definicao = "NVARCHAR(20)" },
+            new { Nome = "Razao", Definicao = "NVARCHAR(100) NOT NULL" },
+            new { Nome = "Fantasia", Definicao = "NVARCHAR(100)" },
+            new { Nome = "Email", Definicao = "NVARCHAR(100)" },
+            new { Nome = "Telefone", Definicao = "NVARCHAR(15)" },
+            new { Nome = "CEP", Definicao = "NVARCHAR(10)" },
+            new { Nome = "Rua", Definicao = "NVARCHAR(100)" },
+            new { Nome = "Numero", Definicao = "NVARCHAR(5)" },
+            new { Nome = "Bairro", Definicao = "NVARCHAR(100)" },
+            new { Nome = "Complemento", Definicao = "NVARCHAR(30)" },
+            new { Nome = "Cidade", Definicao = "NVARCHAR(100)" },
+            new { Nome = "Estado", Definicao = "NVARCHAR(2)" },
+            new { Nome = "Obs", Definicao = "NVARCHAR(240)" },
+            new { Nome = "Ativo", Definicao = "BIT DEFAULT 1 NOT NULL" }
+        };
+
+        foreach (var coluna in colunasEsperadas)
+        {
+            VerificarEAdicionarColuna(connection, "Fornecedores", coluna.Nome, coluna.Definicao);
         }
     }
 

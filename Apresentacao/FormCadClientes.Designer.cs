@@ -653,10 +653,10 @@ partial class FormCadClientes
         // 
         // FormCadClientes
         // 
+        AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = SystemColors.Control;
-        ClientSize = new Size(1008, 729);
+        ClientSize = new Size(1000, 724);
         ControlBox = false;
         Controls.Add(btnAtivaInativa);
         Controls.Add(txtObs);
@@ -694,9 +694,11 @@ partial class FormCadClientes
         MinimumSize = new Size(1024, 768);
         Name = "FormCadClientes";
         StartPosition = FormStartPosition.CenterParent;
-        Style.BackColor = SystemColors.Control;
+        Style.InactiveShadowOpacity = 0;
         Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
         Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+        Style.ShadowOpacity = 0;
+        Style.TitleBar.BackColor = Color.WhiteSmoke;
         Text = " ";
         WindowState = FormWindowState.Maximized;
         ResumeLayout(false);

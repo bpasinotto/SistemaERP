@@ -29,16 +29,17 @@ partial class FormPrincipal
     private void InitializeComponent()
     {
         pnTopo = new Panel();
-        btnUsuarios = new RJControls.RJButton();
-        btnTrocarUsuario = new RJControls.RJButton();
-        btnConsultaVendas = new RJControls.RJButton();
-        btnSair = new RJControls.RJButton();
-        btnInicio = new RJControls.RJButton();
-        btnVender = new RJControls.RJButton();
+        btnFornecedores = new SistemaERP.RJControls.RJButton();
+        btnUsuarios = new SistemaERP.RJControls.RJButton();
+        btnTrocarUsuario = new SistemaERP.RJControls.RJButton();
+        btnConsultaVendas = new SistemaERP.RJControls.RJButton();
+        btnSair = new SistemaERP.RJControls.RJButton();
+        btnInicio = new SistemaERP.RJControls.RJButton();
+        btnVender = new SistemaERP.RJControls.RJButton();
         pageSizeControl1 = new Syncfusion.Windows.Forms.Diagram.PageSizeControl();
-        btnProdutos = new RJControls.RJButton();
-        btnEstoque = new RJControls.RJButton();
-        btnClientes = new RJControls.RJButton();
+        btnProdutos = new SistemaERP.RJControls.RJButton();
+        btnEstoque = new SistemaERP.RJControls.RJButton();
+        btnClientes = new SistemaERP.RJControls.RJButton();
         pnMeio = new Panel();
         pnBaixo = new Panel();
         label1 = new Label();
@@ -51,6 +52,7 @@ partial class FormPrincipal
         // pnTopo
         // 
         pnTopo.BackColor = Color.White;
+        pnTopo.Controls.Add(btnFornecedores);
         pnTopo.Controls.Add(btnUsuarios);
         pnTopo.Controls.Add(btnTrocarUsuario);
         pnTopo.Controls.Add(btnConsultaVendas);
@@ -66,6 +68,27 @@ partial class FormPrincipal
         pnTopo.Name = "pnTopo";
         pnTopo.Size = new Size(1004, 74);
         pnTopo.TabIndex = 0;
+        // 
+        // btnFornecedores
+        // 
+        btnFornecedores.BackColor = Color.LightGray;
+        btnFornecedores.BackgroundColor = Color.LightGray;
+        btnFornecedores.BorderColor = Color.Empty;
+        btnFornecedores.BorderRadius = 20;
+        btnFornecedores.BorderSize = 0;
+        btnFornecedores.FlatAppearance.BorderSize = 0;
+        btnFornecedores.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
+        btnFornecedores.FlatStyle = FlatStyle.Flat;
+        btnFornecedores.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnFornecedores.ForeColor = Color.Black;
+        btnFornecedores.Location = new Point(699, 15);
+        btnFornecedores.Name = "btnFornecedores";
+        btnFornecedores.Size = new Size(119, 41);
+        btnFornecedores.TabIndex = 26;
+        btnFornecedores.Text = "Fornecedores";
+        btnFornecedores.TextColor = Color.Black;
+        btnFornecedores.UseVisualStyleBackColor = false;
+        btnFornecedores.Click += btnFornecedores_Click;
         // 
         // btnUsuarios
         // 
@@ -100,9 +123,9 @@ partial class FormPrincipal
         btnTrocarUsuario.FlatStyle = FlatStyle.Flat;
         btnTrocarUsuario.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnTrocarUsuario.ForeColor = Color.White;
-        btnTrocarUsuario.Location = new Point(787, 15);
+        btnTrocarUsuario.Location = new Point(802, 15);
         btnTrocarUsuario.Name = "btnTrocarUsuario";
-        btnTrocarUsuario.Size = new Size(142, 41);
+        btnTrocarUsuario.Size = new Size(127, 41);
         btnTrocarUsuario.TabIndex = 24;
         btnTrocarUsuario.Text = "Trocar Usuário";
         btnTrocarUsuario.TextColor = Color.White;
@@ -352,4 +375,5 @@ partial class FormPrincipal
     private Label lblUsuarioLogado;
     internal ComboBox cbTema;
     private Label label1;
+    private RJControls.RJButton btnFornecedores;
 }

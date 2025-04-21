@@ -13,6 +13,7 @@ public partial class FormPrincipal : FormBase
 {
     FormUsuarios formUsuarios = new FormUsuarios();
     FormClientes formClientes = new FormClientes();
+    FormFornecedores formFornecedores = new FormFornecedores();
     FormInicio formInicio = new FormInicio();
     int Id = 0;
 
@@ -44,7 +45,7 @@ public partial class FormPrincipal : FormBase
 
     internal void cbTema_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string selectedTheme = cbTema.SelectedItem.ToString();        
+        string selectedTheme = cbTema.SelectedItem.ToString();
 
         // Salvar o tema selecionado
         Properties.Settings.Default.Tema = selectedTheme;
@@ -63,9 +64,10 @@ public partial class FormPrincipal : FormBase
             }
         }
 
-        //Atualiza a cor do grid do FormUsuarios de acordo com o tema selecionado
+        //Atualiza a cor do grid dos Forms de acordo com o tema selecionado
         formUsuarios.MudaCorGrid(selectedTheme);
         formClientes.MudaCorGrid(selectedTheme);
+        formFornecedores.MudaCorGrid(selectedTheme);
     }
 
     private void btnUsuarios_Click(object sender, EventArgs e)
@@ -126,7 +128,7 @@ public partial class FormPrincipal : FormBase
         btnInicio.ForeColor = Color.White;
 
         //Abre o FormInicio dentro do pnMeio
-        
+
         formInicio.TopLevel = false;
         pnMeio.Controls.Add(formInicio);
         formInicio.Show();
@@ -145,6 +147,7 @@ public partial class FormPrincipal : FormBase
         btnConsultaVendas.ForeColor = Color.Black;
         btnEstoque.ForeColor = Color.Black;
         btnUsuarios.ForeColor = Color.Black;
+        btnFornecedores.ForeColor = Color.Black;
 
         //Define a cor de todos os botões como LightGray
         btnInicio.BackColor = Color.LightGray;
@@ -154,6 +157,7 @@ public partial class FormPrincipal : FormBase
         btnConsultaVendas.BackColor = Color.LightGray;
         btnEstoque.BackColor = Color.LightGray;
         btnUsuarios.BackColor = Color.LightGray;
+        btnFornecedores.BackColor = Color.LightGray;
     }
 
     private void lblUsuarioLogado_Click(object sender, EventArgs e)
@@ -186,5 +190,27 @@ public partial class FormPrincipal : FormBase
     private void label1_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void btnFornecedores_Click(object sender, EventArgs e)
+    {
+        //Limpa o pnMeio do FormPrincipal
+        pnMeio.Controls.Clear();
+
+        //Define a cor de todos os botões como LightGray
+        BotoesCinza();
+
+        //Define somente a cor do botão selecionado para verde
+        btnFornecedores.BackColor = Color.FromArgb(2, 89, 89);
+        //Define cor da letra para branco
+        btnFornecedores.ForeColor = Color.White;
+
+
+        formFornecedores.TopLevel = false;
+        pnMeio.Controls.Add(formFornecedores);
+        formFornecedores.Show();
+
+        //Expande o FormIncio para ocupar todo o pnMeio
+        formFornecedores.Dock = DockStyle.Fill;
     }
 }

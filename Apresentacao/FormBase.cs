@@ -34,10 +34,31 @@ public class FormBase : SfForm
     {
         if (theme == "Claro")
         {
+            // Define a cor de fundo da área do cliente
+            this.Style.BackColor = Color.White;
+
+            this.AllowRoundedCorners = true;
+
+            // Personaliza a sombra para o estado ativo
+            this.Style.ShadowOpacity = 0;
+
+            // Personaliza a sombra para o estado inativo
+            this.Style.InactiveShadowOpacity = 0;
+
+            // Altura da barra de título
+            this.Style.TitleBar.Height = 30;
+
+            // Define a cor de fundo e a cor do texto da barra de título
+            this.Style.TitleBar.BackColor = Color.WhiteSmoke;
+            this.Style.TitleBar.ForeColor = Color.Black;            
+
+            this.Style.Border = new Pen(Color.FromArgb(32, 32, 32), 5);
+            this.Style.InactiveBorder = new Pen(Color.Gray, 5);
+
             this.BackColor = Color.White;
             foreach (Panel panel in this.Controls.OfType<Panel>())
             {
-                panel.BackColor = Color.White;
+                panel.BackColor = Color.WhiteSmoke;
                 panel.ForeColor = Color.Black;
             }
 
@@ -50,38 +71,23 @@ public class FormBase : SfForm
         }
         else if (theme == "Escuro")
         {
-            //Sets the back color of the client area.
+            // Define a cor de fundo da área do cliente
             this.Style.BackColor = Color.FromArgb(32, 32, 32);
 
             this.AllowRoundedCorners = true;
 
-            //Customize the shadow for active state
+            // Personaliza a sombra para o estado ativo
             this.Style.ShadowOpacity = 0;
 
-            //Customize the shadow for inactive state
+            // Personaliza a sombra para o estado inativo
             this.Style.InactiveShadowOpacity = 0;
 
-            //Altura da barra de título
+            // Altura da barra de título
             this.Style.TitleBar.Height = 30;
 
-            //Sets the back color and fore color of the title bar.
+            // Define a cor de fundo e a cor do texto da barra de título
             this.Style.TitleBar.BackColor = Color.FromArgb(32, 32, 32);
-            this.Style.TitleBar.ForeColor = Color.White;
-
-            //Sets the fore color of the title bar buttons
-            this.Style.TitleBar.CloseButtonForeColor = Color.White;
-            this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
-            this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
-            //Sets the hover state back color of the title bar buttons
-            this.Style.TitleBar.CloseButtonHoverBackColor = Color.DarkGray;
-            this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.DarkGray;
-            this.Style.TitleBar.MaximizeButtonHoverBackColor = Color.DarkGray;
-
-            //Sets the pressed state back color of the title bar buttons
-            this.Style.TitleBar.CloseButtonPressedBackColor = Color.Gray;
-            this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Gray;
-            this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Gray;
+            this.Style.TitleBar.ForeColor = Color.White;                       
 
             this.Style.Border = new Pen(Color.FromArgb(32, 32, 32), 5);
             this.Style.InactiveBorder = new Pen(Color.Gray, 5);
@@ -94,7 +100,7 @@ public class FormBase : SfForm
                 panel.ForeColor = Color.White;
             }
 
-            //Altera a cor do pnTopo do FormPrincipal
+            // Altera a cor do pnTopo do FormPrincipal
             if (this.Name == "FormPrincipal")
             {
                 Panel pnTopo = (Panel)this.Controls.Find("pnTopo", true)[0];
@@ -112,8 +118,6 @@ public class FormBase : SfForm
                 button.BackColor = Color.FromArgb(44, 44, 44);
                 button.IconColor = Color.White;
             }
-                       
-
         }
     }
 }

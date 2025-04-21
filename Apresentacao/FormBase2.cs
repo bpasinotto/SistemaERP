@@ -50,6 +50,7 @@ public class FormBase2 : Form
         }
         else if (theme == "Escuro")
         {
+            //ALtera cor de fundo e cor da letra
             this.BackColor = Color.FromArgb(44, 44, 44);
             this.ForeColor = Color.White;
             foreach (Panel panel in this.Controls.OfType<Panel>())
