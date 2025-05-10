@@ -41,17 +41,19 @@ namespace SistemaERP.Apresentacao
 
         private void PreencheGrid()
         {
-            // Busca todos os usuários e atribui ao DataTable
-            ClientesServico clientesServico = new ClientesServico();
+            // Instancia o serviço de produtos
+            ProdutosServico produtosServico = new ProdutosServico();
             dt = new DataTable();
-            dt = clientesServico.RetornaTodosClientes(cbInativos.Checked);
+                       
+            dt = produtosServico.RetornaTodosProdutos(cbInativos.Checked);
 
+            // Define o DataTable como fonte de dados do DataGridView
             dgProdutos.DataSource = dt;
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            new FormCadClientes().ShowDialog();
+            new FormCadProdutos().ShowDialog();
             PreencheGrid();
         }
 
@@ -62,7 +64,7 @@ namespace SistemaERP.Apresentacao
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            var idCliente = 0;
+            var idProduto = 0;
 
             // Verifica se há alguma linha selecionada
             if (dgProdutos.SelectedItems.Count > 0)
@@ -73,22 +75,22 @@ namespace SistemaERP.Apresentacao
                 // Faz o cast para DataRow
                 if (linhaSelecionada is DataRowView rowView)
                 {
-                    idCliente = Convert.ToInt32(rowView["Id"]); // Substitua "Id" pelo nome da coluna no seu DataTable                
+                    idProduto = Convert.ToInt32(rowView["Id"]); // Substitua "Id" pelo nome da coluna no seu DataTable                
                 }
 
-                ClientesServico clientesServico = new ClientesServico();
-                var dadosCliente = clientesServico.BuscaClienteId(idCliente);
+                //ProdutosServico produtosServico = new ProdutosServico();
+                //var dadosProduto = produtosServico.BuscaProdutoPorId(idProduto);
 
                 //Abre o form de cadastro de usuário com os dados do usuário selecionado no dgUsuarios
-                FormCadClientes formCadClientes = new FormCadClientes(dadosCliente);
-                formCadClientes.ShowDialog();
+                FormCadProdutos formCadProdutos = new FormCadProdutos(idProduto);
+                formCadProdutos.ShowDialog();
 
                 // Atualiza a lista            
                 PreencheGrid();
             }
             else
             {
-                FormMensagem mensagem = new FormMensagem("Atenção", "Selecione um cliente para editar.");
+                FormMensagem mensagem = new FormMensagem("Atenção", "Selecione um produto para editar.");
                 mensagem.ShowDialog();
             }
         }
@@ -108,5 +110,6 @@ namespace SistemaERP.Apresentacao
                 dgProdutos.DataSource = dv.ToTable();
             }
         }
+        
     }
 }

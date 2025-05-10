@@ -73,6 +73,7 @@ partial class FormProdutos
         btnNovo.Text = "Novo";
         btnNovo.TextColor = Color.White;
         btnNovo.UseVisualStyleBackColor = false;
+        btnNovo.Click += btnNovo_Click;
         // 
         // btnEditar
         // 
@@ -93,6 +94,7 @@ partial class FormProdutos
         btnEditar.Text = "Editar";
         btnEditar.TextColor = Color.White;
         btnEditar.UseVisualStyleBackColor = false;
+        btnEditar.Click += btnEditar_Click;
         // 
         // txtPesquisa
         // 
@@ -116,6 +118,7 @@ partial class FormProdutos
         txtPesquisa.TabIndex = 33;
         txtPesquisa.Texts = "";
         txtPesquisa.UnderlinedStyle = false;
+        txtPesquisa._TextChanged += txtPesquisa__TextChanged;
         // 
         // txtCNPJ
         // 
@@ -151,6 +154,7 @@ partial class FormProdutos
         cbInativos.TabIndex = 34;
         cbInativos.Text = "Ver produtos inativos";
         cbInativos.UseVisualStyleBackColor = true;
+        cbInativos.CheckedChanged += cbInativos_CheckedChanged;
         // 
         // pnMeio
         // 

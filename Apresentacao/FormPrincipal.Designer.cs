@@ -66,7 +66,7 @@ partial class FormPrincipal
         pnTopo.Dock = DockStyle.Top;
         pnTopo.Location = new Point(2, 2);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1004, 74);
+        pnTopo.Size = new Size(996, 74);
         pnTopo.TabIndex = 0;
         // 
         // btnFornecedores
@@ -123,7 +123,7 @@ partial class FormPrincipal
         btnTrocarUsuario.FlatStyle = FlatStyle.Flat;
         btnTrocarUsuario.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnTrocarUsuario.ForeColor = Color.White;
-        btnTrocarUsuario.Location = new Point(802, 15);
+        btnTrocarUsuario.Location = new Point(794, 15);
         btnTrocarUsuario.Name = "btnTrocarUsuario";
         btnTrocarUsuario.Size = new Size(127, 41);
         btnTrocarUsuario.TabIndex = 24;
@@ -164,7 +164,7 @@ partial class FormPrincipal
         btnSair.FlatStyle = FlatStyle.Flat;
         btnSair.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSair.ForeColor = Color.White;
-        btnSair.Location = new Point(935, 15);
+        btnSair.Location = new Point(927, 15);
         btnSair.Name = "btnSair";
         btnSair.Size = new Size(57, 41);
         btnSair.TabIndex = 23;
@@ -241,6 +241,7 @@ partial class FormPrincipal
         btnProdutos.Text = "Produtos";
         btnProdutos.TextColor = Color.Black;
         btnProdutos.UseVisualStyleBackColor = false;
+        btnProdutos.Click += btnProdutos_Click;
         // 
         // btnEstoque
         // 
@@ -288,7 +289,7 @@ partial class FormPrincipal
         pnMeio.Dock = DockStyle.Fill;
         pnMeio.Location = new Point(2, 76);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1004, 623);
+        pnMeio.Size = new Size(996, 618);
         pnMeio.TabIndex = 2;
         // 
         // pnBaixo
@@ -297,9 +298,9 @@ partial class FormPrincipal
         pnBaixo.Controls.Add(cbTema);
         pnBaixo.Controls.Add(lblUsuarioLogado);
         pnBaixo.Dock = DockStyle.Bottom;
-        pnBaixo.Location = new Point(2, 699);
+        pnBaixo.Location = new Point(2, 694);
         pnBaixo.Name = "pnBaixo";
-        pnBaixo.Size = new Size(1004, 28);
+        pnBaixo.Size = new Size(996, 28);
         pnBaixo.TabIndex = 3;
         // 
         // label1
@@ -307,7 +308,7 @@ partial class FormPrincipal
         label1.Anchor = AnchorStyles.Right;
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI Variable Display", 11.25F);
-        label1.Location = new Point(852, 3);
+        label1.Location = new Point(844, 3);
         label1.Name = "label1";
         label1.Size = new Size(47, 20);
         label1.TabIndex = 3;
@@ -318,7 +319,7 @@ partial class FormPrincipal
         // 
         cbTema.Anchor = AnchorStyles.Right;
         cbTema.FormattingEnabled = true;
-        cbTema.Location = new Point(902, 2);
+        cbTema.Location = new Point(894, 2);
         cbTema.Name = "cbTema";
         cbTema.Size = new Size(90, 23);
         cbTema.TabIndex = 2;
@@ -335,10 +336,11 @@ partial class FormPrincipal
         // 
         // FormPrincipal
         // 
+        AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1008, 729);
+        ClientSize = new Size(1000, 724);
         Controls.Add(pnMeio);
         Controls.Add(pnBaixo);
         Controls.Add(pnTopo);
@@ -346,8 +348,11 @@ partial class FormPrincipal
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
         Style.BackColor = Color.WhiteSmoke;
+        Style.InactiveShadowOpacity = 0;
         Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
         Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+        Style.ShadowOpacity = 0;
+        Style.TitleBar.BackColor = Color.WhiteSmoke;
         Text = "PasiWare";
         WindowState = FormWindowState.Maximized;
         Load += FormPrincipal_Load;

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Configuration;
-using System.Drawing;
-using System.Windows.Forms;
-using FontAwesome.Sharp;
+﻿using FontAwesome.Sharp;
 using SistemaERP.RJControls;
-using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.Controls;
 
 namespace SistemaERP.Apresentacao;

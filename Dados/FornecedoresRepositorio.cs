@@ -183,5 +183,30 @@ namespace SistemaERP.Dados
                 }
             }
         }
+
+        public List<Fornecedor> ObterTodosFornecedores()
+        {
+            var fornecedores = new List<Fornecedor>();
+            using (var connection = new SqlConnection(stringConexao))
+            {
+                connection.Open();
+                var query = "SELECT Id, Razao FROM Fornecedores WHERE Ativo = 1";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {                        
+                        while (reader.Read())
+                        {
+                            fornecedores.Add(new Fornecedor
+                            {
+                                Id = reader.GetInt32(0),
+                                Razao = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+            return fornecedores;
+        }
     }
 }

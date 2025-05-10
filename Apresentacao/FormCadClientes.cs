@@ -129,17 +129,17 @@ namespace SistemaERP.Apresentacao
             {
                 if (Id != "")
                 {
-                    var sucesso = new ClientesServico().AlteraCliente(Id, txtCNPJ.Texts, txtRazao.Texts, txtFantasia.Texts, txtEmail.Texts, txtTelefone.Texts, txtCEP.Texts, txtRua.Texts, txtNumero.Texts, txtBairro.Texts, txtComplemento.Texts, txtCidade.Texts, txtEstado.Texts, txtObs.Texts);
-                    var mensagem = new FormMensagem(sucesso ? "Sucesso" : "Falha", sucesso ? "Cliente atualizado com sucesso." : "Falha na atualização do cliente.");
+                    var retorno = new ClientesServico().AlteraCliente(Id, txtCNPJ.Texts, txtRazao.Texts, txtFantasia.Texts, txtEmail.Texts, txtTelefone.Texts, txtCEP.Texts, txtRua.Texts, txtNumero.Texts, txtBairro.Texts, txtComplemento.Texts, txtCidade.Texts, txtEstado.Texts, txtObs.Texts);
+                    var mensagem = new FormMensagem(retorno ? "Sucesso" : "Falha", retorno ? "Cliente atualizado com sucesso." : "Falha na atualização do cliente.");
                     mensagem.ShowDialog();
-                    if (sucesso) Close();
+                    if (retorno) Close();
                 }
                 else
                 {
-                    var sucesso = new ClientesServico().InsereCliente(txtCNPJ.Texts, txtRazao.Texts, txtFantasia.Texts, txtEmail.Texts, txtTelefone.Texts, txtCEP.Texts, txtRua.Texts, txtNumero.Texts, txtBairro.Texts, txtComplemento.Texts, txtCidade.Texts, txtEstado.Texts, txtObs.Texts);
-                    var mensagem = new FormMensagem(sucesso ? "Sucesso" : "Falha", sucesso ? "Cliente cadastrado com sucesso." : "Falha no cadastro do cliente.");
+                    var retorno = new ClientesServico().InsereCliente(txtCNPJ.Texts, txtRazao.Texts, txtFantasia.Texts, txtEmail.Texts, txtTelefone.Texts, txtCEP.Texts, txtRua.Texts, txtNumero.Texts, txtBairro.Texts, txtComplemento.Texts, txtCidade.Texts, txtEstado.Texts, txtObs.Texts);
+                    var mensagem = new FormMensagem(retorno ? "Sucesso" : "Falha", retorno ? "Cliente cadastrado com sucesso." : "Falha no cadastro do cliente.");
                     mensagem.ShowDialog();
-                    if (sucesso) LimparCampos();
+                    if (retorno) LimparCampos();
                 }
             }
             else

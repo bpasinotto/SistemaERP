@@ -45,6 +45,11 @@ namespace SistemaERP.Negocio
             return new FornecedoresRepositorio().InativaAtivaFornecedor(id, inativar);
         }
 
+        public List<Fornecedor> ObterTodosFornecedores()
+        {
+            return new FornecedoresRepositorio().ObterTodosFornecedores();
+        }
+        
         internal async Task<List<string>> ValidaDocumentoAsync(string documento)
         {
             CPFCNPJ.IMain CpfCnpj = new CPFCNPJ.Main();

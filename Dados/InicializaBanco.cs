@@ -41,6 +41,9 @@ public static class Banco
             VerificarColunasProdutos(connection);
             VerificarColunasUsuarios(connection);
 
+            // Criar chaves estrangeiras
+            CriarChavesEstrangeiras(connection);
+
             // Insere usuário ADM
             ExecuteSqlCommand(connection, @"
                 IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID = 1)
@@ -129,9 +132,9 @@ public static class Banco
     }
 
     private static void VerificarColunasFornecedores(SqlConnection connection)
-    {        
+    {
         var colunasEsperadas = new[]
-        {            
+        {
             new { Nome = "CPF/CNPJ", Definicao = "NVARCHAR(20)" },
             new { Nome = "Razao", Definicao = "NVARCHAR(100) NOT NULL" },
             new { Nome = "Fantasia", Definicao = "NVARCHAR(100)" },
@@ -165,7 +168,7 @@ public static class Banco
             new { Nome = "Custo", Definicao = "DECIMAL(18,2) NOT NULL" },
             new { Nome = "Un", Definicao = "NVARCHAR(2) NOT NULL" },
             new { Nome = "Estoque", Definicao = "INT NOT NULL" },
-            new { Nome = "Fornecedor", Definicao = "NVARCHAR(100) NOT NULL" },
+            new { Nome = "Fornecedor", Definicao = "INT NOT NULL" },
             new { Nome = "Ativo", Definicao = "BIT DEFAULT 1 NOT NULL" },
             new { Nome = "DataCadastro", Definicao = "DATETIME DEFAULT GETDATE() NOT NULL" }
         };
@@ -174,6 +177,24 @@ public static class Banco
         {
             VerificarEAdicionarColuna(connection, "Produtos", coluna.Nome, coluna.Definicao);
         }
+    }
+
+    private static void CriarChavesEstrangeiras(SqlConnection connection)
+    {
+        // Adiciona a chave estrangeira à tabela Produtos, vinculando o campo Fornecedor ao Id da tabela Fornecedores
+        string adicionarFKQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_Produtos_Fornecedor_Fornecedores_Id')
+                  AND parent_object_id = OBJECT_ID(N'Produtos')
+            )
+            BEGIN
+                ALTER TABLE Produtos
+                ADD CONSTRAINT FK_Produtos_Fornecedor_Fornecedores_Id
+                FOREIGN KEY (Fornecedor) REFERENCES Fornecedores(Id);
+            END";
+
+        ExecuteSqlCommand(connection, adicionarFKQuery);
     }
 
     private static void VerificarColunasUsuarios(SqlConnection connection)

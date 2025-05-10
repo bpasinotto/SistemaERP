@@ -15,6 +15,7 @@ public partial class FormPrincipal : FormBase
     FormClientes formClientes = new FormClientes();
     FormFornecedores formFornecedores = new FormFornecedores();
     FormInicio formInicio = new FormInicio();
+    FormProdutos formProdutos = new FormProdutos();
     int Id = 0;
 
     public FormPrincipal()
@@ -68,6 +69,7 @@ public partial class FormPrincipal : FormBase
         formUsuarios.MudaCorGrid(selectedTheme);
         formClientes.MudaCorGrid(selectedTheme);
         formFornecedores.MudaCorGrid(selectedTheme);
+        formProdutos.MudaCorGrid(selectedTheme);
     }
 
     private void btnUsuarios_Click(object sender, EventArgs e)
@@ -212,5 +214,27 @@ public partial class FormPrincipal : FormBase
 
         //Expande o FormIncio para ocupar todo o pnMeio
         formFornecedores.Dock = DockStyle.Fill;
+    }
+
+    private void btnProdutos_Click(object sender, EventArgs e)
+    {
+        //Limpa o pnMeio do FormPrincipal
+        pnMeio.Controls.Clear();
+
+        //Define a cor de todos os botões como LightGray
+        BotoesCinza();
+
+        //Define somente a cor do botão selecionado para verde
+        btnProdutos.BackColor = Color.FromArgb(2, 89, 89);
+        //Define cor da letra para branco
+        btnProdutos.ForeColor = Color.White;
+
+
+        formProdutos.TopLevel = false;
+        pnMeio.Controls.Add(formProdutos);
+        formProdutos.Show();
+
+        //Expande o FormIncio para ocupar todo o pnMeio
+        formProdutos.Dock = DockStyle.Fill;
     }
 }
