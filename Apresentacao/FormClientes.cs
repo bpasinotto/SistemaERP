@@ -1,19 +1,70 @@
 ﻿using System.Data;
 using SistemaERP.Negocio;
+using SistemaERP.RJControls;
 
 namespace SistemaERP.Apresentacao;
-public partial class FormClientes : FormBase2
+public partial class FormClientes : FormBase
 {
     private DataTable dt;
+    private RJTextBox txtCodClienteRef;
+    private bool isBuscaMode = false;
 
     public FormClientes()
     {
         InitializeComponent();
+        btnSelecionar.Visible = false; // Inicialmente invisível
+    }
+
+    // Construtor para modo busca
+    public FormClientes(RJTextBox txtCodCliente)
+    {
+        InitializeComponent();
+        txtCodClienteRef = txtCodCliente;
+        isBuscaMode = true;
+        btnSelecionar.Visible = true; // Visível apenas em modo busca
     }
 
     private void FormClientes_Load(object sender, EventArgs e)
     {
         PreencheGrid();
+
+        // Registra o evento do botão apenas se for modo busca
+        if (isBuscaMode)
+        {
+            btnSelecionar.Click += BtnSelecionar_Click;
+        }
+    }
+
+    private void BtnSelecionar_Click(object sender, EventArgs e)
+    {
+        if (txtCodClienteRef != null && dgClientes.SelectedItems.Count > 0)
+        {
+            try
+            {
+                var linhaSelecionada = dgClientes.SelectedItems[0];
+
+                if (linhaSelecionada is DataRowView rowView)
+                {
+                    int idCliente = Convert.ToInt32(rowView["Id"]);
+
+                    // Insere o ID no txtCodCliente do FormCadVendas
+                    txtCodClienteRef.Texts = idCliente.ToString();
+
+                    // Fecha o FormClientes
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormMensagem mensagem = new FormMensagem("Erro", $"Erro ao selecionar cliente: {ex.Message}");
+                mensagem.ShowDialog();
+            }
+        }
+        else
+        {
+            FormMensagem mensagem = new FormMensagem("Atenção", "Selecione um cliente para continuar.");
+            mensagem.ShowDialog();
+        }
     }
 
     internal void MudaCorGrid(string tema)

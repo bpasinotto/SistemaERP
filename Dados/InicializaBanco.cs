@@ -34,12 +34,18 @@ public static class Banco
             CreateTableFornecedores(connection);
             CreateTableProdutos(connection);
             CreateTableUsuarios(connection);
+            CreateTableVendas(connection);
+            CreateTableVendaItens(connection);
+            CreateTableEmpresa(connection);
 
             // Verificar e adicionar colunas conforme as definições das tabelas
             VerificarColunasClientes(connection);
             VerificarColunasFornecedores(connection);
             VerificarColunasProdutos(connection);
             VerificarColunasUsuarios(connection);
+            VerificarColunasVendas(connection);
+            VerificarColunasVendaItens(connection);
+            VerificarColunasEmpresa(connection);
 
             // Criar chaves estrangeiras
             CriarChavesEstrangeiras(connection);
@@ -49,7 +55,16 @@ public static class Banco
                 IF NOT EXISTS (SELECT 1 FROM Usuarios WHERE ID = 1)
                 BEGIN
                     INSERT INTO Usuarios (Nome, Email, Senha) 
-                    VALUES ('PasiWare', 'suporte@pasiware.com', 'Bpdo8787');
+                    VALUES ('PasiWare', 'suporte@pasiware.com', '1234');
+                END
+            ");
+
+            // Insere empresa padrão se não existir
+            ExecuteSqlCommand(connection, @"
+                IF NOT EXISTS (SELECT 1 FROM Empresa)
+                BEGIN
+                    INSERT INTO Empresa (ClienteId, NomeCliente) 
+                    VALUES (NEWID(), 'Empresa Principal');
                 END
             ");
         }
@@ -101,6 +116,36 @@ public static class Banco
             );";
 
         ExecuteSqlCommand(connection, createUsuariosTable);
+    }
+
+    private static void CreateTableVendas(SqlConnection connection)
+    {
+        string createVendasTable = @"
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Vendas' AND xtype='U')
+            CREATE TABLE Vendas (
+                Id INT IDENTITY(1,1) PRIMARY KEY
+            );";
+        ExecuteSqlCommand(connection, createVendasTable);
+    }
+
+    private static void CreateTableVendaItens(SqlConnection connection)
+    {
+        string createVendaItensTable = @"
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='VendaItens' AND xtype='U')
+            CREATE TABLE VendaItens (
+                Id INT IDENTITY(1,1) PRIMARY KEY
+            );";
+        ExecuteSqlCommand(connection, createVendaItensTable);
+    }
+
+    private static void CreateTableEmpresa(SqlConnection connection)
+    {
+        string createEmpresaTable = @"
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Empresa' AND xtype='U')
+            CREATE TABLE Empresa (
+                ClienteId UNIQUEIDENTIFIER PRIMARY KEY
+            );";
+        ExecuteSqlCommand(connection, createEmpresaTable);
     }
 
     private static void VerificarColunasClientes(SqlConnection connection)
@@ -179,24 +224,6 @@ public static class Banco
         }
     }
 
-    private static void CriarChavesEstrangeiras(SqlConnection connection)
-    {
-        // Adiciona a chave estrangeira à tabela Produtos, vinculando o campo Fornecedor ao Id da tabela Fornecedores
-        string adicionarFKQuery = @"
-            IF NOT EXISTS (
-                SELECT * FROM sys.foreign_keys 
-                WHERE object_id = OBJECT_ID(N'FK_Produtos_Fornecedor_Fornecedores_Id')
-                  AND parent_object_id = OBJECT_ID(N'Produtos')
-            )
-            BEGIN
-                ALTER TABLE Produtos
-                ADD CONSTRAINT FK_Produtos_Fornecedor_Fornecedores_Id
-                FOREIGN KEY (Fornecedor) REFERENCES Fornecedores(Id);
-            END";
-
-        ExecuteSqlCommand(connection, adicionarFKQuery);
-    }
-
     private static void VerificarColunasUsuarios(SqlConnection connection)
     {
         // Definição das colunas esperadas para a tabela Usuarios
@@ -213,6 +240,128 @@ public static class Banco
         {
             VerificarEAdicionarColuna(connection, "Usuarios", coluna.Nome, coluna.Definicao);
         }
+    }
+
+    private static void VerificarColunasVendas(SqlConnection connection)
+    {
+        var colunasEsperadas = new[]
+        {
+            new { Nome = "IdCliente", Definicao = "INT NOT NULL" },
+            new { Nome = "IdUsuario", Definicao = "INT NOT NULL" },
+            new { Nome = "DataVenda", Definicao = "DATETIME DEFAULT GETDATE() NOT NULL" },
+            new { Nome = "ValorTotal", Definicao = "DECIMAL(18,2) NOT NULL" },
+            new { Nome = "Situacao", Definicao = "NVARCHAR(20) NOT NULL" },
+            new { Nome = "Observacao", Definicao = "NVARCHAR(255)" }
+        };
+
+        foreach (var coluna in colunasEsperadas)
+        {
+            VerificarEAdicionarColuna(connection, "Vendas", coluna.Nome, coluna.Definicao);
+        }
+    }
+
+    private static void VerificarColunasVendaItens(SqlConnection connection)
+    {
+        var colunasEsperadas = new[]
+        {
+            new { Nome = "IdVenda", Definicao = "INT NOT NULL" },
+            new { Nome = "IdProduto", Definicao = "INT NOT NULL" },
+            new { Nome = "Quantidade", Definicao = "DECIMAL(18,3) NOT NULL" },
+            new { Nome = "ValorUnitario", Definicao = "DECIMAL(18,2) NOT NULL" },
+            new { Nome = "ValorTotalItem", Definicao = "DECIMAL(18,2) NOT NULL" }
+        };
+
+        foreach (var coluna in colunasEsperadas)
+        {
+            VerificarEAdicionarColuna(connection, "VendaItens", coluna.Nome, coluna.Definicao);
+        }
+    }
+
+    private static void VerificarColunasEmpresa(SqlConnection connection)
+    {
+        // Definição das colunas esperadas para a tabela Empresa
+        var colunasEsperadas = new[]
+        {
+            new { Nome = "NomeCliente", Definicao = "VARCHAR(100) NOT NULL" }
+        };
+
+        foreach (var coluna in colunasEsperadas)
+        {
+            VerificarEAdicionarColuna(connection, "Empresa", coluna.Nome, coluna.Definicao);
+        }
+    }
+
+    private static void CriarChavesEstrangeiras(SqlConnection connection)
+    {
+        // Adiciona a chave estrangeira à tabela Produtos, vinculando o campo Fornecedor ao Id da tabela Fornecedores
+        string adicionarFKProdutosFornecedorQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_Produtos_Fornecedor_Fornecedores_Id')
+                  AND parent_object_id = OBJECT_ID(N'Produtos')
+            )
+            BEGIN
+                ALTER TABLE Produtos
+                ADD CONSTRAINT FK_Produtos_Fornecedor_Fornecedores_Id
+                FOREIGN KEY (Fornecedor) REFERENCES Fornecedores(Id);
+            END";
+        ExecuteSqlCommand(connection, adicionarFKProdutosFornecedorQuery);
+
+        // Adiciona a chave estrangeira à tabela Vendas, vinculando o campo IdCliente ao Id da tabela Clientes
+        string adicionarFKVendasClienteQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_Vendas_IdCliente_Clientes_Id')
+                  AND parent_object_id = OBJECT_ID(N'Vendas')
+            )
+            BEGIN
+                ALTER TABLE Vendas
+                ADD CONSTRAINT FK_Vendas_IdCliente_Clientes_Id
+                FOREIGN KEY (IdCliente) REFERENCES Clientes(Id);
+            END";
+        ExecuteSqlCommand(connection, adicionarFKVendasClienteQuery);
+
+        // Adiciona a chave estrangeira à tabela Vendas, vinculando o campo IdUsuario ao Id da tabela Usuarios
+        string adicionarFKVendasUsuarioQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_Vendas_IdUsuario_Usuarios_Id')
+                  AND parent_object_id = OBJECT_ID(N'Vendas')
+            )
+            BEGIN
+                ALTER TABLE Vendas
+                ADD CONSTRAINT FK_Vendas_IdUsuario_Usuarios_Id
+                FOREIGN KEY (IdUsuario) REFERENCES Usuarios(Id);
+            END";
+        ExecuteSqlCommand(connection, adicionarFKVendasUsuarioQuery);
+
+        // Adiciona a chave estrangeira à tabela VendaItens, vinculando o campo IdVenda ao Id da tabela Vendas
+        string adicionarFKVendaItensVendaQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_VendaItens_IdVenda_Vendas_Id')
+                  AND parent_object_id = OBJECT_ID(N'VendaItens')
+            )
+            BEGIN
+                ALTER TABLE VendaItens
+                ADD CONSTRAINT FK_VendaItens_IdVenda_Vendas_Id
+                FOREIGN KEY (IdVenda) REFERENCES Vendas(Id);
+            END";
+        ExecuteSqlCommand(connection, adicionarFKVendaItensVendaQuery);
+
+        // Adiciona a chave estrangeira à tabela VendaItens, vinculando o campo IdProduto ao Id da tabela Produtos
+        string adicionarFKVendaItensProdutoQuery = @"
+            IF NOT EXISTS (
+                SELECT * FROM sys.foreign_keys 
+                WHERE object_id = OBJECT_ID(N'FK_VendaItens_IdProduto_Produtos_Id')
+                  AND parent_object_id = OBJECT_ID(N'VendaItens')
+            )
+            BEGIN
+                ALTER TABLE VendaItens
+                ADD CONSTRAINT FK_VendaItens_IdProduto_Produtos_Id
+                FOREIGN KEY (IdProduto) REFERENCES Produtos(Id);
+            END";
+        ExecuteSqlCommand(connection, adicionarFKVendaItensProdutoQuery);
     }
 
     private static void VerificarEAdicionarColuna(SqlConnection connection, string tabela, string coluna, string definicao)

@@ -657,7 +657,7 @@ partial class FormCadClientes
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1000, 724);
-        ControlBox = false;
+        CloseButtonVisible = false;
         Controls.Add(btnAtivaInativa);
         Controls.Add(txtObs);
         Controls.Add(btnBuscaCep);
@@ -691,6 +691,8 @@ partial class FormCadClientes
         Controls.Add(label3);
         Controls.Add(label14);
         Controls.Add(label15);
+        IconSize = new Size(0, 0);
+        MinimizeBox = false;
         MinimumSize = new Size(1024, 768);
         Name = "FormCadClientes";
         StartPosition = FormStartPosition.CenterParent;

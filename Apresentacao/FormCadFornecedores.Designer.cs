@@ -75,7 +75,7 @@ partial class FormCadFornecedores
         btnBuscaCep.IconColor = Color.FromArgb(2, 89, 89);
         btnBuscaCep.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnBuscaCep.IconSize = 32;
-        btnBuscaCep.Location = new Point(316, 501);
+        btnBuscaCep.Location = new Point(316, 495);
         btnBuscaCep.Name = "btnBuscaCep";
         btnBuscaCep.Size = new Size(38, 36);
         btnBuscaCep.TabIndex = 87;
@@ -94,7 +94,7 @@ partial class FormCadFornecedores
         btnBuscaCnpj.IconColor = Color.FromArgb(2, 89, 89);
         btnBuscaCnpj.IconFont = FontAwesome.Sharp.IconFont.Auto;
         btnBuscaCnpj.IconSize = 32;
-        btnBuscaCnpj.Location = new Point(316, 195);
+        btnBuscaCnpj.Location = new Point(316, 189);
         btnBuscaCnpj.Name = "btnBuscaCnpj";
         btnBuscaCnpj.Size = new Size(38, 36);
         btnBuscaCnpj.TabIndex = 75;
@@ -115,7 +115,7 @@ partial class FormCadFornecedores
         btnAtivaInativa.FlatStyle = FlatStyle.Flat;
         btnAtivaInativa.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnAtivaInativa.ForeColor = Color.White;
-        btnAtivaInativa.Location = new Point(61, 656);
+        btnAtivaInativa.Location = new Point(61, 650);
         btnAtivaInativa.Name = "btnAtivaInativa";
         btnAtivaInativa.Size = new Size(249, 41);
         btnAtivaInativa.TabIndex = 103;
@@ -135,7 +135,7 @@ partial class FormCadFornecedores
         txtObs.BorderSize = 2;
         txtObs.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtObs.ForeColor = Color.White;
-        txtObs.Location = new Point(719, 191);
+        txtObs.Location = new Point(719, 185);
         txtObs.MaxLength = 240;
         txtObs.Multiline = true;
         txtObs.Name = "txtObs";
@@ -159,7 +159,7 @@ partial class FormCadFornecedores
         txtEstado.BorderSize = 2;
         txtEstado.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtEstado.ForeColor = Color.White;
-        txtEstado.Location = new Point(407, 496);
+        txtEstado.Location = new Point(407, 490);
         txtEstado.MaxLength = 2;
         txtEstado.Multiline = false;
         txtEstado.Name = "txtEstado";
@@ -183,7 +183,7 @@ partial class FormCadFornecedores
         txtComplemento.BorderSize = 2;
         txtComplemento.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtComplemento.ForeColor = Color.White;
-        txtComplemento.Location = new Point(407, 435);
+        txtComplemento.Location = new Point(407, 429);
         txtComplemento.MaxLength = 20;
         txtComplemento.Multiline = false;
         txtComplemento.Name = "txtComplemento";
@@ -207,7 +207,7 @@ partial class FormCadFornecedores
         txtNumero.BorderSize = 2;
         txtNumero.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtNumero.ForeColor = Color.White;
-        txtNumero.Location = new Point(407, 374);
+        txtNumero.Location = new Point(407, 368);
         txtNumero.MaxLength = 5;
         txtNumero.Multiline = false;
         txtNumero.Name = "txtNumero";
@@ -231,7 +231,7 @@ partial class FormCadFornecedores
         txtCidade.BorderSize = 2;
         txtCidade.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtCidade.ForeColor = Color.White;
-        txtCidade.Location = new Point(407, 313);
+        txtCidade.Location = new Point(407, 307);
         txtCidade.MaxLength = 100;
         txtCidade.Multiline = false;
         txtCidade.Name = "txtCidade";
@@ -255,7 +255,7 @@ partial class FormCadFornecedores
         txtBairro.BorderSize = 2;
         txtBairro.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtBairro.ForeColor = Color.White;
-        txtBairro.Location = new Point(407, 252);
+        txtBairro.Location = new Point(407, 246);
         txtBairro.MaxLength = 100;
         txtBairro.Multiline = false;
         txtBairro.Name = "txtBairro";
@@ -279,7 +279,7 @@ partial class FormCadFornecedores
         txtRua.BorderSize = 2;
         txtRua.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtRua.ForeColor = Color.White;
-        txtRua.Location = new Point(407, 191);
+        txtRua.Location = new Point(407, 185);
         txtRua.MaxLength = 100;
         txtRua.Multiline = false;
         txtRua.Name = "txtRua";
@@ -303,7 +303,7 @@ partial class FormCadFornecedores
         txtCEP.BorderSize = 2;
         txtCEP.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtCEP.ForeColor = Color.White;
-        txtCEP.Location = new Point(60, 496);
+        txtCEP.Location = new Point(60, 490);
         txtCEP.MaxLength = 10;
         txtCEP.Multiline = false;
         txtCEP.Name = "txtCEP";
@@ -328,7 +328,7 @@ partial class FormCadFornecedores
         txtTelefone.BorderSize = 2;
         txtTelefone.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtTelefone.ForeColor = Color.White;
-        txtTelefone.Location = new Point(60, 435);
+        txtTelefone.Location = new Point(60, 429);
         txtTelefone.MaxLength = 15;
         txtTelefone.Multiline = false;
         txtTelefone.Name = "txtTelefone";
@@ -352,7 +352,7 @@ partial class FormCadFornecedores
         txtEmail.BorderSize = 2;
         txtEmail.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtEmail.ForeColor = Color.White;
-        txtEmail.Location = new Point(60, 374);
+        txtEmail.Location = new Point(60, 368);
         txtEmail.MaxLength = 100;
         txtEmail.Multiline = false;
         txtEmail.Name = "txtEmail";
@@ -376,7 +376,7 @@ partial class FormCadFornecedores
         txtFantasia.BorderSize = 2;
         txtFantasia.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtFantasia.ForeColor = Color.White;
-        txtFantasia.Location = new Point(60, 313);
+        txtFantasia.Location = new Point(60, 307);
         txtFantasia.MaxLength = 100;
         txtFantasia.Multiline = false;
         txtFantasia.Name = "txtFantasia";
@@ -400,7 +400,7 @@ partial class FormCadFornecedores
         txtRazao.BorderSize = 2;
         txtRazao.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtRazao.ForeColor = Color.White;
-        txtRazao.Location = new Point(61, 252);
+        txtRazao.Location = new Point(61, 246);
         txtRazao.MaxLength = 100;
         txtRazao.Multiline = false;
         txtRazao.Name = "txtRazao";
@@ -424,7 +424,7 @@ partial class FormCadFornecedores
         txtCNPJ.BorderSize = 2;
         txtCNPJ.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtCNPJ.ForeColor = Color.White;
-        txtCNPJ.Location = new Point(60, 191);
+        txtCNPJ.Location = new Point(60, 185);
         txtCNPJ.MaxLength = 32767;
         txtCNPJ.Multiline = false;
         txtCNPJ.Name = "txtCNPJ";
@@ -451,7 +451,7 @@ partial class FormCadFornecedores
         btnVoltar.FlatStyle = FlatStyle.Flat;
         btnVoltar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnVoltar.ForeColor = Color.White;
-        btnVoltar.Location = new Point(535, 656);
+        btnVoltar.Location = new Point(535, 650);
         btnVoltar.Name = "btnVoltar";
         btnVoltar.Size = new Size(122, 41);
         btnVoltar.TabIndex = 74;
@@ -473,7 +473,7 @@ partial class FormCadFornecedores
         btnSalvar.FlatStyle = FlatStyle.Flat;
         btnSalvar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnSalvar.ForeColor = Color.White;
-        btnSalvar.Location = new Point(407, 656);
+        btnSalvar.Location = new Point(407, 650);
         btnSalvar.Name = "btnSalvar";
         btnSalvar.Size = new Size(122, 41);
         btnSalvar.TabIndex = 73;
@@ -488,7 +488,7 @@ partial class FormCadFornecedores
         label1.Anchor = AnchorStyles.None;
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI Variable Display Light", 25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        label1.Location = new Point(286, 20);
+        label1.Location = new Point(286, 14);
         label1.Name = "label1";
         label1.Size = new Size(388, 46);
         label1.TabIndex = 76;
@@ -499,7 +499,7 @@ partial class FormCadFornecedores
         label2.Anchor = AnchorStyles.None;
         label2.AutoSize = true;
         label2.Font = new Font("Segoe UI Variable Display", 10F);
-        label2.Location = new Point(75, 174);
+        label2.Location = new Point(75, 168);
         label2.Name = "label2";
         label2.Size = new Size(73, 19);
         label2.TabIndex = 88;
@@ -510,7 +510,7 @@ partial class FormCadFornecedores
         label13.Anchor = AnchorStyles.None;
         label13.AutoSize = true;
         label13.Font = new Font("Segoe UI Variable Display", 10F);
-        label13.Location = new Point(424, 479);
+        label13.Location = new Point(424, 473);
         label13.Name = "label13";
         label13.Size = new Size(50, 19);
         label13.TabIndex = 99;
@@ -521,7 +521,7 @@ partial class FormCadFornecedores
         label12.Anchor = AnchorStyles.None;
         label12.AutoSize = true;
         label12.Font = new Font("Segoe UI Variable Display", 10F);
-        label12.Location = new Point(424, 418);
+        label12.Location = new Point(424, 412);
         label12.Name = "label12";
         label12.Size = new Size(97, 19);
         label12.TabIndex = 98;
@@ -532,7 +532,7 @@ partial class FormCadFornecedores
         label11.Anchor = AnchorStyles.None;
         label11.AutoSize = true;
         label11.Font = new Font("Segoe UI Variable Display", 10F);
-        label11.Location = new Point(424, 357);
+        label11.Location = new Point(424, 351);
         label11.Name = "label11";
         label11.Size = new Size(59, 19);
         label11.TabIndex = 97;
@@ -543,7 +543,7 @@ partial class FormCadFornecedores
         label10.Anchor = AnchorStyles.None;
         label10.AutoSize = true;
         label10.Font = new Font("Segoe UI Variable Display", 10F);
-        label10.Location = new Point(424, 296);
+        label10.Location = new Point(424, 290);
         label10.Name = "label10";
         label10.Size = new Size(52, 19);
         label10.TabIndex = 96;
@@ -554,7 +554,7 @@ partial class FormCadFornecedores
         label9.Anchor = AnchorStyles.None;
         label9.AutoSize = true;
         label9.Font = new Font("Segoe UI Variable Display", 10F);
-        label9.Location = new Point(424, 235);
+        label9.Location = new Point(424, 229);
         label9.Name = "label9";
         label9.Size = new Size(45, 19);
         label9.TabIndex = 95;
@@ -565,7 +565,7 @@ partial class FormCadFornecedores
         label8.Anchor = AnchorStyles.None;
         label8.AutoSize = true;
         label8.Font = new Font("Segoe UI Variable Display", 10F);
-        label8.Location = new Point(424, 174);
+        label8.Location = new Point(424, 168);
         label8.Name = "label8";
         label8.Size = new Size(32, 19);
         label8.TabIndex = 94;
@@ -576,7 +576,7 @@ partial class FormCadFornecedores
         label7.Anchor = AnchorStyles.None;
         label7.AutoSize = true;
         label7.Font = new Font("Segoe UI Variable Display", 10F);
-        label7.Location = new Point(76, 518);
+        label7.Location = new Point(76, 512);
         label7.Name = "label7";
         label7.Size = new Size(34, 19);
         label7.TabIndex = 93;
@@ -587,7 +587,7 @@ partial class FormCadFornecedores
         label6.Anchor = AnchorStyles.None;
         label6.AutoSize = true;
         label6.Font = new Font("Segoe UI Variable Display", 10F);
-        label6.Location = new Point(75, 418);
+        label6.Location = new Point(75, 412);
         label6.Name = "label6";
         label6.Size = new Size(59, 19);
         label6.TabIndex = 92;
@@ -598,7 +598,7 @@ partial class FormCadFornecedores
         label5.Anchor = AnchorStyles.None;
         label5.AutoSize = true;
         label5.Font = new Font("Segoe UI Variable Display", 10F);
-        label5.Location = new Point(75, 357);
+        label5.Location = new Point(75, 351);
         label5.Name = "label5";
         label5.Size = new Size(41, 19);
         label5.TabIndex = 91;
@@ -609,7 +609,7 @@ partial class FormCadFornecedores
         label4.Anchor = AnchorStyles.None;
         label4.AutoSize = true;
         label4.Font = new Font("Segoe UI Variable Display", 10F);
-        label4.Location = new Point(75, 296);
+        label4.Location = new Point(75, 290);
         label4.Name = "label4";
         label4.Size = new Size(99, 19);
         label4.TabIndex = 90;
@@ -620,7 +620,7 @@ partial class FormCadFornecedores
         label3.Anchor = AnchorStyles.None;
         label3.AutoSize = true;
         label3.Font = new Font("Segoe UI Variable Display", 10F);
-        label3.Location = new Point(75, 235);
+        label3.Location = new Point(75, 229);
         label3.Name = "label3";
         label3.Size = new Size(84, 19);
         label3.TabIndex = 89;
@@ -631,7 +631,7 @@ partial class FormCadFornecedores
         label14.Anchor = AnchorStyles.None;
         label14.AutoSize = true;
         label14.Font = new Font("Segoe UI Variable Display", 10F);
-        label14.Location = new Point(736, 174);
+        label14.Location = new Point(736, 168);
         label14.Name = "label14";
         label14.Size = new Size(87, 19);
         label14.TabIndex = 101;
@@ -642,7 +642,7 @@ partial class FormCadFornecedores
         label15.Anchor = AnchorStyles.None;
         label15.AutoSize = true;
         label15.Font = new Font("Segoe UI Variable Display", 10F);
-        label15.Location = new Point(75, 479);
+        label15.Location = new Point(75, 473);
         label15.Name = "label15";
         label15.Size = new Size(34, 19);
         label15.TabIndex = 102;
@@ -653,8 +653,8 @@ partial class FormCadFornecedores
         AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1000, 744);
-        ControlBox = false;
+        ClientSize = new Size(1000, 724);
+        CloseButtonVisible = false;
         Controls.Add(btnAtivaInativa);
         Controls.Add(txtObs);
         Controls.Add(btnBuscaCep);
@@ -688,6 +688,8 @@ partial class FormCadFornecedores
         Controls.Add(label3);
         Controls.Add(label14);
         Controls.Add(label15);
+        IconSize = new Size(0, 0);
+        MinimizeBox = false;
         MinimumSize = new Size(1024, 768);
         Name = "FormCadFornecedores";
         StartPosition = FormStartPosition.CenterParent;

@@ -95,12 +95,13 @@ public partial class FormUsuarios : FormBase2
 
     private void btnNovo_Click(object sender, EventArgs e)
     {
-        // Abre o form de cadastro de usuário
+        // Abre o form de cadastro de usuário
         FormCadUsuarios formCadUsuarios = new FormCadUsuarios();
-        formCadUsuarios.ShowDialog();
 
-        // Atualiza a lista
-        PreencheGrid();
+        // Adiciona o evento para executar PreencheGrid quando o FormCadUsuarios for fechado
+        formCadUsuarios.FormClosed += (s, args) => PreencheGrid();
+
+        formCadUsuarios.Show();
     }
 
     private void cbInativos_CheckedChanged(object sender, EventArgs e)

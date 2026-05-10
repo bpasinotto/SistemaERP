@@ -281,10 +281,11 @@ partial class FormAlteraUsuarios
         // 
         // FormAlteraUsuarios
         // 
+        AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1008, 729);
-        ControlBox = false;
+        ClientSize = new Size(1000, 724);
+        CloseButtonVisible = false;
         Controls.Add(btnAtivaInativa);
         Controls.Add(lblSenhaInvalida);
         Controls.Add(lblUsuarioInvalido);
@@ -299,10 +300,15 @@ partial class FormAlteraUsuarios
         Controls.Add(label3);
         Controls.Add(label4);
         Controls.Add(label2);
+        IconSize = new Size(0, 0);
+        MinimizeBox = false;
         MinimumSize = new Size(1024, 768);
         Name = "FormAlteraUsuarios";
+        Style.InactiveShadowOpacity = 0;
         Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
         Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+        Style.ShadowOpacity = 0;
+        Style.TitleBar.BackColor = Color.WhiteSmoke;
         Text = " ";
         WindowState = FormWindowState.Maximized;
         ResumeLayout(false);

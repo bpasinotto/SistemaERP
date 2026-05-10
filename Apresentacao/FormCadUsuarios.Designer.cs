@@ -266,10 +266,11 @@ partial class FormCadUsuarios
         // 
         // FormCadUsuarios
         // 
+        AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1008, 729);
-        ControlBox = false;
+        ClientSize = new Size(1000, 724);
+        CloseButtonVisible = false;
         Controls.Add(lblSenhaInvalida);
         Controls.Add(lblUsuarioInvalido);
         Controls.Add(txtSenha);
@@ -283,12 +284,17 @@ partial class FormCadUsuarios
         Controls.Add(label3);
         Controls.Add(label4);
         Controls.Add(label2);
+        IconSize = new Size(0, 0);
+        MinimizeBox = false;
         MinimumSize = new Size(1024, 768);
         Name = "FormCadUsuarios";
         StartPosition = FormStartPosition.CenterParent;
+        Style.InactiveShadowOpacity = 0;
         Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
         Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
-        Text = " ";
+        Style.ShadowOpacity = 0;
+        Style.TitleBar.BackColor = Color.WhiteSmoke;
+        Text = " Cadastro de Usuários";
         WindowState = FormWindowState.Maximized;
         Load += FormCadUsuarios_Load;
         ResumeLayout(false);

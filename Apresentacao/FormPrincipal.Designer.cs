@@ -32,10 +32,9 @@ partial class FormPrincipal
         btnFornecedores = new SistemaERP.RJControls.RJButton();
         btnUsuarios = new SistemaERP.RJControls.RJButton();
         btnTrocarUsuario = new SistemaERP.RJControls.RJButton();
-        btnConsultaVendas = new SistemaERP.RJControls.RJButton();
         btnSair = new SistemaERP.RJControls.RJButton();
         btnInicio = new SistemaERP.RJControls.RJButton();
-        btnVender = new SistemaERP.RJControls.RJButton();
+        btnVendas = new SistemaERP.RJControls.RJButton();
         pageSizeControl1 = new Syncfusion.Windows.Forms.Diagram.PageSizeControl();
         btnProdutos = new SistemaERP.RJControls.RJButton();
         btnEstoque = new SistemaERP.RJControls.RJButton();
@@ -55,10 +54,9 @@ partial class FormPrincipal
         pnTopo.Controls.Add(btnFornecedores);
         pnTopo.Controls.Add(btnUsuarios);
         pnTopo.Controls.Add(btnTrocarUsuario);
-        pnTopo.Controls.Add(btnConsultaVendas);
         pnTopo.Controls.Add(btnSair);
         pnTopo.Controls.Add(btnInicio);
-        pnTopo.Controls.Add(btnVender);
+        pnTopo.Controls.Add(btnVendas);
         pnTopo.Controls.Add(pageSizeControl1);
         pnTopo.Controls.Add(btnProdutos);
         pnTopo.Controls.Add(btnEstoque);
@@ -81,7 +79,7 @@ partial class FormPrincipal
         btnFornecedores.FlatStyle = FlatStyle.Flat;
         btnFornecedores.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnFornecedores.ForeColor = Color.Black;
-        btnFornecedores.Location = new Point(699, 15);
+        btnFornecedores.Location = new Point(547, 15);
         btnFornecedores.Name = "btnFornecedores";
         btnFornecedores.Size = new Size(119, 41);
         btnFornecedores.TabIndex = 26;
@@ -102,7 +100,7 @@ partial class FormPrincipal
         btnUsuarios.FlatStyle = FlatStyle.Flat;
         btnUsuarios.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnUsuarios.ForeColor = Color.Black;
-        btnUsuarios.Location = new Point(606, 15);
+        btnUsuarios.Location = new Point(454, 15);
         btnUsuarios.Name = "btnUsuarios";
         btnUsuarios.Size = new Size(87, 41);
         btnUsuarios.TabIndex = 25;
@@ -131,26 +129,6 @@ partial class FormPrincipal
         btnTrocarUsuario.TextColor = Color.White;
         btnTrocarUsuario.UseVisualStyleBackColor = false;
         btnTrocarUsuario.Click += btnTrocarUsuario_Click;
-        // 
-        // btnConsultaVendas
-        // 
-        btnConsultaVendas.BackColor = Color.LightGray;
-        btnConsultaVendas.BackgroundColor = Color.LightGray;
-        btnConsultaVendas.BorderColor = Color.Empty;
-        btnConsultaVendas.BorderRadius = 20;
-        btnConsultaVendas.BorderSize = 0;
-        btnConsultaVendas.FlatAppearance.BorderSize = 0;
-        btnConsultaVendas.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
-        btnConsultaVendas.FlatStyle = FlatStyle.Flat;
-        btnConsultaVendas.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnConsultaVendas.ForeColor = Color.Black;
-        btnConsultaVendas.Location = new Point(364, 15);
-        btnConsultaVendas.Name = "btnConsultaVendas";
-        btnConsultaVendas.Size = new Size(146, 41);
-        btnConsultaVendas.TabIndex = 24;
-        btnConsultaVendas.Text = "Consultar Vendas";
-        btnConsultaVendas.TextColor = Color.Black;
-        btnConsultaVendas.UseVisualStyleBackColor = false;
         // 
         // btnSair
         // 
@@ -194,25 +172,26 @@ partial class FormPrincipal
         btnInicio.UseVisualStyleBackColor = false;
         btnInicio.Click += btnInicio_Click;
         // 
-        // btnVender
+        // btnVendas
         // 
-        btnVender.BackColor = Color.LightGray;
-        btnVender.BackgroundColor = Color.LightGray;
-        btnVender.BorderColor = Color.Empty;
-        btnVender.BorderRadius = 20;
-        btnVender.BorderSize = 0;
-        btnVender.FlatAppearance.BorderSize = 0;
-        btnVender.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
-        btnVender.FlatStyle = FlatStyle.Flat;
-        btnVender.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        btnVender.ForeColor = Color.Black;
-        btnVender.Location = new Point(281, 15);
-        btnVender.Name = "btnVender";
-        btnVender.Size = new Size(77, 41);
-        btnVender.TabIndex = 22;
-        btnVender.Text = "Vender";
-        btnVender.TextColor = Color.Black;
-        btnVender.UseVisualStyleBackColor = false;
+        btnVendas.BackColor = Color.LightGray;
+        btnVendas.BackgroundColor = Color.LightGray;
+        btnVendas.BorderColor = Color.Empty;
+        btnVendas.BorderRadius = 20;
+        btnVendas.BorderSize = 0;
+        btnVendas.FlatAppearance.BorderSize = 0;
+        btnVendas.FlatAppearance.MouseOverBackColor = Color.FromArgb(2, 89, 89);
+        btnVendas.FlatStyle = FlatStyle.Flat;
+        btnVendas.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnVendas.ForeColor = Color.Black;
+        btnVendas.Location = new Point(281, 15);
+        btnVendas.Name = "btnVendas";
+        btnVendas.Size = new Size(77, 41);
+        btnVendas.TabIndex = 22;
+        btnVendas.Text = "Vendas";
+        btnVendas.TextColor = Color.Black;
+        btnVendas.UseVisualStyleBackColor = false;
+        btnVendas.Click += btnVendas_Click;
         // 
         // pageSizeControl1
         // 
@@ -255,7 +234,7 @@ partial class FormPrincipal
         btnEstoque.FlatStyle = FlatStyle.Flat;
         btnEstoque.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEstoque.ForeColor = Color.Black;
-        btnEstoque.Location = new Point(516, 15);
+        btnEstoque.Location = new Point(364, 15);
         btnEstoque.Name = "btnEstoque";
         btnEstoque.Size = new Size(84, 41);
         btnEstoque.TabIndex = 23;
@@ -319,6 +298,7 @@ partial class FormPrincipal
         // 
         cbTema.Anchor = AnchorStyles.Right;
         cbTema.FormattingEnabled = true;
+        cbTema.Items.AddRange(new object[] { "Claro", "Escuro" });
         cbTema.Location = new Point(894, 2);
         cbTema.Name = "cbTema";
         cbTema.Size = new Size(90, 23);
@@ -355,6 +335,7 @@ partial class FormPrincipal
         Style.TitleBar.BackColor = Color.WhiteSmoke;
         Text = "PasiWare";
         WindowState = FormWindowState.Maximized;
+        FormClosed += FormPrincipal_FormClosed;
         Load += FormPrincipal_Load;
         pnTopo.ResumeLayout(false);
         pnBaixo.ResumeLayout(false);
@@ -366,12 +347,11 @@ partial class FormPrincipal
 
     private Panel pnTopo;
     private Panel pnMeio;
-    private RJControls.RJButton btnVender;
+    private RJControls.RJButton btnVendas;
     private RJControls.RJButton btnClientes;
     private RJControls.RJButton btnProdutos;
     private RJControls.RJButton btnInicio;
     private RJControls.RJButton btnEstoque;
-    private RJControls.RJButton btnConsultaVendas;
     private Syncfusion.Windows.Forms.Diagram.PageSizeControl pageSizeControl1;
     private RJControls.RJButton btnUsuarios;
     private RJControls.RJButton btnSair;

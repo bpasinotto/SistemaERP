@@ -344,7 +344,7 @@ partial class FormCadProdutos
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1000, 724);
-        ControlBox = false;
+        CloseButtonVisible = false;
         Controls.Add(lblDataCadastro);
         Controls.Add(label8);
         Controls.Add(cbFornecedor);
@@ -363,6 +363,8 @@ partial class FormCadProdutos
         Controls.Add(cbUN);
         Controls.Add(label6);
         Controls.Add(label7);
+        IconSize = new Size(0, 0);
+        MinimizeBox = false;
         MinimumSize = new Size(1024, 768);
         Name = "FormCadProdutos";
         StartPosition = FormStartPosition.CenterParent;

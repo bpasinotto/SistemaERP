@@ -36,6 +36,7 @@ partial class FormClientes
         cbInativos = new CheckBox();
         pnMeio = new Panel();
         dgClientes = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+        btnSelecionar = new SistemaERP.RJControls.RJButton();
         pnTopo.SuspendLayout();
         pnMeio.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dgClientes).BeginInit();
@@ -43,15 +44,16 @@ partial class FormClientes
         // 
         // pnTopo
         // 
+        pnTopo.Controls.Add(btnSelecionar);
         pnTopo.Controls.Add(txtPesquisa);
         pnTopo.Controls.Add(txtCNPJ);
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Controls.Add(cbInativos);
         pnTopo.Dock = DockStyle.Top;
-        pnTopo.Location = new Point(0, 0);
+        pnTopo.Location = new Point(2, 2);
         pnTopo.Name = "pnTopo";
-        pnTopo.Size = new Size(1024, 68);
+        pnTopo.Size = new Size(1004, 68);
         pnTopo.TabIndex = 28;
         // 
         // txtPesquisa
@@ -88,7 +90,7 @@ partial class FormClientes
         txtCNPJ.BorderSize = 2;
         txtCNPJ.Font = new Font("Segoe UI Variable Display", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         txtCNPJ.ForeColor = Color.White;
-        txtCNPJ.Location = new Point(54, -453);
+        txtCNPJ.Location = new Point(44, -453);
         txtCNPJ.MaxLength = 32767;
         txtCNPJ.Multiline = false;
         txtCNPJ.Name = "txtCNPJ";
@@ -114,7 +116,7 @@ partial class FormClientes
         btnNovo.FlatStyle = FlatStyle.Flat;
         btnNovo.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnNovo.ForeColor = Color.White;
-        btnNovo.Location = new Point(940, 12);
+        btnNovo.Location = new Point(920, 12);
         btnNovo.Name = "btnNovo";
         btnNovo.Size = new Size(72, 41);
         btnNovo.TabIndex = 35;
@@ -135,7 +137,7 @@ partial class FormClientes
         btnEditar.FlatStyle = FlatStyle.Flat;
         btnEditar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
         btnEditar.ForeColor = Color.White;
-        btnEditar.Location = new Point(861, 12);
+        btnEditar.Location = new Point(841, 12);
         btnEditar.Name = "btnEditar";
         btnEditar.Size = new Size(73, 41);
         btnEditar.TabIndex = 36;
@@ -160,9 +162,9 @@ partial class FormClientes
         // 
         pnMeio.Controls.Add(dgClientes);
         pnMeio.Dock = DockStyle.Fill;
-        pnMeio.Location = new Point(0, 68);
+        pnMeio.Location = new Point(2, 70);
         pnMeio.Name = "pnMeio";
-        pnMeio.Size = new Size(1024, 700);
+        pnMeio.Size = new Size(1004, 680);
         pnMeio.TabIndex = 29;
         // 
         // dgClientes
@@ -176,28 +178,48 @@ partial class FormClientes
         dgClientes.ForeColor = Color.Black;
         dgClientes.Location = new Point(0, 0);
         dgClientes.Name = "dgClientes";
-        dgClientes.Size = new Size(1024, 700);
+        dgClientes.Size = new Size(1004, 680);
         dgClientes.Style.BorderColor = Color.FromArgb(100, 100, 100);
-        dgClientes.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
-        dgClientes.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
-        dgClientes.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
-        dgClientes.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
         dgClientes.TabIndex = 0;
         dgClientes.Text = "dgUsuarios";
         // 
+        // btnSelecionar
+        // 
+        btnSelecionar.Anchor = AnchorStyles.Right;
+        btnSelecionar.BackColor = Color.FromArgb(2, 89, 89);
+        btnSelecionar.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnSelecionar.BorderColor = Color.Empty;
+        btnSelecionar.BorderRadius = 20;
+        btnSelecionar.BorderSize = 0;
+        btnSelecionar.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnSelecionar.FlatStyle = FlatStyle.Flat;
+        btnSelecionar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnSelecionar.ForeColor = Color.White;
+        btnSelecionar.Location = new Point(730, 12);
+        btnSelecionar.Name = "btnSelecionar";
+        btnSelecionar.Size = new Size(105, 41);
+        btnSelecionar.TabIndex = 38;
+        btnSelecionar.Text = "Selecionar";
+        btnSelecionar.TextColor = Color.White;
+        btnSelecionar.UseVisualStyleBackColor = false;
+        // 
         // FormClientes
         // 
+        AllowRoundedCorners = true;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.WhiteSmoke;
-        ClientSize = new Size(1024, 768);
-        ControlBox = false;
+        ClientSize = new Size(1008, 752);
         Controls.Add(pnMeio);
         Controls.Add(pnTopo);
-        FormBorderStyle = FormBorderStyle.None;
         Name = "FormClientes";
         StartPosition = FormStartPosition.CenterParent;
-        WindowState = FormWindowState.Maximized;
+        Style.BackColor = Color.WhiteSmoke;
+        Style.InactiveShadowOpacity = 0;
+        Style.MdiChild.IconHorizontalAlignment = HorizontalAlignment.Center;
+        Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
+        Style.ShadowOpacity = 0;
+        Style.TitleBar.BackColor = Color.WhiteSmoke;
         Load += FormClientes_Load;
         pnTopo.ResumeLayout(false);
         pnTopo.PerformLayout();
@@ -216,4 +238,5 @@ partial class FormClientes
     private Syncfusion.WinForms.DataGrid.SfDataGrid dgClientes;
     private RJControls.RJTextBox txtCNPJ;
     private RJControls.RJTextBox txtPesquisa;
+    private RJControls.RJButton btnSelecionar;
 }

@@ -16,6 +16,7 @@ public partial class FormPrincipal : FormBase
     FormFornecedores formFornecedores = new FormFornecedores();
     FormInicio formInicio = new FormInicio();
     FormProdutos formProdutos = new FormProdutos();
+    FormVendas formVendas = new FormVendas();
     int Id = 0;
 
     public FormPrincipal()
@@ -33,8 +34,8 @@ public partial class FormPrincipal : FormBase
 
     private void FormPrincipal_Load(object sender, EventArgs e)
     {
-        cbTema.Items.Add("Claro");
-        cbTema.Items.Add("Escuro");
+        //cbTema.Items.Add("Claro");
+        //cbTema.Items.Add("Escuro");
 
         // Carregar o tema salvo
         string savedTheme = Properties.Settings.Default.Tema;
@@ -145,8 +146,7 @@ public partial class FormPrincipal : FormBase
         btnInicio.ForeColor = Color.Black;
         btnProdutos.ForeColor = Color.Black;
         btnClientes.ForeColor = Color.Black;
-        btnVender.ForeColor = Color.Black;
-        btnConsultaVendas.ForeColor = Color.Black;
+        btnVendas.ForeColor = Color.Black;
         btnEstoque.ForeColor = Color.Black;
         btnUsuarios.ForeColor = Color.Black;
         btnFornecedores.ForeColor = Color.Black;
@@ -155,8 +155,7 @@ public partial class FormPrincipal : FormBase
         btnInicio.BackColor = Color.LightGray;
         btnProdutos.BackColor = Color.LightGray;
         btnClientes.BackColor = Color.LightGray;
-        btnVender.BackColor = Color.LightGray;
-        btnConsultaVendas.BackColor = Color.LightGray;
+        btnVendas.BackColor = Color.LightGray;
         btnEstoque.BackColor = Color.LightGray;
         btnUsuarios.BackColor = Color.LightGray;
         btnFornecedores.BackColor = Color.LightGray;
@@ -180,6 +179,9 @@ public partial class FormPrincipal : FormBase
         //Define cor da letra para branco
         btnClientes.ForeColor = Color.White;
 
+        // Remove a barra de título ao abrir do FormPrincipal
+        formClientes.FormBorderStyle = FormBorderStyle.None;
+        formClientes.ControlBox = false;
 
         formClientes.TopLevel = false;
         pnMeio.Controls.Add(formClientes);
@@ -237,4 +239,32 @@ public partial class FormPrincipal : FormBase
         //Expande o FormIncio para ocupar todo o pnMeio
         formProdutos.Dock = DockStyle.Fill;
     }
+
+    private void btnVendas_Click(object sender, EventArgs e)
+    {
+        //Limpa o pnMeio do FormPrincipal
+        pnMeio.Controls.Clear();
+
+        //Define a cor de todos os botões como LightGray
+        BotoesCinza();
+
+        //Define somente a cor do botão selecionado para verde
+        btnVendas.BackColor = Color.FromArgb(2, 89, 89);
+        //Define cor da letra para branco
+        btnVendas.ForeColor = Color.White;
+
+
+        formVendas.TopLevel = false;
+        pnMeio.Controls.Add(formVendas);
+        formVendas.Show();
+
+        //Expande o FormIncio para ocupar todo o pnMeio
+        formVendas.Dock = DockStyle.Fill;
+    }
+
+    private void FormPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        Application.Exit();
+    }
+    
 }
