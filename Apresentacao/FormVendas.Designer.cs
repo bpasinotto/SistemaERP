@@ -36,7 +36,11 @@ partial class FormVendas
         label1 = new Label();
         sfDateTimeEdit1 = new Syncfusion.WinForms.Input.SfDateTimeEdit();
         txtPesquisa = new SistemaERP.RJControls.RJTextBox();
+        pnMeio = new Panel();
+        dgVendas = new Syncfusion.WinForms.DataGrid.SfDataGrid();
         pnTopo.SuspendLayout();
+        pnMeio.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dgVendas).BeginInit();
         SuspendLayout();
         // 
         // pnTopo
@@ -94,6 +98,7 @@ partial class FormVendas
         btnEditar.Text = "Editar";
         btnEditar.TextColor = Color.White;
         btnEditar.UseVisualStyleBackColor = false;
+        btnEditar.Click += btnEditar_Click;
         // 
         // btnConsultar
         // 
@@ -113,6 +118,7 @@ partial class FormVendas
         btnConsultar.Text = "Consultar";
         btnConsultar.TextColor = Color.White;
         btnConsultar.UseVisualStyleBackColor = false;
+        btnConsultar.Click += btnConsultar_Click;
         // 
         // sfDateTimeEdit2
         // 
@@ -174,6 +180,36 @@ partial class FormVendas
         txtPesquisa.TabIndex = 33;
         txtPesquisa.Texts = "";
         txtPesquisa.UnderlinedStyle = false;
+        txtPesquisa._TextChanged += txtPesquisa__TextChanged;
+        // 
+        // pnMeio
+        // 
+        pnMeio.Controls.Add(dgVendas);
+        pnMeio.Dock = DockStyle.Fill;
+        pnMeio.Location = new Point(0, 68);
+        pnMeio.Name = "pnMeio";
+        pnMeio.Size = new Size(996, 550);
+        pnMeio.TabIndex = 30;
+        // 
+        // dgVendas
+        // 
+        dgVendas.AccessibleName = "Table";
+        dgVendas.AllowEditing = false;
+        dgVendas.AllowFiltering = true;
+        dgVendas.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
+        dgVendas.BackColor = Color.White;
+        dgVendas.Dock = DockStyle.Fill;
+        dgVendas.ForeColor = Color.Black;
+        dgVendas.Location = new Point(0, 0);
+        dgVendas.Name = "dgVendas";
+        dgVendas.Size = new Size(996, 550);
+        dgVendas.Style.BorderColor = Color.FromArgb(100, 100, 100);
+        dgVendas.Style.CheckBoxStyle.CheckedBackColor = Color.FromArgb(0, 120, 215);
+        dgVendas.Style.CheckBoxStyle.CheckedBorderColor = Color.FromArgb(0, 120, 215);
+        dgVendas.Style.CheckBoxStyle.IndeterminateBorderColor = Color.FromArgb(0, 120, 215);
+        dgVendas.Style.HyperlinkStyle.DefaultLinkColor = Color.FromArgb(0, 120, 215);
+        dgVendas.TabIndex = 0;
+        dgVendas.Text = "dgVendas";
         // 
         // FormVendas
         // 
@@ -181,6 +217,7 @@ partial class FormVendas
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(996, 618);
         ControlBox = false;
+        Controls.Add(pnMeio);
         Controls.Add(pnTopo);
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormVendas";
@@ -188,6 +225,8 @@ partial class FormVendas
         Load += FormVendas_Load;
         pnTopo.ResumeLayout(false);
         pnTopo.PerformLayout();
+        pnMeio.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dgVendas).EndInit();
         ResumeLayout(false);
     }
 
@@ -201,4 +240,6 @@ partial class FormVendas
     private RJControls.RJButton btnConsultar;
     private RJControls.RJButton btnNovo;
     private RJControls.RJButton btnEditar;
+    private Panel pnMeio;
+    private Syncfusion.WinForms.DataGrid.SfDataGrid dgVendas;
 }

@@ -71,6 +71,7 @@ public partial class FormPrincipal : FormBase
         formClientes.MudaCorGrid(selectedTheme);
         formFornecedores.MudaCorGrid(selectedTheme);
         formProdutos.MudaCorGrid(selectedTheme);
+        formVendas.MudaCorGrid(selectedTheme);
     }
 
     private void btnUsuarios_Click(object sender, EventArgs e)

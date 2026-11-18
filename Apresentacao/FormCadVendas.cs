@@ -200,11 +200,20 @@ public partial class FormCadVendas : FormBase
             txtCodCliente.Texts = venda.IdCliente.ToString();
             lblNomeCliente.Text = venda.NomeCliente;
 
-            cbVendedor.SelectedValue = venda.IdUsuario;
-            if (cbVendedor.SelectedIndex == -1 && !string.IsNullOrWhiteSpace(venda.NomeUsuario))
+            if (cbVendedor.DataSource is DataTable dtUsuarios &&
+                !dtUsuarios.AsEnumerable().Any(r => Convert.ToInt32(r["Id"]) == venda.IdUsuario))
             {
-                cbVendedor.Text = venda.NomeUsuario;
+                DataRow novaLinha = dtUsuarios.NewRow();
+                novaLinha["Id"] = venda.IdUsuario;
+                novaLinha["Nome"] = venda.NomeUsuario;
+                if (dtUsuarios.Columns.Contains("Email"))
+                {
+                    novaLinha["Email"] = string.Empty;
+                }
+                dtUsuarios.Rows.Add(novaLinha);
             }
+
+            cbVendedor.SelectedValue = venda.IdUsuario;
 
             _itensVenda.Clear();
             _itensVenda.AddRange(venda.Itens);
@@ -955,6 +964,7 @@ public partial class FormCadVendas : FormBase
             if (sucesso)
             {
                 new FormMensagem("Sucesso", "Venda registrada com sucesso!").ShowDialog();
+                DialogResult = DialogResult.OK;
                 Close();
             }
             else
