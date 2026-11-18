@@ -45,7 +45,7 @@ internal static class Program
             formCarregamento.Close();
         }
 
-        int login = 1; // Ativar a tela de login
+        int login = 0; // Ativar a tela de login
         if (login == 1)
         {
             // Executar o formulário de login
@@ -94,10 +94,9 @@ internal static class Program
                 System.Diagnostics.Debug.WriteLine("Timeout ao verificar licença");
                 return false;
             }
-
-            bool resultado = tarefa;
-            System.Diagnostics.Debug.WriteLine($"Resultado da verificação: {resultado}");
-            return resultado;
+                        
+            System.Diagnostics.Debug.WriteLine($"Resultado da verificação: {tarefa}");
+            return tarefa;
         }
         catch (AggregateException aex)
         {

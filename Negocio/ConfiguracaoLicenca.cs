@@ -13,7 +13,7 @@ internal static class ConfiguracaoLicenca
     /// <summary>
     /// Timeout em segundos para verificação de licença
     /// </summary>
-    public static int TimeoutSegundos { get; set; } = 30;
+    public static int TimeoutSegundos { get; set; } = 60;
 
     /// <summary>
     /// URL da API de Controle de Licença
