@@ -53,7 +53,7 @@ namespace SistemaERP.Apresentacao
             decimal preco = 0; // Campo de texto para o preço
             decimal custo = 0; // Campo de texto para o custo
             string un = cbUN.Text; // Campo de texto para a unidade de medida
-            int estoque = 0; // Campo de texto para o estoque                            
+            decimal estoque = 0; // Campo de texto para o estoque                            
             int fornecedor = Convert.ToInt32(cbFornecedor.SelectedValue); // Id do fornecedor selecionado
                                    
 
@@ -75,16 +75,21 @@ namespace SistemaERP.Apresentacao
                 new FormMensagem("Atenção", "O custo do produto não pode ser negativo.").ShowDialog();
                 return;
             }
-            // Validação Estoque
-            if (!int.TryParse(txtEstoque.Texts, out estoque) || estoque < 0)
-            {
-                new FormMensagem("Atenção", "O estoque não pode ser negativo.").ShowDialog();
-                return;
-            }
             // Validação Unidade de Medida
             if (string.IsNullOrWhiteSpace(un))
             {
                 new FormMensagem("Atenção", "A unidade de medida é obrigatória.").ShowDialog();
+                return;
+            }
+            // Validação Estoque
+            if (!decimal.TryParse(txtEstoque.Texts, out estoque) || estoque < 0)
+            {
+                new FormMensagem("Atenção", "O estoque não pode ser negativo.").ShowDialog();
+                return;
+            }
+            if (!ProdutosServico.ValidarQuantidadePorUnidade(estoque, un, permitirZero: true, out string erroEstoque))
+            {
+                new FormMensagem("Atenção", erroEstoque).ShowDialog();
                 return;
             }
             // Validação Fornecedor
@@ -169,8 +174,8 @@ namespace SistemaERP.Apresentacao
                     txtNome.Texts = dataRow["Nome"].ToString();
                     txtPreco.Texts = Convert.ToDecimal(dataRow["Preco"]).ToString();
                     txtCusto.Texts = Convert.ToDecimal(dataRow["Custo"]).ToString();
-                    txtEstoque.Texts = Convert.ToInt32(dataRow["Estoque"]).ToString();
                     cbUN.Text = dataRow["Un"].ToString();
+                    txtEstoque.Texts = Convert.ToDecimal(dataRow["Estoque"]).ToString("0.###");
 
                     // Seleciona o fornecedor correspondente no ComboBox  
                     cbFornecedor.SelectedValue = Convert.ToInt32(dataRow["Fornecedor"]);
@@ -190,13 +195,44 @@ namespace SistemaERP.Apresentacao
 
         private void ConfigurarValidacaoCampos()
         {
-            // txtEstoque - Apenas números
+            // txtEstoque - Validação conforme a unidade de medida selecionada (inteiro para UN/CX/PC, até 3 casas decimais para as demais)
             txtEstoque.KeyPress += (sender, e) =>
             {
-                // Permite apenas dígitos numéricos e teclas de controle (como backspace)
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                if (char.IsControl(e.KeyChar))
+                    return;
+
+                bool exigeInteiro = ProdutosServico.UnidadeExigeInteiro(cbUN.Text);
+
+                if (exigeInteiro)
                 {
-                    e.Handled = true;
+                    if (!char.IsDigit(e.KeyChar))
+                    {
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+
+                    if (e.KeyChar == ',' && txtEstoque.Texts.Contains(','))
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+
+                    int indiceVirgula = txtEstoque.Texts.IndexOf(',');
+                    if (char.IsDigit(e.KeyChar) && indiceVirgula >= 0 && txtEstoque.SelectionStart > indiceVirgula)
+                    {
+                        string casasDecimais = txtEstoque.Texts[(indiceVirgula + 1)..];
+                        if (casasDecimais.Length >= 3)
+                        {
+                            e.Handled = true;
+                        }
+                    }
                 }
             };
 

@@ -1,20 +1,84 @@
 ﻿using System.Data;
 using SistemaERP.Negocio;
+using SistemaERP.RJControls;
 
 namespace SistemaERP.Apresentacao
 {
     public partial class FormProdutos : FormBase2
     {
         private DataTable dt;
+        private RJTextBox? txtCodProdutoRef;
+        private bool isBuscaMode = false;
 
         public FormProdutos()
         {
             InitializeComponent();
+            btnSelecionar.Visible = false;
+        }
+
+        // Construtor para modo busca
+        public FormProdutos(RJTextBox txtCodProduto)
+        {
+            InitializeComponent();
+            txtCodProdutoRef = txtCodProduto;
+            isBuscaMode = true;
+            btnSelecionar.Visible = true;
+            cbInativos.Checked = false;
+            cbInativos.Enabled = false;
         }
 
         private void FormProdutos_Load(object sender, EventArgs e)
         {
+            if (isBuscaMode)
+            {
+                cbInativos.Checked = false;
+                cbInativos.Enabled = false;
+                btnSelecionar.Click += BtnSelecionar_Click;
+            }
+
             PreencheGrid();
+        }
+
+        private void BtnSelecionar_Click(object? sender, EventArgs e)
+        {
+            if (cbInativos.Checked)
+            {
+                new FormMensagem("Atenção", "Não é permitido selecionar produtos inativos.").ShowDialog();
+                return;
+            }
+
+            if (txtCodProdutoRef != null && dgProdutos.SelectedItems.Count > 0)
+            {
+                try
+                {
+                    var linhaSelecionada = dgProdutos.SelectedItems[0];
+
+                    if (linhaSelecionada is DataRowView rowView)
+                    {
+                        int idProduto = Convert.ToInt32(rowView["Id"]);
+
+                        var produto = new ProdutosServico().BuscaProdutoPorId(idProduto);
+                        if (produto == null || !Convert.ToBoolean(produto["Ativo"]))
+                        {
+                            new FormMensagem("Atenção", "Não é permitido selecionar um produto inativo.").ShowDialog();
+                            return;
+                        }
+
+                        txtCodProdutoRef.Texts = idProduto.ToString();
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FormMensagem mensagem = new FormMensagem("Erro", $"Erro ao selecionar produto: {ex.Message}");
+                    mensagem.ShowDialog();
+                }
+            }
+            else
+            {
+                FormMensagem mensagem = new FormMensagem("Atenção", "Selecione um produto para continuar.");
+                mensagem.ShowDialog();
+            }
         }
 
         internal void MudaCorGrid(string tema)

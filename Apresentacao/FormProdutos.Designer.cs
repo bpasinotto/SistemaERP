@@ -29,6 +29,7 @@ partial class FormProdutos
     private void InitializeComponent()
     {
         pnTopo = new Panel();
+        btnSelecionar = new SistemaERP.RJControls.RJButton();
         btnNovo = new SistemaERP.RJControls.RJButton();
         btnEditar = new SistemaERP.RJControls.RJButton();
         txtPesquisa = new SistemaERP.RJControls.RJTextBox();
@@ -43,6 +44,7 @@ partial class FormProdutos
         // 
         // pnTopo
         // 
+        pnTopo.Controls.Add(btnSelecionar);
         pnTopo.Controls.Add(btnNovo);
         pnTopo.Controls.Add(btnEditar);
         pnTopo.Controls.Add(txtPesquisa);
@@ -53,6 +55,26 @@ partial class FormProdutos
         pnTopo.Name = "pnTopo";
         pnTopo.Size = new Size(1024, 68);
         pnTopo.TabIndex = 29;
+        // 
+        // btnSelecionar
+        // 
+        btnSelecionar.Anchor = AnchorStyles.Right;
+        btnSelecionar.BackColor = Color.FromArgb(2, 89, 89);
+        btnSelecionar.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnSelecionar.BorderColor = Color.Empty;
+        btnSelecionar.BorderRadius = 20;
+        btnSelecionar.BorderSize = 0;
+        btnSelecionar.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnSelecionar.FlatStyle = FlatStyle.Flat;
+        btnSelecionar.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnSelecionar.ForeColor = Color.White;
+        btnSelecionar.Location = new Point(750, 12);
+        btnSelecionar.Name = "btnSelecionar";
+        btnSelecionar.Size = new Size(105, 41);
+        btnSelecionar.TabIndex = 40;
+        btnSelecionar.Text = "Selecionar";
+        btnSelecionar.TextColor = Color.White;
+        btnSelecionar.UseVisualStyleBackColor = false;
         // 
         // btnNovo
         // 
@@ -214,6 +236,7 @@ partial class FormProdutos
     private CheckBox cbInativos;
     private RJControls.RJButton btnNovo;
     private RJControls.RJButton btnEditar;
+    private RJControls.RJButton btnSelecionar;
     private Panel pnMeio;
     private Syncfusion.WinForms.DataGrid.SfDataGrid dgProdutos;
 }

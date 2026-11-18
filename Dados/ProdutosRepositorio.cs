@@ -9,7 +9,7 @@ namespace SistemaERP.Dados
         private readonly string stringConexao = ConfigurationManager.ConnectionStrings["ComBanco"].ConnectionString;
 
         // Função para inserir um novo produto
-        public bool InsereProduto(string nome, decimal preco, decimal custo, string un, int estoque, int fornecedor)
+        public bool InsereProduto(string nome, decimal preco, decimal custo, string un, decimal estoque, int fornecedor)
         {
             var query = @"INSERT INTO Produtos (Nome, Preco, Custo, Un, Estoque, Fornecedor) 
                               VALUES (@nome, @preco, @custo, @un, @estoque, @fornecedor)";
@@ -19,11 +19,11 @@ namespace SistemaERP.Dados
             {
                 connection.Open();
                 using var command = new SqlCommand(query, connection);
-                command.Parameters.Add(new SqlParameter("@nome", SqlDbType.NVarChar) { Value = nome });
-                command.Parameters.Add(new SqlParameter("@preco", SqlDbType.Decimal) { Value = preco });
-                command.Parameters.Add(new SqlParameter("@custo", SqlDbType.Decimal) { Value = custo });
-                command.Parameters.Add(new SqlParameter("@un", SqlDbType.NVarChar) { Value = un });
-                command.Parameters.Add(new SqlParameter("@estoque", SqlDbType.Int) { Value = estoque });
+                command.Parameters.Add(new SqlParameter("@nome", SqlDbType.NVarChar, 100) { Value = nome });
+                command.Parameters.Add(new SqlParameter("@preco", SqlDbType.Decimal) { Precision = 18, Scale = 2, Value = preco });
+                command.Parameters.Add(new SqlParameter("@custo", SqlDbType.Decimal) { Precision = 18, Scale = 2, Value = custo });
+                command.Parameters.Add(new SqlParameter("@un", SqlDbType.NVarChar, 2) { Value = un });
+                command.Parameters.Add(new SqlParameter("@estoque", SqlDbType.Decimal) { Precision = 18, Scale = 3, Value = estoque });
                 command.Parameters.Add(new SqlParameter("@fornecedor", SqlDbType.Int) { Value = fornecedor });                
 
                 command.ExecuteNonQuery();
@@ -37,7 +37,7 @@ namespace SistemaERP.Dados
         }
 
         // Função para alterar um produto existente
-        public bool AlteraProduto(int id, string nome, decimal preco, decimal custo, string un, int estoque, int fornecedor)
+        public bool AlteraProduto(int id, string nome, decimal preco, decimal custo, string un, decimal estoque, int fornecedor)
         {
             var query = @"UPDATE Produtos 
                               SET Nome = @nome, Preco = @preco, Custo = @custo, Un = @un, Estoque = @estoque, Fornecedor = @fornecedor 
@@ -49,11 +49,11 @@ namespace SistemaERP.Dados
                 connection.Open();
                 using var command = new SqlCommand(query, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = id });
-                command.Parameters.Add(new SqlParameter("@nome", SqlDbType.NVarChar) { Value = nome });
-                command.Parameters.Add(new SqlParameter("@preco", SqlDbType.Decimal) { Value = preco });
-                command.Parameters.Add(new SqlParameter("@custo", SqlDbType.Decimal) { Value = custo });
-                command.Parameters.Add(new SqlParameter("@un", SqlDbType.NVarChar) { Value = un });
-                command.Parameters.Add(new SqlParameter("@estoque", SqlDbType.Int) { Value = estoque });
+                command.Parameters.Add(new SqlParameter("@nome", SqlDbType.NVarChar, 100) { Value = nome });
+                command.Parameters.Add(new SqlParameter("@preco", SqlDbType.Decimal) { Precision = 18, Scale = 2, Value = preco });
+                command.Parameters.Add(new SqlParameter("@custo", SqlDbType.Decimal) { Precision = 18, Scale = 2, Value = custo });
+                command.Parameters.Add(new SqlParameter("@un", SqlDbType.NVarChar, 2) { Value = un });
+                command.Parameters.Add(new SqlParameter("@estoque", SqlDbType.Decimal) { Precision = 18, Scale = 3, Value = estoque });
                 command.Parameters.Add(new SqlParameter("@fornecedor", SqlDbType.Int) { Value = fornecedor });                
 
                 int rowsAffected = command.ExecuteNonQuery();

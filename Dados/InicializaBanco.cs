@@ -212,7 +212,7 @@ public static class Banco
             new { Nome = "Preco", Definicao = "DECIMAL(18,2) NOT NULL" },
             new { Nome = "Custo", Definicao = "DECIMAL(18,2) NOT NULL" },
             new { Nome = "Un", Definicao = "NVARCHAR(2) NOT NULL" },
-            new { Nome = "Estoque", Definicao = "INT NOT NULL" },
+            new { Nome = "Estoque", Definicao = "DECIMAL(18,3) NOT NULL" },
             new { Nome = "Fornecedor", Definicao = "INT NOT NULL" },
             new { Nome = "Ativo", Definicao = "BIT DEFAULT 1 NOT NULL" },
             new { Nome = "DataCadastro", Definicao = "DATETIME DEFAULT GETDATE() NOT NULL" }
@@ -222,6 +222,57 @@ public static class Banco
         {
             VerificarEAdicionarColuna(connection, "Produtos", coluna.Nome, coluna.Definicao);
         }
+
+        MigrarColunaEstoqueProdutos(connection);
+    }
+
+    private static void MigrarColunaEstoqueProdutos(SqlConnection connection)
+    {
+        string migrarEstoqueQuery = @"
+            IF EXISTS (
+                SELECT 1
+                FROM INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_NAME = 'Produtos'
+                  AND COLUMN_NAME = 'Estoque'
+                  AND (DATA_TYPE <> 'decimal' OR ISNULL(NUMERIC_PRECISION, 0) <> 18 OR ISNULL(NUMERIC_SCALE, 0) <> 3)
+            )
+            BEGIN
+                DECLARE @DefaultConstraintName NVARCHAR(256);
+                DECLARE @DefaultDefinition NVARCHAR(MAX);
+                DECLARE @Sql NVARCHAR(MAX);
+
+                -- Verifica se existe Default Constraint vinculada à coluna Estoque
+                SELECT 
+                    @DefaultConstraintName = dc.name,
+                    @DefaultDefinition = dc.definition
+                FROM sys.default_constraints dc
+                INNER JOIN sys.columns c 
+                    ON dc.parent_object_id = c.object_id 
+                   AND dc.parent_column_id = c.column_id
+                WHERE dc.parent_object_id = OBJECT_ID(N'Produtos')
+                  AND c.name = N'Estoque';
+
+                IF @DefaultConstraintName IS NOT NULL
+                BEGIN
+                    SET @Sql = N'ALTER TABLE [Produtos] DROP CONSTRAINT [' + @DefaultConstraintName + N'];';
+                    EXEC sp_executesql @Sql;
+                END
+
+                -- Garante que não existam valores nulos antes de aplicar NOT NULL
+                UPDATE [Produtos] SET [Estoque] = 0 WHERE [Estoque] IS NULL;
+
+                -- Altera o tipo da coluna preservando todos os valores existentes
+                ALTER TABLE [Produtos] ALTER COLUMN [Estoque] DECIMAL(18,3) NOT NULL;
+
+                -- Recria a Default Constraint caso existisse anteriormente
+                IF @DefaultConstraintName IS NOT NULL AND @DefaultDefinition IS NOT NULL
+                BEGIN
+                    SET @Sql = N'ALTER TABLE [Produtos] ADD CONSTRAINT [' + @DefaultConstraintName + N'] DEFAULT ' + @DefaultDefinition + N' FOR [Estoque];';
+                    EXEC sp_executesql @Sql;
+                END
+            END;";
+
+        ExecuteSqlCommand(connection, migrarEstoqueQuery);
     }
 
     private static void VerificarColunasUsuarios(SqlConnection connection)

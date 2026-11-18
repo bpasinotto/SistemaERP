@@ -50,6 +50,9 @@ partial class FormCadVendas
         pnLateral = new Panel();
         dgProdutosVenda = new DataGridView();
         btnBuscaProduto = new FontAwesome.Sharp.IconButton();
+        lblNomeProduto = new Label();
+        btnAdicionarProduto = new SistemaERP.RJControls.RJButton();
+        btnRemoverProduto = new SistemaERP.RJControls.RJButton();
         pnBaixo.SuspendLayout();
         pnLateral.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dgProdutosVenda).BeginInit();
@@ -78,6 +81,7 @@ partial class FormCadVendas
         txtCodCliente.Texts = "";
         txtCodCliente.UnderlinedStyle = false;
         txtCodCliente._TextChanged += txtCodCliente__TextChanged;
+        txtCodCliente.KeyDown += txtCodCliente_KeyDown;
         txtCodCliente.KeyPress += txtCodCliente_KeyPress;
         txtCodCliente.Leave += txtCodCliente_Leave;
         // 
@@ -124,6 +128,9 @@ partial class FormCadVendas
         txtCodProduto.TabIndex = 2;
         txtCodProduto.Texts = "";
         txtCodProduto.UnderlinedStyle = false;
+        txtCodProduto.KeyDown += txtCodProduto_KeyDown;
+        txtCodProduto.KeyPress += txtCodProduto_KeyPress;
+        txtCodProduto.Leave += txtCodProduto_Leave;
         // 
         // label1
         // 
@@ -180,6 +187,10 @@ partial class FormCadVendas
         txtQuantidade.TabIndex = 3;
         txtQuantidade.Texts = "1";
         txtQuantidade.UnderlinedStyle = false;
+        txtQuantidade._TextChanged += txtQuantidade__TextChanged;
+        txtQuantidade.KeyDown += txtQuantidade_KeyDown;
+        txtQuantidade.KeyPress += txtQuantidade_KeyPress;
+        txtQuantidade.Leave += txtQuantidade_Leave;
         // 
         // label3
         // 
@@ -213,6 +224,11 @@ partial class FormCadVendas
         txtPrecoUnit.TabIndex = 4;
         txtPrecoUnit.Texts = "R$: 0,00";
         txtPrecoUnit.UnderlinedStyle = false;
+        txtPrecoUnit._TextChanged += txtPrecoUnit__TextChanged;
+        txtPrecoUnit.Enter += txtPrecoUnit_Enter;
+        txtPrecoUnit.KeyDown += txtPrecoUnit_KeyDown;
+        txtPrecoUnit.KeyPress += txtPrecoUnit_KeyPress;
+        txtPrecoUnit.Leave += txtPrecoUnit_Leave;
         // 
         // label4
         // 
@@ -317,6 +333,7 @@ partial class FormCadVendas
         btnSalvar.Text = "Salvar";
         btnSalvar.TextColor = Color.White;
         btnSalvar.UseVisualStyleBackColor = false;
+        btnSalvar.Click += btnSalvar_Click;
         // 
         // pnBaixo
         // 
@@ -385,6 +402,60 @@ partial class FormCadVendas
         btnBuscaProduto.TabIndex = 100;
         btnBuscaProduto.TabStop = false;
         btnBuscaProduto.UseVisualStyleBackColor = false;
+        btnBuscaProduto.Click += btnBuscaProduto_Click;
+        // 
+        // lblNomeProduto
+        // 
+        lblNomeProduto.AutoSize = true;
+        lblNomeProduto.Font = new Font("Segoe UI Variable Display", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        lblNomeProduto.Location = new Point(85, 280);
+        lblNomeProduto.MaximumSize = new Size(390, 22);
+        lblNomeProduto.Name = "lblNomeProduto";
+        lblNomeProduto.Size = new Size(134, 20);
+        lblNomeProduto.TabIndex = 102;
+        lblNomeProduto.Text = "Nome do Produto";
+        // 
+        // btnAdicionarProduto
+        // 
+        btnAdicionarProduto.BackColor = Color.FromArgb(2, 89, 89);
+        btnAdicionarProduto.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnAdicionarProduto.BorderColor = Color.Empty;
+        btnAdicionarProduto.BorderRadius = 20;
+        btnAdicionarProduto.BorderSize = 0;
+        btnAdicionarProduto.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnAdicionarProduto.FlatStyle = FlatStyle.Flat;
+        btnAdicionarProduto.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnAdicionarProduto.ForeColor = Color.White;
+        btnAdicionarProduto.Location = new Point(70, 548);
+        btnAdicionarProduto.Name = "btnAdicionarProduto";
+        btnAdicionarProduto.Size = new Size(122, 41);
+        btnAdicionarProduto.TabIndex = 103;
+        btnAdicionarProduto.TabStop = false;
+        btnAdicionarProduto.Text = "Adicionar";
+        btnAdicionarProduto.TextColor = Color.White;
+        btnAdicionarProduto.UseVisualStyleBackColor = false;
+        btnAdicionarProduto.Click += btnAdicionarProduto_Click;
+        // 
+        // btnRemoverProduto
+        // 
+        btnRemoverProduto.BackColor = Color.FromArgb(2, 89, 89);
+        btnRemoverProduto.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnRemoverProduto.BorderColor = Color.Empty;
+        btnRemoverProduto.BorderRadius = 20;
+        btnRemoverProduto.BorderSize = 0;
+        btnRemoverProduto.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnRemoverProduto.FlatStyle = FlatStyle.Flat;
+        btnRemoverProduto.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnRemoverProduto.ForeColor = Color.White;
+        btnRemoverProduto.Location = new Point(203, 548);
+        btnRemoverProduto.Name = "btnRemoverProduto";
+        btnRemoverProduto.Size = new Size(122, 41);
+        btnRemoverProduto.TabIndex = 104;
+        btnRemoverProduto.TabStop = false;
+        btnRemoverProduto.Text = "Remover";
+        btnRemoverProduto.TextColor = Color.White;
+        btnRemoverProduto.UseVisualStyleBackColor = false;
+        btnRemoverProduto.Click += btnRemoverProduto_Click;
         // 
         // FormCadVendas
         // 
@@ -392,6 +463,9 @@ partial class FormCadVendas
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1000, 724);
+        Controls.Add(btnRemoverProduto);
+        Controls.Add(btnAdicionarProduto);
+        Controls.Add(lblNomeProduto);
         Controls.Add(btnBuscaProduto);
         Controls.Add(pnLateral);
         Controls.Add(pnBaixo);
@@ -451,4 +525,7 @@ partial class FormCadVendas
     private Label label6;
     private DataGridView dgProdutosVenda;
     private FontAwesome.Sharp.IconButton btnBuscaProduto;
+    private Label lblNomeProduto;
+    private RJControls.RJButton btnAdicionarProduto;
+    private RJControls.RJButton btnRemoverProduto;
 }

@@ -37,6 +37,12 @@ public partial class FormClientes : FormBase
 
     private void BtnSelecionar_Click(object sender, EventArgs e)
     {
+        if (cbInativos.Checked)
+        {
+            new FormMensagem("Atenção", "Não é permitido selecionar um cliente inativo.").ShowDialog();
+            return;
+        }
+
         if (txtCodClienteRef != null && dgClientes.SelectedItems.Count > 0)
         {
             try
@@ -46,6 +52,14 @@ public partial class FormClientes : FormBase
                 if (linhaSelecionada is DataRowView rowView)
                 {
                     int idCliente = Convert.ToInt32(rowView["Id"]);
+
+                    var dadosCliente = new ClientesServico().BuscaClienteId(idCliente);
+                    if (dadosCliente == null || dadosCliente.Count == 0 ||
+                        (dadosCliente.Count > 14 && string.Equals(dadosCliente[14], "False", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        new FormMensagem("Atenção", "Não é permitido selecionar um cliente inativo.").ShowDialog();
+                        return;
+                    }
 
                     // Insere o ID no txtCodCliente do FormCadVendas
                     txtCodClienteRef.Texts = idCliente.ToString();
