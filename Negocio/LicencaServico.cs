@@ -25,6 +25,12 @@ internal class LicencaServico
     /// <returns>true se liberada, false se bloqueada</returns>
     public async Task<bool> VerificarLicencaAsync(Guid empresaId)
     {
+        if (ConfiguracaoLicenca.DesabilitarVerificacao)
+        {
+            System.Diagnostics.Debug.WriteLine("[LICENÇA] Verificação remota ignorada em ambiente de desenvolvimento.");
+            return true;
+        }
+
         try
         {            
             var url = $"{_apiBaseUrl}/api/licencas/{empresaId}/status";

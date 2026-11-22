@@ -26,8 +26,12 @@ internal static class Program
             // Inicializar o banco
             Banco.Inicializa();
 
-            // Verificar licenÁa da empresa
-            if (!Task.Run(() => VerificarLicenca()).GetAwaiter().GetResult()) 
+            // Verificar licen√ßa da empresa (em desenvolvimento local a valida√ß√£o remota √© ignorada sem requisi√ß√µes HTTP)
+            if (ConfiguracaoLicenca.DesabilitarVerificacao)
+            {
+                System.Diagnostics.Debug.WriteLine($"[AMBIENTE: {ConfiguracaoLicenca.Ambiente}] Valida√ß√£o remota de licen√ßa desabilitada.");
+            }
+            else if (!Task.Run(() => VerificarLicenca()).GetAwaiter().GetResult())
             {
                 // Fechar a tela de carregamento
                 formCarregamento.Close();
@@ -36,7 +40,7 @@ internal static class Program
                 FormMensagem mensagem = new FormMensagem("Sistema Bloqueado", "Sistema Bloqueado");
                 mensagem.ShowDialog();
 
-                // Fechar a aplicaÁ„o
+                // Fechar a aplica√ß√£o
                 Application.Exit();
                 return;
             }
@@ -48,26 +52,25 @@ internal static class Program
         int login = 0; // Ativar a tela de login
         if (login == 1)
         {
-            // Executar o formul·rio de login
+            // Executar o formul√°rio de login
             Application.Run(new FormLogin());
         }
         else
         {
-            // Executar o formul·rio principal
+            // Executar o formul√°rio principal
             Application.Run(new FormPrincipal());
-
         }
     }
 
     /// <summary>
-    /// Verifica se a licenÁa da empresa est· ativa
+    /// Verifica se a licen√ßa da empresa est√° ativa
     /// </summary>
     private static async Task<bool> VerificarLicenca()
     {
-        // Desabilitar verificaÁ„o se configurado (apenas desenvolvimento)
+        // Desabilitar verifica√ß√£o se configurado (apenas desenvolvimento)
         if (ConfiguracaoLicenca.DesabilitarVerificacao)
         {
-            System.Diagnostics.Debug.WriteLine("VerificaÁ„o de licenÁa DESABILITADA");
+            System.Diagnostics.Debug.WriteLine("Verifica√ß√£o de licen√ßa DESABILITADA");
             return true;
         }
 
@@ -78,8 +81,8 @@ internal static class Program
 
             if (!clienteId.HasValue)
             {
-                // Se n„o existir ClienteId, bloqueia o sistema
-                System.Diagnostics.Debug.WriteLine("ClienteId n„o encontrado");
+                // Se n√£o existir ClienteId, bloqueia o sistema
+                System.Diagnostics.Debug.WriteLine("ClienteId n√£o encontrado");
                 return false;
             }
 
@@ -91,22 +94,22 @@ internal static class Program
             // Aguardar com timeout configurado
             if (!tarefa)
             {
-                System.Diagnostics.Debug.WriteLine("Timeout ao verificar licenÁa");
+                System.Diagnostics.Debug.WriteLine("Timeout ao verificar licen√ßa");
                 return false;
             }
-                        
-            System.Diagnostics.Debug.WriteLine($"Resultado da verificaÁ„o: {tarefa}");
+
+            System.Diagnostics.Debug.WriteLine($"Resultado da verifica√ß√£o: {tarefa}");
             return tarefa;
         }
         catch (AggregateException aex)
         {
-            System.Diagnostics.Debug.WriteLine($"Erro ao verificar licenÁa (AggregateException): {aex.InnerException?.Message}");
+            System.Diagnostics.Debug.WriteLine($"Erro ao verificar licen√ßa (AggregateException): {aex.InnerException?.Message}");
             return false;
         }
         catch (Exception ex)
         {
-            // Em caso de erro, bloqueia o sistema por seguranÁa
-            System.Diagnostics.Debug.WriteLine($"Erro ao verificar licenÁa: {ex.Message}");
+            // Em caso de erro, bloqueia o sistema por seguran√ßa
+            System.Diagnostics.Debug.WriteLine($"Erro ao verificar licen√ßa: {ex.Message}");
             System.Diagnostics.Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
             return false;
         }
