@@ -35,6 +35,21 @@ public class VendasServico
     /// </summary>
     public bool ValidarItemVenda(int idProduto, decimal quantidadeInformada, decimal valorUnitario, decimal quantidadeJaNaVenda, out string mensagemErro)
     {
+        return ValidarItemVenda(idProduto, quantidadeInformada, valorUnitario, quantidadeJaNaVenda, estoqueJaReservadoNaVenda: 0m, permitirProdutoInativoSeMantido: false, out mensagemErro);
+    }
+
+    /// <summary>
+    /// Valida um item individual considerando o estoque já reservado pela própria venda em edição
+    /// </summary>
+    public bool ValidarItemVenda(
+        int idProduto,
+        decimal quantidadeInformada,
+        decimal valorUnitario,
+        decimal quantidadeJaNaVenda,
+        decimal estoqueJaReservadoNaVenda,
+        bool permitirProdutoInativoSeMantido,
+        out string mensagemErro)
+    {
         if (idProduto <= 0)
         {
             mensagemErro = "Selecione um produto válido.";
@@ -50,7 +65,9 @@ public class VendasServico
 
         bool ativo = Convert.ToBoolean(produto["Ativo"]);
         string nomeProduto = produto["Nome"]?.ToString() ?? $"ID {idProduto}";
-        if (!ativo)
+        decimal quantidadeTotalProduto = decimal.Round(quantidadeInformada + quantidadeJaNaVenda, 3);
+
+        if (!ativo && (!permitirProdutoInativoSeMantido || quantidadeTotalProduto > estoqueJaReservadoNaVenda))
         {
             mensagemErro = $"O produto '{nomeProduto}' está inativo.";
             return false;
@@ -69,11 +86,11 @@ public class VendasServico
         }
 
         decimal estoqueAtual = Convert.ToDecimal(produto["Estoque"]);
-        decimal quantidadeTotalProduto = decimal.Round(quantidadeInformada + quantidadeJaNaVenda, 3);
+        decimal estoqueDisponivelEfetivo = decimal.Round(estoqueAtual + estoqueJaReservadoNaVenda, 3);
 
-        if (quantidadeTotalProduto > estoqueAtual)
+        if (quantidadeTotalProduto > estoqueDisponivelEfetivo)
         {
-            mensagemErro = $"Estoque insuficiente para o produto '{nomeProduto}'. Disponível: {estoqueAtual:0.###} {un}.";
+            mensagemErro = $"Estoque insuficiente para o produto '{nomeProduto}'. Disponível: {estoqueDisponivelEfetivo:0.###} {un}.";
             return false;
         }
 
@@ -171,6 +188,138 @@ public class VendasServico
         }
 
         return _vendasRepositorio.InsereVenda(venda, out mensagemErro);
+    }
+
+    /// <summary>
+    /// Valida e atualiza uma venda concluída (cabeçalho, observação e itens) com ajuste transacional de estoque pela diferença
+    /// </summary>
+    public bool AtualizaVenda(Venda venda, out string mensagemErro)
+    {
+        if (venda == null || venda.Id <= 0)
+        {
+            mensagemErro = "Venda inválida para alteração.";
+            return false;
+        }
+
+        var vendaOriginal = _vendasRepositorio.ConsultaVendaPorId(venda.Id);
+        if (vendaOriginal == null)
+        {
+            mensagemErro = "Venda não encontrada.";
+            return false;
+        }
+
+        if (!string.Equals(vendaOriginal.Situacao, "Concluída", StringComparison.OrdinalIgnoreCase))
+        {
+            mensagemErro = $"Somente vendas com situação 'Concluída' podem ser alteradas. Situação atual: '{vendaOriginal.Situacao}'.";
+            return false;
+        }
+
+        if (venda.IdCliente <= 0)
+        {
+            mensagemErro = "Selecione um cliente válido para a venda.";
+            return false;
+        }
+
+        var dadosCliente = _clientesRepositorio.BuscaClienteId(venda.IdCliente);
+        if (dadosCliente == null || dadosCliente.Count == 0)
+        {
+            mensagemErro = "O cliente informado não foi encontrado.";
+            return false;
+        }
+
+        bool clienteInativo = dadosCliente.Count > 14 &&
+            string.Equals(dadosCliente[14], "False", StringComparison.OrdinalIgnoreCase);
+
+        if (clienteInativo && venda.IdCliente != vendaOriginal.IdCliente)
+        {
+            mensagemErro = "O cliente selecionado está inativo.";
+            return false;
+        }
+
+        if (venda.IdUsuario <= 0)
+        {
+            mensagemErro = "Selecione o vendedor responsável pela venda.";
+            return false;
+        }
+
+        var dadosUsuario = _usuariosRepositorio.BuscaUsuarioId(venda.IdUsuario);
+        if (dadosUsuario == null || dadosUsuario.Count == 0)
+        {
+            mensagemErro = "O vendedor selecionado não foi encontrado.";
+            return false;
+        }
+
+        if (venda.Itens == null || venda.Itens.Count == 0)
+        {
+            mensagemErro = "A venda deve conter pelo menos um produto.";
+            return false;
+        }
+
+        var qtdOriginalPorProduto = vendaOriginal.Itens
+            .GroupBy(i => i.IdProduto)
+            .ToDictionary(g => g.Key, g => decimal.Round(g.Sum(x => x.Quantidade), 3));
+
+        var quantidadeAcumuladaPorProduto = new Dictionary<int, decimal>();
+        decimal valorTotalCalculado = 0m;
+
+        foreach (var item in venda.Itens)
+        {
+            quantidadeAcumuladaPorProduto.TryGetValue(item.IdProduto, out decimal qtdAnteriorNaLista);
+            qtdOriginalPorProduto.TryGetValue(item.IdProduto, out decimal qtdReservadaOriginal);
+
+            if (!ValidarItemVenda(
+                item.IdProduto,
+                item.Quantidade,
+                item.ValorUnitario,
+                qtdAnteriorNaLista,
+                qtdReservadaOriginal,
+                permitirProdutoInativoSeMantido: qtdReservadaOriginal > 0,
+                out mensagemErro))
+            {
+                return false;
+            }
+
+            item.Quantidade = decimal.Round(item.Quantidade, 3);
+            item.ValorUnitario = decimal.Round(item.ValorUnitario, 2);
+            item.ValorTotalItem = CalcularSubtotalItem(item.Quantidade, item.ValorUnitario);
+
+            if (item.ValorTotalItem <= 0)
+            {
+                mensagemErro = "O subtotal de cada item da venda deve ser maior que zero.";
+                return false;
+            }
+
+            quantidadeAcumuladaPorProduto[item.IdProduto] = decimal.Round(qtdAnteriorNaLista + item.Quantidade, 3);
+            valorTotalCalculado += item.ValorTotalItem;
+        }
+
+        venda.ValorTotal = decimal.Round(valorTotalCalculado, 2);
+        if (venda.ValorTotal <= 0)
+        {
+            mensagemErro = "O valor total da venda deve ser maior que zero.";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(venda.Observacao) && venda.Observacao.Length > 255)
+        {
+            venda.Observacao = venda.Observacao[..255];
+        }
+
+        return _vendasRepositorio.AlteraVenda(venda, out mensagemErro);
+    }
+
+    /// <summary>
+    /// Cancela uma venda concluída e estorna o estoque de todos os seus itens dentro de uma transação SQL
+    /// </summary>
+    public bool CancelaVenda(int idVenda, out string mensagemErro)
+    {
+        if (idVenda <= 0)
+        {
+            mensagemErro = "ID da venda inválido.";
+            return false;
+        }
+
+        return _vendasRepositorio.CancelarVenda(idVenda, out mensagemErro);
     }
 
     /// <summary>

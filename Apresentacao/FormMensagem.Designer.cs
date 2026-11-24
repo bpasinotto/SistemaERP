@@ -32,6 +32,7 @@ partial class FormMensagem
         pnTopo = new Panel();
         pnBaixo = new Panel();
         btnOK = new RJControls.RJButton();
+        btnNao = new RJControls.RJButton();
         pnTopo.SuspendLayout();
         pnBaixo.SuspendLayout();
         SuspendLayout();
@@ -57,12 +58,35 @@ partial class FormMensagem
         // 
         // pnBaixo
         // 
+        pnBaixo.Controls.Add(btnNao);
         pnBaixo.Controls.Add(btnOK);
         pnBaixo.Dock = DockStyle.Fill;
         pnBaixo.Location = new Point(0, 109);
         pnBaixo.Name = "pnBaixo";
         pnBaixo.Size = new Size(600, 66);
         pnBaixo.TabIndex = 2;
+        // 
+        // btnNao
+        // 
+        btnNao.Anchor = AnchorStyles.None;
+        btnNao.BackColor = Color.FromArgb(168, 42, 42);
+        btnNao.BackgroundColor = Color.FromArgb(168, 42, 42);
+        btnNao.BorderColor = Color.Empty;
+        btnNao.BorderRadius = 20;
+        btnNao.BorderSize = 0;
+        btnNao.FlatAppearance.BorderColor = Color.DarkRed;
+        btnNao.FlatStyle = FlatStyle.Flat;
+        btnNao.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnNao.ForeColor = Color.White;
+        btnNao.Location = new Point(310, 10);
+        btnNao.Name = "btnNao";
+        btnNao.Size = new Size(122, 41);
+        btnNao.TabIndex = 20;
+        btnNao.Text = "Não";
+        btnNao.TextColor = Color.White;
+        btnNao.UseVisualStyleBackColor = false;
+        btnNao.Visible = false;
+        btnNao.Click += btnNao_Click;
         // 
         // btnOK
         // 
@@ -108,4 +132,5 @@ partial class FormMensagem
     private Panel pnTopo;
     private Panel pnBaixo;
     private RJControls.RJButton btnOK;
+    private RJControls.RJButton btnNao;
 }

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using SistemaERP.Modelo;
 using SistemaERP.Negocio;
@@ -13,9 +14,12 @@ public partial class FormCadVendas : FormBase
     private readonly ProdutosServico _produtosServico = new();
     private readonly ClientesServico _clientesServico = new();
     private readonly List<VendaItem> _itensVenda = new();
+    private readonly Dictionary<int, decimal> _qtdOriginalPorProduto = new();
 
-    private readonly int _vendaIdVisualizacao;
-    private readonly bool _somenteVisualizacao;
+    private readonly int _vendaId;
+    private bool _modoEdicao;
+    private bool _somenteVisualizacao;
+    private int _idClienteOriginal;
 
     private int _idClienteSelecionado;
     private int _idProdutoSelecionado;
@@ -36,17 +40,16 @@ public partial class FormCadVendas : FormBase
 
     public FormCadVendas(int idVenda) : this()
     {
-        _vendaIdVisualizacao = idVenda;
-        _somenteVisualizacao = idVenda > 0;
+        _vendaId = idVenda;
     }
 
     private void FormCadVendas_Load(object? sender, EventArgs e)
     {
         AplicarTemaGridItens();
 
-        if (_somenteVisualizacao && _vendaIdVisualizacao > 0)
+        if (_vendaId > 0)
         {
-            CarregarVendaParaVisualizacao(_vendaIdVisualizacao);
+            CarregarVendaExistente(_vendaId);
         }
     }
 
@@ -131,6 +134,7 @@ public partial class FormCadVendas : FormBase
         });
 
         dgProdutosVenda.KeyDown += DgProdutosVenda_KeyDown;
+        dgProdutosVenda.CellDoubleClick += DgProdutosVenda_CellDoubleClick;
     }
 
     private void AplicarTemaGridItens()
@@ -152,6 +156,8 @@ public partial class FormCadVendas : FormBase
             dgProdutosVenda.DefaultCellStyle.SelectionBackColor = Color.FromArgb(2, 89, 89);
             dgProdutosVenda.DefaultCellStyle.SelectionForeColor = Color.White;
             dgProdutosVenda.GridColor = Color.FromArgb(100, 100, 100);
+            pnObservacao.BackColor = Color.FromArgb(44, 44, 44);
+            lblObservacao.ForeColor = Color.White;
         }
         else
         {
@@ -161,6 +167,8 @@ public partial class FormCadVendas : FormBase
             dgProdutosVenda.DefaultCellStyle.SelectionBackColor = Color.FromArgb(2, 89, 89);
             dgProdutosVenda.DefaultCellStyle.SelectionForeColor = Color.White;
             dgProdutosVenda.GridColor = Color.LightGray;
+            pnObservacao.BackColor = Color.WhiteSmoke;
+            lblObservacao.ForeColor = Color.Black;
         }
     }
 
@@ -182,7 +190,7 @@ public partial class FormCadVendas : FormBase
         }
     }
 
-    private void CarregarVendaParaVisualizacao(int idVenda)
+    private void CarregarVendaExistente(int idVenda)
     {
         try
         {
@@ -194,8 +202,15 @@ public partial class FormCadVendas : FormBase
                 return;
             }
 
-            this.Text = $"Visualização da Venda #{venda.Id} - {venda.DataVenda:dd/MM/yyyy HH:mm}";
+            bool vendaConcluida = string.Equals(venda.Situacao, "Concluída", StringComparison.OrdinalIgnoreCase);
+            _modoEdicao = vendaConcluida;
+            _somenteVisualizacao = !vendaConcluida;
 
+            this.Text = vendaConcluida
+                ? $"Editar Venda #{venda.Id} - {venda.DataVenda:dd/MM/yyyy HH:mm} ({venda.Situacao})"
+                : $"Visualização da Venda #{venda.Id} - {venda.DataVenda:dd/MM/yyyy HH:mm} ({venda.Situacao})";
+
+            _idClienteOriginal = venda.IdCliente;
             _idClienteSelecionado = venda.IdCliente;
             txtCodCliente.Texts = venda.IdCliente.ToString();
             lblNomeCliente.Text = venda.NomeCliente;
@@ -214,23 +229,38 @@ public partial class FormCadVendas : FormBase
             }
 
             cbVendedor.SelectedValue = venda.IdUsuario;
+            txtObservacao.Texts = venda.Observacao ?? string.Empty;
 
             _itensVenda.Clear();
             _itensVenda.AddRange(venda.Itens);
+
+            _qtdOriginalPorProduto.Clear();
+            foreach (var grupo in venda.Itens.GroupBy(i => i.IdProduto))
+            {
+                _qtdOriginalPorProduto[grupo.Key] = decimal.Round(grupo.Sum(i => i.Quantidade), 3);
+            }
+
             AtualizarGridItens();
             AtualizarTotalGeral();
 
-            // Modo somente visualização: desabilita edição e gravação
-            txtCodCliente.Enabled = false;
-            btnBuscaCliente.Enabled = false;
-            cbVendedor.Enabled = false;
-            txtCodProduto.Enabled = false;
-            btnBuscaProduto.Enabled = false;
-            txtQuantidade.Enabled = false;
-            txtPrecoUnit.Enabled = false;
-            btnAdicionarProduto.Visible = false;
-            btnRemoverProduto.Visible = false;
-            btnSalvar.Visible = false;
+            btnGerarPdf.Visible = true;
+            btnCancelarVenda.Visible = vendaConcluida;
+
+            if (_somenteVisualizacao)
+            {
+                // Venda cancelada: bloqueia qualquer edição
+                txtCodCliente.Enabled = false;
+                btnBuscaCliente.Enabled = false;
+                cbVendedor.Enabled = false;
+                txtCodProduto.Enabled = false;
+                btnBuscaProduto.Enabled = false;
+                txtQuantidade.Enabled = false;
+                txtPrecoUnit.Enabled = false;
+                txtObservacao.Enabled = false;
+                btnAdicionarProduto.Visible = false;
+                btnRemoverProduto.Visible = false;
+                btnSalvar.Visible = false;
+            }
         }
         catch (Exception ex)
         {
@@ -288,11 +318,11 @@ public partial class FormCadVendas : FormBase
                     bool clienteInativo = dadosCliente.Count > 14 &&
                         string.Equals(dadosCliente[14], "False", StringComparison.OrdinalIgnoreCase);
 
-                    if (clienteInativo)
+                    if (clienteInativo && (!_modoEdicao || clienteId != _idClienteOriginal))
                     {
                         _idClienteSelecionado = 0;
                         lblNomeCliente.Text = "Cliente inativo";
-                        new FormMensagem("Atenção", "O cliente informado está inativo e não pode ser utilizado em novas vendas.").ShowDialog();
+                        new FormMensagem("Atenção", "O cliente informado está inativo e não pode ser utilizado em vendas.").ShowDialog();
                         txtCodCliente.Texts = string.Empty;
                         lblNomeCliente.Text = "Nome do Cliente";
                         return;
@@ -437,7 +467,8 @@ public partial class FormCadVendas : FormBase
             }
 
             bool ativo = Convert.ToBoolean(produto["Ativo"]);
-            if (!ativo)
+            bool produtoEstavaNaVendaOriginal = _modoEdicao && _qtdOriginalPorProduto.ContainsKey(produtoId);
+            if (!ativo && !produtoEstavaNaVendaOriginal)
             {
                 LimparDadosProdutoSelecionado();
                 lblNomeProduto.Text = "Produto inativo";
@@ -465,7 +496,6 @@ public partial class FormCadVendas : FormBase
                     txtPrecoUnit.Texts = FormatarMoedaCampo(precoCadastrado);
                 }
 
-                // Se a unidade do novo produto exigir inteiro e a quantidade atual for inválida/fracionada, redefine para "1"
                 if (!TentarConverterQuantidadePtBr(txtQuantidade.Texts, out decimal qtdAtual) ||
                     !ProdutosServico.ValidarQuantidadePorUnidade(qtdAtual, _unidadeProdutoSelecionado, permitirZero: false, out _))
                 {
@@ -772,14 +802,13 @@ public partial class FormCadVendas : FormBase
 
     #endregion
 
-    #region -> Adição e Remoção de Itens na Venda
+    #region -> Adição, Edição e Remoção de Itens na Venda
 
     private void btnAdicionarProduto_Click(object? sender, EventArgs e)
     {
         if (_somenteVisualizacao)
             return;
 
-        // Caso o usuário tenha digitado o código do produto e clicado direto em Adicionar
         if (!string.IsNullOrWhiteSpace(txtCodProduto.Texts) &&
             (!int.TryParse(txtCodProduto.Texts.Trim(), out int codDigitado) || codDigitado != _idProdutoSelecionado))
         {
@@ -822,7 +851,20 @@ public partial class FormCadVendas : FormBase
             .Where(i => i.IdProduto == _idProdutoSelecionado)
             .Sum(i => i.Quantidade);
 
-        if (!_vendasServico.ValidarItemVenda(_idProdutoSelecionado, quantidade, precoUnitario, quantidadeJaAdicionada, out string mensagemErro))
+        decimal estoqueReservadoOriginal = 0m;
+        if (_modoEdicao)
+        {
+            _qtdOriginalPorProduto.TryGetValue(_idProdutoSelecionado, out estoqueReservadoOriginal);
+        }
+
+        if (!_vendasServico.ValidarItemVenda(
+            _idProdutoSelecionado,
+            quantidade,
+            precoUnitario,
+            quantidadeJaAdicionada,
+            estoqueReservadoOriginal,
+            permitirProdutoInativoSeMantido: estoqueReservadoOriginal > 0,
+            out string mensagemErro))
         {
             new FormMensagem("Atenção", mensagemErro).ShowDialog();
             return;
@@ -835,7 +877,6 @@ public partial class FormCadVendas : FormBase
             return;
         }
 
-        // Se o produto já estiver na grade com o mesmo preço unitário, acumula a quantidade na mesma linha
         var itemExistente = _itensVenda.FirstOrDefault(i => i.IdProduto == _idProdutoSelecionado && i.ValorUnitario == precoUnitario);
         if (itemExistente != null)
         {
@@ -888,6 +929,38 @@ public partial class FormCadVendas : FormBase
         }
     }
 
+    private void DgProdutosVenda_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
+    {
+        if (_somenteVisualizacao || e.RowIndex < 0 || e.RowIndex >= _itensVenda.Count)
+            return;
+
+        // Carrega o item selecionado nos campos de lançamento para facilitar a edição de quantidade/preço
+        var item = _itensVenda[e.RowIndex];
+        _itensVenda.RemoveAt(e.RowIndex);
+
+        AtualizarGridItens();
+        AtualizarTotalGeral();
+
+        _atualizandoCamposProduto = true;
+        try
+        {
+            _idProdutoSelecionado = item.IdProduto;
+            _nomeProdutoSelecionado = item.NomeProduto;
+            _unidadeProdutoSelecionado = item.Un;
+            txtCodProduto.Texts = item.IdProduto.ToString();
+            lblNomeProduto.Text = $"{item.NomeProduto} ({item.Un})";
+            txtQuantidade.Texts = item.Quantidade.ToString("0.###", CulturaPtBr);
+            txtPrecoUnit.Texts = FormatarMoedaCampo(item.ValorUnitario);
+        }
+        finally
+        {
+            _atualizandoCamposProduto = false;
+        }
+
+        AtualizarSubtotalItem();
+        txtQuantidade.Focus();
+    }
+
     private void AtualizarGridItens()
     {
         dgProdutosVenda.DataSource = null;
@@ -905,7 +978,7 @@ public partial class FormCadVendas : FormBase
 
     #endregion
 
-    #region -> Gravação da Venda
+    #region -> Gravação, Cancelamento e PDF da Venda
 
     private void btnSalvar_Click(object? sender, EventArgs e)
     {
@@ -917,7 +990,6 @@ public partial class FormCadVendas : FormBase
 
         try
         {
-            // Revalida o cliente informado no campo txtCodCliente
             txtCodCliente_Leave(txtCodCliente, EventArgs.Empty);
             if (_idClienteSelecionado <= 0)
             {
@@ -941,12 +1013,18 @@ public partial class FormCadVendas : FormBase
                 return;
             }
 
+            string? observacao = string.IsNullOrWhiteSpace(txtObservacao.Texts)
+                ? null
+                : txtObservacao.Texts.Trim();
+
             var venda = new Venda
             {
+                Id = _vendaId,
                 IdCliente = _idClienteSelecionado,
                 IdUsuario = idUsuario,
                 DataVenda = DateTime.Now,
                 Situacao = "Concluída",
+                Observacao = observacao,
                 ValorTotal = _itensVenda.Sum(i => i.ValorTotalItem),
                 Itens = _itensVenda.Select(i => new VendaItem
                 {
@@ -959,17 +1037,36 @@ public partial class FormCadVendas : FormBase
                 }).ToList()
             };
 
-            bool sucesso = _vendasServico.CadastraVenda(venda, out string mensagemErro);
+            bool sucesso;
+            string mensagemErro;
 
-            if (sucesso)
+            if (_modoEdicao && _vendaId > 0)
             {
-                new FormMensagem("Sucesso", "Venda registrada com sucesso!").ShowDialog();
-                DialogResult = DialogResult.OK;
-                Close();
+                sucesso = _vendasServico.AtualizaVenda(venda, out mensagemErro);
+                if (sucesso)
+                {
+                    new FormMensagem("Sucesso", "Venda atualizada e estoque ajustado com sucesso!").ShowDialog();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    new FormMensagem("Atenção", string.IsNullOrWhiteSpace(mensagemErro) ? "Falha ao atualizar a venda." : mensagemErro).ShowDialog();
+                }
             }
             else
             {
-                new FormMensagem("Atenção", string.IsNullOrWhiteSpace(mensagemErro) ? "Falha ao registrar a venda." : mensagemErro).ShowDialog();
+                sucesso = _vendasServico.CadastraVenda(venda, out mensagemErro);
+                if (sucesso)
+                {
+                    new FormMensagem("Sucesso", "Venda registrada com sucesso!").ShowDialog();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    new FormMensagem("Atenção", string.IsNullOrWhiteSpace(mensagemErro) ? "Falha ao registrar a venda." : mensagemErro).ShowDialog();
+                }
             }
         }
         catch (Exception ex)
@@ -983,6 +1080,97 @@ public partial class FormCadVendas : FormBase
             {
                 btnSalvar.Enabled = true;
             }
+        }
+    }
+
+    private void btnCancelarVenda_Click(object? sender, EventArgs e)
+    {
+        if (_vendaId <= 0 || _somenteVisualizacao || _salvandoVenda)
+            return;
+
+        using var confirmacao = new FormMensagem(
+            "Confirmar Cancelamento",
+            $"Deseja realmente cancelar a Venda #{_vendaId}?\nO estoque de todos os produtos vendidos será estornado automaticamente.",
+            confirmacao: true);
+
+        if (confirmacao.ShowDialog() != DialogResult.Yes)
+            return;
+
+        _salvandoVenda = true;
+        btnCancelarVenda.Enabled = false;
+        btnSalvar.Enabled = false;
+
+        try
+        {
+            bool sucesso = _vendasServico.CancelaVenda(_vendaId, out string mensagemErro);
+            if (sucesso)
+            {
+                new FormMensagem("Sucesso", "Venda cancelada e estoque estornado com sucesso!").ShowDialog();
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+            {
+                new FormMensagem("Atenção", string.IsNullOrWhiteSpace(mensagemErro) ? "Não foi possível cancelar a venda." : mensagemErro).ShowDialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            new FormMensagem("Erro", $"Erro ao cancelar a venda: {ex.Message}").ShowDialog();
+        }
+        finally
+        {
+            _salvandoVenda = false;
+            if (!IsDisposed)
+            {
+                btnCancelarVenda.Enabled = true;
+                btnSalvar.Enabled = true;
+            }
+        }
+    }
+
+    private void btnGerarPdf_Click(object? sender, EventArgs e)
+    {
+        if (_vendaId <= 0)
+            return;
+
+        try
+        {
+            var vendaPersistida = _vendasServico.BuscaVendaPorId(_vendaId);
+            if (vendaPersistida == null)
+            {
+                new FormMensagem("Erro", "Venda não encontrada para geração do comprovante.").ShowDialog();
+                return;
+            }
+
+            using var saveDialog = new SaveFileDialog
+            {
+                Title = "Salvar Comprovante de Venda em PDF",
+                Filter = "Arquivo PDF (*.pdf)|*.pdf",
+                FileName = $"Venda_{vendaPersistida.Id}.pdf",
+                DefaultExt = "pdf"
+            };
+
+            if (saveDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            var pdfServico = new VendaPdfServico();
+            pdfServico.GerarComprovantePdf(vendaPersistida, saveDialog.FileName);
+
+            new FormMensagem("Sucesso", "Comprovante PDF gerado com sucesso!").ShowDialog();
+
+            try
+            {
+                Process.Start(new ProcessStartInfo(saveDialog.FileName) { UseShellExecute = true });
+            }
+            catch
+            {
+                // Caso o sistema não tenha leitor de PDF associado, o arquivo já foi salvo com sucesso
+            }
+        }
+        catch (Exception ex)
+        {
+            new FormMensagem("Erro", $"Erro ao gerar comprovante em PDF: {ex.Message}").ShowDialog();
         }
     }
 

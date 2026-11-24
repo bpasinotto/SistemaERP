@@ -45,9 +45,14 @@ partial class FormCadVendas
         btnVoltar = new SistemaERP.RJControls.RJButton();
         btnSalvar = new SistemaERP.RJControls.RJButton();
         pnBaixo = new Panel();
+        btnCancelarVenda = new SistemaERP.RJControls.RJButton();
+        btnGerarPdf = new SistemaERP.RJControls.RJButton();
         lblTotalGeral = new Label();
         label6 = new Label();
         pnLateral = new Panel();
+        pnObservacao = new Panel();
+        lblObservacao = new Label();
+        txtObservacao = new SistemaERP.RJControls.RJTextBox();
         dgProdutosVenda = new DataGridView();
         btnBuscaProduto = new FontAwesome.Sharp.IconButton();
         lblNomeProduto = new Label();
@@ -55,6 +60,7 @@ partial class FormCadVendas
         btnRemoverProduto = new SistemaERP.RJControls.RJButton();
         pnBaixo.SuspendLayout();
         pnLateral.SuspendLayout();
+        pnObservacao.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dgProdutosVenda).BeginInit();
         SuspendLayout();
         // 
@@ -337,6 +343,8 @@ partial class FormCadVendas
         // 
         // pnBaixo
         // 
+        pnBaixo.Controls.Add(btnGerarPdf);
+        pnBaixo.Controls.Add(btnCancelarVenda);
         pnBaixo.Controls.Add(lblTotalGeral);
         pnBaixo.Controls.Add(label6);
         pnBaixo.Controls.Add(btnSalvar);
@@ -346,6 +354,52 @@ partial class FormCadVendas
         pnBaixo.Name = "pnBaixo";
         pnBaixo.Size = new Size(996, 86);
         pnBaixo.TabIndex = 98;
+        // 
+        // btnCancelarVenda
+        // 
+        btnCancelarVenda.Anchor = AnchorStyles.Left;
+        btnCancelarVenda.BackColor = Color.FromArgb(168, 42, 42);
+        btnCancelarVenda.BackgroundColor = Color.FromArgb(168, 42, 42);
+        btnCancelarVenda.BorderColor = Color.Empty;
+        btnCancelarVenda.BorderRadius = 20;
+        btnCancelarVenda.BorderSize = 0;
+        btnCancelarVenda.FlatAppearance.BorderColor = Color.DarkRed;
+        btnCancelarVenda.FlatStyle = FlatStyle.Flat;
+        btnCancelarVenda.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnCancelarVenda.ForeColor = Color.White;
+        btnCancelarVenda.Location = new Point(334, 25);
+        btnCancelarVenda.Name = "btnCancelarVenda";
+        btnCancelarVenda.Size = new Size(155, 41);
+        btnCancelarVenda.TabIndex = 105;
+        btnCancelarVenda.TabStop = false;
+        btnCancelarVenda.Text = "Cancelar Venda";
+        btnCancelarVenda.TextColor = Color.White;
+        btnCancelarVenda.UseVisualStyleBackColor = false;
+        btnCancelarVenda.Visible = false;
+        btnCancelarVenda.Click += btnCancelarVenda_Click;
+        // 
+        // btnGerarPdf
+        // 
+        btnGerarPdf.Anchor = AnchorStyles.Left;
+        btnGerarPdf.BackColor = Color.FromArgb(2, 89, 89);
+        btnGerarPdf.BackgroundColor = Color.FromArgb(2, 89, 89);
+        btnGerarPdf.BorderColor = Color.Empty;
+        btnGerarPdf.BorderRadius = 20;
+        btnGerarPdf.BorderSize = 0;
+        btnGerarPdf.FlatAppearance.BorderColor = Color.DarkBlue;
+        btnGerarPdf.FlatStyle = FlatStyle.Flat;
+        btnGerarPdf.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnGerarPdf.ForeColor = Color.White;
+        btnGerarPdf.Location = new Point(500, 25);
+        btnGerarPdf.Name = "btnGerarPdf";
+        btnGerarPdf.Size = new Size(130, 41);
+        btnGerarPdf.TabIndex = 106;
+        btnGerarPdf.TabStop = false;
+        btnGerarPdf.Text = "Gerar PDF";
+        btnGerarPdf.TextColor = Color.White;
+        btnGerarPdf.UseVisualStyleBackColor = false;
+        btnGerarPdf.Visible = false;
+        btnGerarPdf.Click += btnGerarPdf_Click;
         // 
         // lblTotalGeral
         // 
@@ -372,11 +426,56 @@ partial class FormCadVendas
         // pnLateral
         // 
         pnLateral.Controls.Add(dgProdutosVenda);
+        pnLateral.Controls.Add(pnObservacao);
         pnLateral.Dock = DockStyle.Right;
         pnLateral.Location = new Point(497, 2);
         pnLateral.Name = "pnLateral";
         pnLateral.Size = new Size(501, 634);
         pnLateral.TabIndex = 99;
+        // 
+        // pnObservacao
+        // 
+        pnObservacao.Controls.Add(txtObservacao);
+        pnObservacao.Controls.Add(lblObservacao);
+        pnObservacao.Dock = DockStyle.Bottom;
+        pnObservacao.Location = new Point(0, 529);
+        pnObservacao.Name = "pnObservacao";
+        pnObservacao.Size = new Size(501, 105);
+        pnObservacao.TabIndex = 1;
+        // 
+        // lblObservacao
+        // 
+        lblObservacao.AutoSize = true;
+        lblObservacao.Font = new Font("Segoe UI Variable Display", 10F);
+        lblObservacao.Location = new Point(12, 4);
+        lblObservacao.Name = "lblObservacao";
+        lblObservacao.Size = new Size(80, 19);
+        lblObservacao.TabIndex = 0;
+        lblObservacao.Text = "Observação";
+        // 
+        // txtObservacao
+        // 
+        txtObservacao.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        txtObservacao.BackColor = Color.FromArgb(2, 89, 89);
+        txtObservacao.BorderColor = Color.Empty;
+        txtObservacao.BorderFocusColor = Color.FromArgb(3, 140, 140);
+        txtObservacao.BorderRadius = 15;
+        txtObservacao.BorderSize = 2;
+        txtObservacao.Font = new Font("Segoe UI Variable Display", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        txtObservacao.ForeColor = Color.White;
+        txtObservacao.Location = new Point(8, 25);
+        txtObservacao.MaxLength = 255;
+        txtObservacao.Multiline = true;
+        txtObservacao.Name = "txtObservacao";
+        txtObservacao.Padding = new Padding(10, 7, 10, 7);
+        txtObservacao.PasswordChar = false;
+        txtObservacao.PlaceholderColor = Color.FromArgb(191, 189, 180);
+        txtObservacao.PlaceholderText = "";
+        txtObservacao.SelectionStart = 0;
+        txtObservacao.Size = new Size(485, 72);
+        txtObservacao.TabIndex = 1;
+        txtObservacao.Texts = "";
+        txtObservacao.UnderlinedStyle = false;
         // 
         // dgProdutosVenda
         // 
@@ -384,7 +483,7 @@ partial class FormCadVendas
         dgProdutosVenda.Dock = DockStyle.Fill;
         dgProdutosVenda.Location = new Point(0, 0);
         dgProdutosVenda.Name = "dgProdutosVenda";
-        dgProdutosVenda.Size = new Size(501, 634);
+        dgProdutosVenda.Size = new Size(501, 529);
         dgProdutosVenda.TabIndex = 0;
         // 
         // btnBuscaProduto
@@ -496,6 +595,8 @@ partial class FormCadVendas
         pnBaixo.ResumeLayout(false);
         pnBaixo.PerformLayout();
         pnLateral.ResumeLayout(false);
+        pnObservacao.ResumeLayout(false);
+        pnObservacao.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)dgProdutosVenda).EndInit();
         ResumeLayout(false);
         PerformLayout();
@@ -519,8 +620,13 @@ partial class FormCadVendas
     private FontAwesome.Sharp.IconButton btnBuscaCliente;
     private RJControls.RJButton btnVoltar;
     private RJControls.RJButton btnSalvar;
+    private RJControls.RJButton btnCancelarVenda;
+    private RJControls.RJButton btnGerarPdf;
     private Panel pnBaixo;
     private Panel pnLateral;
+    private Panel pnObservacao;
+    private Label lblObservacao;
+    private RJControls.RJTextBox txtObservacao;
     private Label lblTotalGeral;
     private Label label6;
     private DataGridView dgProdutosVenda;

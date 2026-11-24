@@ -210,7 +210,10 @@ namespace SistemaERP.Apresentacao
                             formVisualizarVenda.AplicaTema(temaSalvo);
                         }
 
-                        formVisualizarVenda.ShowDialog();
+                        if (formVisualizarVenda.ShowDialog() == DialogResult.OK)
+                        {
+                            PreencheGrid();
+                        }
                     }
                 }
                 catch (Exception ex)
